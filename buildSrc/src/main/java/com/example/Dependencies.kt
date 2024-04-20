@@ -17,7 +17,7 @@ object Config {
 }
 
 object Android {
-    const val applicationId = "com.example.geeksforgeekschat"
+    const val applicationId = "com.example.roadAssist"
     const val compileSdk = 34
     const val minSdk = 24
     const val targetSdk = 34
@@ -72,6 +72,7 @@ object Libs {
         const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
         const val fragmentKtx = "androidx.fragment:fragment-ktx:1.6.1"
         const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+        const val viewBindingDelegate = "com.github.kirich1409:viewbindingpropertydelegate-full:1.5.9"
 
         object Test {
             const val jUnit = "junit:junit:4.13.2"

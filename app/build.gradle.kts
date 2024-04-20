@@ -76,6 +76,7 @@ dependencies {
     implementation ("com.google.android.gms:play-services-maps:18.1.0")
     implementation("pub.devrel:easypermissions:3.0.0")
 //    implementation ("com.google.android:android-maps-utils:2.2.0")
+    implementation(Libs.View.viewBindingDelegate)
 
     //Modules
     implementation(project(":domain"))
@@ -107,6 +108,10 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
     kapt(Libs.Application.DependencyInjection.hilt_compiler)
 
     //Compose

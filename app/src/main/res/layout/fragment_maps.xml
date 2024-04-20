@@ -18,10 +18,10 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".presentation.screens.maps.MapsFragment" />
     <Button
-        android:id="@+id/button"
+        android:id="@+id/requestAssistButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Request Fuel"
+        android:text="Request Assist"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

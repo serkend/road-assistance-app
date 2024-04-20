@@ -6,12 +6,12 @@
     app:startDestination="@id/homeFragment2">
     <fragment
         android:id="@+id/homeFragment2"
-        android:name="com.example.geeksforgeekschat.presentation.screens.user.home.HomeFragment"
+        android:name="com.example.roadAssist.presentation.screens.user.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.geeksforgeekschat.presentation.screens.user.profile.ProfileFragment"
+        android:name="com.example.roadAssist.presentation.screens.user.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <action
@@ -21,7 +21,7 @@
         app:popUpToInclusive="true"/>
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.example.geeksforgeekschat.presentation.screens.maps.MapsFragment"
+        android:name="com.example.roadAssist.presentation.screens.maps.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
 </navigation>

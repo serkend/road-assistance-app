@@ -14,7 +14,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "FuelDelivery"
+rootProject.name = "RoadAssist"
 include (":data")
 include (":domain")
 include(":app")

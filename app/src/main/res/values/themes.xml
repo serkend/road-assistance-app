@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.GeeksForGeeksChat" parent="Theme.Material3.Light.NoActionBar" >
+    <style name="Theme.RoadAssist" parent="Theme.Material3.Light.NoActionBar" >
+        <item name="colorPrimary">@color/pink</item>
+        <item name="colorPrimaryDark">@color/pink</item>
+        <item name="colorSecondary">@color/pink</item>
+        <item name="android:colorPrimary">@color/pink</item>
+        <item name="android:colorPrimaryDark">@color/pink</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowBackground">@color/crayola</item>
+        <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:textColor">@color/text_default</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
     </style>
-
 </resources>

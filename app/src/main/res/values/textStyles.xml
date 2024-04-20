@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Text" parent="Widget.AppCompat.TextView"/>
+
+    <!-- Bold -->
+
+    <style name="Text.Bold" parent="Text">
+        <item name="android:fontFamily">@font/sofia_pro_bold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine1">
+        <item name="android:textSize">66sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:lineSpacingExtra">72.6sp</item>
+        <item name="android:fontFeatureSettings">smcp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine1.ContrastPrimary">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine2">
+        <item name="android:textSize">44sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:lineSpacingExtra">48.4sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:fontFeatureSettings">smcp</item>
+    </style>
+
+    <style name="Text.Bold.Timer">
+        <item name="android:textSize">32sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:lineSpacingExtra">39.04sp</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:fontFeatureSettings">smcp</item>
+    </style>
+
+
+    <style name="Text.Bold.Timer.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine2.ContrastPrimary">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine2.Link">
+        <item name="android:textColor">@color/text_link</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine3">
+        <item name="android:textSize">34sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:lineSpacingExtra">41.48sp</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine3.Link">
+        <item name="android:textColor">@color/text_link</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine4">
+        <item name="android:textSize">28sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:lineSpacingExtra">34.16sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:fontFeatureSettings">smcp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine4.PrimaryHeadline">
+        <item name="android:textColor">@color/text_primary_headline</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine4.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine4.ContrastPrimary">
+        <item name="android:textColor">@color/text_contrast_primary</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine5">
+        <item name="android:textSize">22sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:lineSpacingExtra">26.84sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:fontFeatureSettings">smcp</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine5.Link">
+        <item name="android:textColor">@color/text_link</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine5.ContrastPrimary">
+        <item name="android:textColor">@color/text_contrast_primary</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine5.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine5.Error">
+        <item name="android:textColor">@color/text_error</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine5.PrimaryHeadline">
+        <item name="android:textColor">@color/text_primary_headline</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine6">
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:lineSpacingExtra">23.4sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:fontFeatureSettings">smcp</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine6.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine6.ContrastPrimary">
+        <item name="android:textColor">@color/text_contrast_primary</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine6.Link">
+        <item name="android:textColor">@color/text_link</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine6.PrimaryHeadline">
+        <item name="android:textColor">@color/text_primary_headline</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine6.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Bold.HeadLine6.IconDefault2">
+        <item name="android:textColor">@color/icon_default_2</item>
+    </style>
+
+    <style name="Text.Bold.Body">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:lineSpacingExtra">24sp</item>
+    </style>
+
+    <style name="Text.Bold.Body.Default">
+        <item name="android:textColor">@color/button_default</item>
+    </style>
+
+    <style name="Text.Bold.Body.ContrastPrimary">
+        <item name="android:textColor">@color/text_contrast_primary</item>
+    </style>
+
+    <style name="Text.Bold.Body.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Text.Bold.Body.Link">
+        <item name="android:textColor">@color/text_link</item>
+    </style>
+
+    <style name="Text.Bold.Body.PrimaryHeadline">
+        <item name="android:textColor">@color/text_primary_headline</item>
+    </style>
+
+    <style name="Text.Bold.Body.Error">
+        <item name="android:textColor">@color/text_error</item>
+    </style>
+
+    <style name="Text.Bold.Caption">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:lineSpacingExtra">19.6sp</item>
+    </style>
+
+    <style name="Text.Bold.Caption.SegmentButton">
+        <item name="android:textColor">@color/segment_button_text</item>
+    </style>
+
+    <style name="Text.Bold.Caption.PrimaryHeadline">
+        <item name="android:textColor">@color/text_primary_headline</item>
+    </style>
+
+    <style name="Text.Bold.Caption.Tertiary">
+        <item name="android:textColor">@color/text_tertiary</item>
+    </style>
+
+    <style name="Text.Bold.Caption.Error">
+        <item name="android:textColor">@color/text_error</item>
+    </style>
+
+    <style name="Text.Bold.Caption.ButtonDefault">
+        <item name="android:textColor">@color/button_default</item>
+    </style>
+
+    <style name="Text.Bold.Caption.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="Text.Bold.Caption.ContrastPrimary">
+        <item name="android:textColor">@color/text_contrast_primary</item>
+    </style>
+
+    <style name="Text.Bold.SubCaption">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:lineSpacingExtra">16.2sp</item>
+    </style>
+
+    <style name="Text.Bold.SubCaption.ContrastPrimary">
+        <item name="android:textColor">@color/text_contrast_primary</item>
+    </style>
+
+    <!-- Regular -->
+
+    <style name="Text.Regular">
+        <item name="android:fontFamily">@font/sofia_pro_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Text.Regular.Caption">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:lineSpacingExtra">19.6sp</item>
+        <item name="android:fontFeatureSettings">normal</item>
+    </style>
+
+    <style name="Text.Regular.Timer">
+        <item name="android:textSize">32sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:lineSpacingExtra">39.04sp</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:fontFeatureSettings">smcp</item>
+    </style>
+
+    <style name="Text.Regular.Timer.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Text.Regular.Caption.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Text.Regular.Caption.PrimaryHeadline">
+        <item name="android:textColor">@color/text_primary_headline</item>
+    </style>
+
+    <style name="Text.Regular.Caption.ContrastPrimary">
+        <item name="android:textColor">@color/text_contrast_primary</item>
+    </style>
+
+    <style name="Text.Regular.Caption.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="Text.Regular.Caption.Secondary2">
+        <item name="android:textColor">@color/text_secondary_2</item>
+    </style>
+
+    <style name="Text.Regular.Caption.Error">
+        <item name="android:textColor">@color/text_error</item>
+    </style>
+
+    <style name="Text.Regular.Caption.Tertiary">
+        <item name="android:textColor">@color/text_tertiary</item>
+    </style>
+
+    <style name="Text.Regular.SubCaption">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:lineSpacingExtra">13.2sp</item>
+    </style>
+
+    <style name="Text.Regular.SubCaption.ContrastPrimary">
+        <item name="android:textColor">@color/text_contrast_primary</item>
+    </style>
+
+    <style name="Text.Regular.SubCaption.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="Text.Regular.SubCaption.Error">
+        <item name="android:textColor">@color/text_error</item>
+    </style>
+
+    <style name="Text.Regular.SubCaption.PrimaryHeadline">
+        <item name="android:textColor">@color/text_primary_headline</item>
+    </style>
+
+    <style name="Text.Regular.SubCaption.AdRegular">
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">@color/text_secondary_contrast</item>
+    </style>
+
+    <style name="Text.Regular.SubCaption.Tertiary">
+        <item name="android:textColor">@color/text_tertiary</item>
+    </style>
+
+    <style name="Text.Regular.Caption.Link">
+        <item name="android:textColor">@color/text_link</item>
+    </style>
+
+    <style name="Text.Regular.Body">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:lineSpacingExtra">24sp</item>
+        <item name="android:fontFeatureSettings">normal</item>
+    </style>
+
+    <style name="Text.Regular.Body.Default">
+        <item name="android:textColor">@color/button_default</item>
+    </style>
+
+    <style name="Text.Regular.Body.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Text.Regular.Body.PrimaryHeadline">
+        <item name="android:textColor">@color/text_primary_headline</item>
+    </style>
+
+    <style name="Text.Regular.Body.ContrastPrimary" >
+        <item name="android:textColor">@color/text_contrast_primary</item>
+    </style>
+
+    <style name="Text.Regular.Body.White" parent="Text.Regular.Body">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Regular.Body.Additional">
+        <item name="android:textColor">@color/icon_additional</item>
+    </style>
+
+    <style name="Text.Regular.Body.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="Text.Dialog">
+        <item name="android:fontFamily">@font/sf_pro_text_medium</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+    </style>
+
+    <style name="Text.Dialog.Body" />
+
+    <style name="Text.Dialog.Body.Bold">
+        <item name="android:fontFamily">@font/sf_pro_text_medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="Text.Dialog.Body.Bold.Primary">
+        <item name="android:textColor">@color/text_dialog_permission</item>
+    </style>
+
+    <style name="Text.Dialog.Body.Bold.Default">
+        <item name="android:textColor">@color/dialog_permission_button_text</item>
+    </style>
+
+    <style name="Text.Dialog.Body.Regular">
+        <item name="android:fontFamily">@font/sf_pro_text_regular</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="Text.Dialog.Body.Regular.Primary">
+        <item name="android:textColor">@color/text_dialog_permission</item>
+    </style>
+
+    <style name="Text.Dialog.Body.Regular.Default">
+        <item name="android:textColor">@color/dialog_permission_button_text</item>
+    </style>
+
+    <style name="Text.Regular.LastHistory">
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:lineSpacingExtra">24sp</item>
+        <item name="android:fontFeatureSettings">normal</item>
+    </style>
+
+    <style name="Text.Regular.LastHistory.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+</resources>

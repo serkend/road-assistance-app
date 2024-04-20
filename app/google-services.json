@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "844536867455",
-    "project_id": "footballmatchtrackertest",
-    "storage_bucket": "footballmatchtrackertest.appspot.com"
+    "project_number": "447819393102",
+    "project_id": "roadassist-d62f9",
+    "storage_bucket": "roadassist-d62f9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:844536867455:android:70b719caefbc0056e3ed4a",
+        "mobilesdk_app_id": "1:447819393102:android:c52ada877d1b3dc496fb1f",
         "android_client_info": {
-          "package_name": "com.example.geeksforgeekschat"
+          "package_name": "com.example.roadAssist"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "844536867455-fqm5mo1mdpm34tpvnkafolctsl5oivpb.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAWr92TXKp24V-e0wpmMAO3VI3BVwyZr6c"
+          "current_key": "AIzaSyDKvDQ7pE1Jz58acdrZvGc8LYaF24yiVow"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "844536867455-fqm5mo1mdpm34tpvnkafolctsl5oivpb.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

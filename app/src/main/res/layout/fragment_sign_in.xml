@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.screens.auth.sign_in.SignInFragment">
+    android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/usernameTIL"
@@ -35,9 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="Password"
-        app:passwordToggleContentDescription="description"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/black"
+        app:endIconMode="password_toggle"
         android:background="@drawable/edit_background"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
@@ -72,10 +69,10 @@
             android:text="Sign In"
             tools:layout_editor_absoluteX="162dp" />
         <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/progressBarStyle"
-
+            android:id="@+id/signInProgressBar"
+            style="@style/ProgressBarStyle.Button"
+            android:visibility="invisible"
+            android:layout_gravity="center"
             />
     </FrameLayout>
 

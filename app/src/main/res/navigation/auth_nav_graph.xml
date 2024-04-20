@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/signInFragment2"
-        android:name="com.example.geeksforgeekschat.presentation.screens.auth.sign_in.SignInFragment"
+        android:name="com.example.roadAssist.presentation.screens.auth.sign_in.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
         <action
@@ -16,6 +16,6 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment2"
-        android:name="com.example.geeksforgeekschat.presentation.screens.auth.sign_up.SignUpFragment"
+        android:name="com.example.roadAssist.presentation.screens.auth.sign_up.SignUpFragment"
         android:label="SignUpFragment" />
 </navigation>

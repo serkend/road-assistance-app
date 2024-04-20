@@ -3,7 +3,7 @@ package com.example.data.repository
 import android.util.Log
 import com.example.common.Constants
 import com.example.common.Resource
-import com.example.data.model.UserEntity
+import com.example.data.model.UserDto
 import com.example.data.model.toModel
 import com.example.domain.model.UserModel
 import com.example.domain.repository.UserManagerRepository
@@ -26,7 +26,7 @@ class UserManagerRepositoryImpl @Inject constructor(
         var snapshotListener: ListenerRegistration? = null
         val loggedUserId = mAuth.currentUser?.uid
         try {
-            val userList = mutableListOf<UserEntity>()
+            val userList = mutableListOf<UserDto>()
             val docReference = firestore.collection(Constants.FIREBASE_COLLECTION_USERS)
                 .orderBy(Constants.CREATED_AT_FIELD, Query.Direction.DESCENDING)
 
@@ -37,7 +37,7 @@ class UserManagerRepositoryImpl @Inject constructor(
                     }
 
                     for (document in it.documents) {
-                        document.toObject(UserEntity::class.java)?.let { user ->
+                        document.toObject(UserDto::class.java)?.let { user ->
                             if (user.uId != loggedUserId) {
                                 userList.add(user)
                             }
@@ -67,7 +67,7 @@ class UserManagerRepositoryImpl @Inject constructor(
                 val docRef = firestore.collection(Constants.FIREBASE_COLLECTION_USERS)
                     .document(uid)
                 val docSnapshot = docRef.get().await()
-                val user = docSnapshot.toObject<UserEntity>() ?: UserEntity()
+                val user = docSnapshot.toObject<UserDto>() ?: UserDto()
                 return Resource.Success(user.toModel())
             }
             return Resource.Failure()

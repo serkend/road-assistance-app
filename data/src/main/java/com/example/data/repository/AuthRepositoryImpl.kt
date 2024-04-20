@@ -5,8 +5,8 @@ import android.util.Log
 import com.example.common.Constants
 import com.example.common.Constants.TAG
 import com.example.common.Resource
-import com.example.data.mappers.toEntity
-import com.example.data.model.UserEntity
+import com.example.data.mappers.toDto
+import com.example.data.model.UserDto
 import com.example.domain.model.SignInCredentials
 import com.example.domain.model.SignUpCredentials
 import com.example.domain.model.UserModel
@@ -61,10 +61,9 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun signUp(credentials : SignUpCredentials, userModel: UserModel): Flow<Resource<Boolean>> = flow {
         try {
             emit(Resource.Loading)
-            mAuth.createUserWithEmailAndPassword(credentials.email, credentials.password)
-                .await()
+            mAuth.createUserWithEmailAndPassword(credentials.email, credentials.password).await()
             val imageUrl = credentials.imageUri?.let { saveProfilePictureToStorage(it) }
-            saveCurrUserToFirebase(userModel.toEntity().copy(image = imageUrl))
+            saveCurrUserToFirebase(userModel.toDto().copy(image = imageUrl))
             emit(Resource.Success(true))
         } catch (e: Exception) {
             emit(Resource.Failure(e))
@@ -92,10 +91,10 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    private suspend fun saveCurrUserToFirebase(userEntity: UserEntity) {
+    private suspend fun saveCurrUserToFirebase(userDto: UserDto) {
         val uid = mAuth.currentUser?.uid
         uid?.let {
-            val user = userEntity.copy(uId = uid)
+            val user = userDto.copy(uId = uid)
 
             firestore.collection(Constants.FIREBASE_COLLECTION_USERS)
                 .document(user.uId)
