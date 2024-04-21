@@ -1,5 +1,6 @@
 package com.example.domain.auth.usecases.auth
 
+import com.example.domain.auth.repository.AuthRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject

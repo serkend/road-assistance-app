@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.Resource
+import com.example.domain.auth.model.SignUpCredentials
 import com.example.domain.auth.usecases.auth.AuthUseCases
 import com.example.domain.common.User
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,10 +1,9 @@
-package com.example.roadAssist.presentation.screens.requestAssist.vehicleTrouble
+package com.example.roadAssist.presentation.screens.requestAssistFlow.vehicleTrouble
 
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
-import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView

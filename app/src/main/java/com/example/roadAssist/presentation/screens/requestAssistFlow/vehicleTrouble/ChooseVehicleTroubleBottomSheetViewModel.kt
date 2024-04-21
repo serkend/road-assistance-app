@@ -1,4 +1,4 @@
-package com.example.roadAssist.presentation.screens.requestAssist.vehicleTrouble
+package com.example.roadAssist.presentation.screens.requestAssistFlow.vehicleTrouble
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

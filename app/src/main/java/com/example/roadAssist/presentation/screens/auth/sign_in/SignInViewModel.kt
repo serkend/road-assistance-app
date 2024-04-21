@@ -3,6 +3,7 @@ package com.example.roadAssist.presentation.screens.auth.sign_in
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.Resource
+import com.example.domain.auth.model.SignInCredentials
 import com.example.roadAssist.presentation.model.LoginState
 import com.example.domain.auth.usecases.auth.AuthUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel

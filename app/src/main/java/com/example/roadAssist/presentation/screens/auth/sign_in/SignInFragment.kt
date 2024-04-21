@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.common.Constants.TAG
+import com.example.domain.auth.model.SignInCredentials
 import com.example.roadAssist.R
 import com.example.roadAssist.databinding.FragmentSignInBinding
 import com.example.roadAssist.presentation.model.LoginState

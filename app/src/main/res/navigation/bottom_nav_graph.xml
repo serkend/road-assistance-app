@@ -30,7 +30,7 @@
     </fragment>
     <dialog
         android:id="@+id/chooseVehicleTroubleBottomSheetFragment"
-        android:name="com.example.roadAssist.presentation.screens.requestAssist.vehicleTrouble.ChooseVehicleTroubleBottomSheetFragment"
+        android:name="com.example.roadAssist.presentation.screens.requestAssistFlow.vehicleTrouble.ChooseVehicleTroubleBottomSheetFragment"
         android:label="fragment_choose_vehicle_trouble_bottom_sheet"
         tools:layout="@layout/fragment_choose_vehicle_trouble_bottom_sheet" />
 </navigation>

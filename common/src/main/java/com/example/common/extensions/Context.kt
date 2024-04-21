@@ -1,4 +1,4 @@
-package com.example.roadAssist.presentation.utils
+package com.example.common.extensions
 
 import android.Manifest
 import android.content.Context

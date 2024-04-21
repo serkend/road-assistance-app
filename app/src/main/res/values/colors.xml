@@ -13,6 +13,7 @@
     <color name="pink2">#e8628c</color>
     <color name="crayola">#F5F5F9</color>
     <color name="text_default">#333333</color>
+    <color name="gray">#f0efef</color>
 
     <!-- Text -->
     <color name="text_primary">#080808</color>
