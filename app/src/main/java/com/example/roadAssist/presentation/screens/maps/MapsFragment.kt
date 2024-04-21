@@ -13,10 +13,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.common.Constants.TAG
 import com.example.roadAssist.R
 import com.example.roadAssist.databinding.FragmentMapsBinding
 import com.example.roadAssist.databinding.FragmentSignInBinding
+import com.example.roadAssist.presentation.utils.bindSharedFlow
 import com.example.roadAssist.presentation.utils.bindStateFlow
 import com.example.roadAssist.presentation.utils.checkLocationPermission
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -29,6 +34,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MapsFragment : Fragment() {
@@ -121,7 +127,19 @@ class MapsFragment : Fragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
         locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-        binding.requestAssistButton.setOnClickListener {
+        initViews()
+        bindViewModel()
+    }
+
+    private fun bindViewModel() = with(viewModel) {
+        bindSharedFlow(launchChooseVehicleTroubleScreen) {
+            Log.e(TAG, "bindViewModel: launchChooseVehicleTroubleScreen")
+            findNavController().navigate(R.id.chooseVehicleTroubleBottomSheetFragment)
+        }
+    }
+
+    private fun initViews() = with(binding) {
+        requestAssistButton.setOnClickListener {
             viewModel.onRequestAssistClicked()
         }
     }

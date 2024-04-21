@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.Constants.TAG
 import com.example.common.Resource
-import com.example.domain.usecases.auth.AuthUseCases
-import com.example.domain.usecases.user_manager.GetCurrentUser
-import com.example.domain.model.UserModel
+import com.example.domain.auth.usecases.auth.AuthUseCases
+import com.example.domain.userManager.usecases.GetCurrentUser
+import com.example.domain.common.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,7 +19,7 @@ class ProfileViewModel @Inject constructor(
     private val authUseCases: AuthUseCases, private val getCurrentUserUseCase: GetCurrentUser
 ) : ViewModel() {
 
-    private var _profileUiState: MutableStateFlow<UserModel?> = MutableStateFlow(null)
+    private var _profileUiState: MutableStateFlow<User?> = MutableStateFlow(null)
     val profileUiState = _profileUiState.asStateFlow()
 
     init {

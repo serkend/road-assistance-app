@@ -2,7 +2,7 @@ package com.example.roadAssist.presentation.screens.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.usecases.auth.AuthUseCases
+import com.example.domain.auth.usecases.auth.AuthUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

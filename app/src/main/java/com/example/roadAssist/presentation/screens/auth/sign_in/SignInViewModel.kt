@@ -3,9 +3,8 @@ package com.example.roadAssist.presentation.screens.auth.sign_in
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.Resource
-import com.example.domain.model.SignInCredentials
 import com.example.roadAssist.presentation.model.LoginState
-import com.example.domain.usecases.auth.AuthUseCases
+import com.example.domain.auth.usecases.auth.AuthUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow

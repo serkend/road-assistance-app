@@ -138,18 +138,10 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="Text.Bold.HeadLine6.IconDefault2">
-        <item name="android:textColor">@color/icon_default_2</item>
-    </style>
-
     <style name="Text.Bold.Body">
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingMultiplier">0</item>
         <item name="android:lineSpacingExtra">24sp</item>
-    </style>
-
-    <style name="Text.Bold.Body.Default">
-        <item name="android:textColor">@color/button_default</item>
     </style>
 
     <style name="Text.Bold.Body.ContrastPrimary">
@@ -178,10 +170,6 @@
         <item name="android:lineSpacingExtra">19.6sp</item>
     </style>
 
-    <style name="Text.Bold.Caption.SegmentButton">
-        <item name="android:textColor">@color/segment_button_text</item>
-    </style>
-
     <style name="Text.Bold.Caption.PrimaryHeadline">
         <item name="android:textColor">@color/text_primary_headline</item>
     </style>
@@ -192,10 +180,6 @@
 
     <style name="Text.Bold.Caption.Error">
         <item name="android:textColor">@color/text_error</item>
-    </style>
-
-    <style name="Text.Bold.Caption.ButtonDefault">
-        <item name="android:textColor">@color/button_default</item>
     </style>
 
     <style name="Text.Bold.Caption.Secondary">
@@ -312,10 +296,6 @@
         <item name="android:fontFeatureSettings">normal</item>
     </style>
 
-    <style name="Text.Regular.Body.Default">
-        <item name="android:textColor">@color/button_default</item>
-    </style>
-
     <style name="Text.Regular.Body.Primary">
         <item name="android:textColor">@color/text_primary</item>
     </style>
@@ -330,10 +310,6 @@
 
     <style name="Text.Regular.Body.White" parent="Text.Regular.Body">
         <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="Text.Regular.Body.Additional">
-        <item name="android:textColor">@color/icon_additional</item>
     </style>
 
     <style name="Text.Regular.Body.Secondary">
@@ -357,10 +333,6 @@
         <item name="android:textColor">@color/text_dialog_permission</item>
     </style>
 
-    <style name="Text.Dialog.Body.Bold.Default">
-        <item name="android:textColor">@color/dialog_permission_button_text</item>
-    </style>
-
     <style name="Text.Dialog.Body.Regular">
         <item name="android:fontFamily">@font/sf_pro_text_regular</item>
         <item name="android:textSize">13sp</item>
@@ -368,10 +340,6 @@
 
     <style name="Text.Dialog.Body.Regular.Primary">
         <item name="android:textColor">@color/text_dialog_permission</item>
-    </style>
-
-    <style name="Text.Dialog.Body.Regular.Default">
-        <item name="android:textColor">@color/dialog_permission_button_text</item>
     </style>
 
     <style name="Text.Regular.LastHistory">

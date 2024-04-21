@@ -17,4 +17,6 @@
     <dimen name="text_size_36">36sp</dimen>
     <dimen name="text_size_28">28sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
+    <dimen name="emergency_card_padding">6dp</dimen>
+    <dimen name="emergency_card_text_margin_top">6dp</dimen>
 </resources>

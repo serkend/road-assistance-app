@@ -73,19 +73,18 @@ android {
 }
 
 dependencies {
-    implementation ("com.google.android.gms:play-services-maps:18.1.0")
-    implementation("pub.devrel:easypermissions:3.0.0")
-//    implementation ("com.google.android:android-maps-utils:2.2.0")
-    implementation(Libs.View.viewBindingDelegate)
-
     //Modules
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":common"))
 
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    //Navigation
     implementation(Libs.Application.Navigation.navigation_fragment)
     implementation(Libs.Application.Navigation.navigation_ui)
+
+    //View
+    implementation(Libs.View.viewBindingDelegate)
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation(Libs.View.fragmentKtx)
     implementation(Libs.View.material)
     implementation(Libs.View.appCompat)
@@ -99,26 +98,28 @@ dependencies {
     implementation(Firebase.firestore)
     implementation(Firebase.auth)
 
+    //Google API
+    implementation ("com.google.android.gms:play-services-maps:18.2.0")
+    implementation("com.google.android.gms:play-services-location:21.2.0")
+
     //Lifecycle
     implementation(Libs.View.lifecycleRuntime)
     implementation(Libs.View.lifecycleViewModel)
 
     //DI
     implementation(Libs.Application.DependencyInjection.hilt)
+    kapt(Libs.Application.DependencyInjection.hilt_compiler)
+
+    //View
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
-    implementation("com.google.android.gms:play-services-location:21.0.1")
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
-    kapt(Libs.Application.DependencyInjection.hilt_compiler)
 
     //Compose
     implementation(Libs.Compose.coilCompose)
-    implementation(Libs.Compose.material3)
     implementation(Libs.Compose.runtime)
-    implementation(Libs.Compose.extended_icons)
     implementation(Libs.Boom.activityCompose)
     implementation(Libs.Boom.viewModelCompose)
     implementation(Libs.Compose.ui)

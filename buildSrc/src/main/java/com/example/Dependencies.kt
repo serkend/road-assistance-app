@@ -56,7 +56,7 @@ object Project {
 
 object Firebase {
     private const val bom_version = "32.2.3"
-    const val firebaseBom = "com.google.firebase:firebase-bom:${bom_version}"
+    const val firebaseBom = "com.google.firebase:firebase-bom:$bom_version"
     const val auth = "com.google.firebase:firebase-auth-ktx"
     const val firestore = "com.google.firebase:firebase-firestore-ktx"
     const val storage = "com.google.firebase:firebase-storage-ktx"
@@ -184,7 +184,9 @@ object Libs {
             private const val roomVersion = "2.4.3"
 
             const val roomRuntime = "androidx.room:room-runtime:$roomVersion"
-            const val kaptRoom = "androidx.room:room-compiler:$roomVersion"
+            const val roomAnnotationProcessor = "androidx.room:room-compiler:$roomVersion"
+            const val roomKapt = "androidx.room:room-compiler:$roomVersion"
+
             const val roomKtx = "androidx.room:room-ktx:$roomVersion"
             const val roomPaging = "androidx.room:room-paging:$roomVersion"
         }

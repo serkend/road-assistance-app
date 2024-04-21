@@ -37,12 +37,11 @@ android {
 
 dependencies {
 
-    implementation( project(Modules.common))
-    implementation( project(Modules.domain))
+    implementation(project(Modules.common))
+    implementation(project(Modules.domain))
 
     //Kotlin
     implementation(Libs.View.coreKtx)
-    implementation("androidx.core:core-ktx:1.10.1")
 
     //Firebase
     implementation(platform(Firebase.firebaseBom))
@@ -53,5 +52,9 @@ dependencies {
     //DI
     implementation(Libs.Application.DependencyInjection.hilt)
     kapt(Libs.Application.DependencyInjection.hilt_compiler)
+
+    //Room
+    implementation(Libs.Application.Database.roomRuntime)
+    implementation(Libs.Application.Database.roomKtx)
 
 }

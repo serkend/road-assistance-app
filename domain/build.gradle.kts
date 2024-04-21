@@ -38,8 +38,9 @@ android {
 dependencies {
 
     implementation(project(Modules.common))
+    implementation("androidx.core:core-ktx:1.10.1")
 
-    //Firebase
+    //com.example.Firebase
     implementation(platform(Firebase.firebaseBom))
     implementation(Firebase.storage)
     implementation(Firebase.firestore)
@@ -47,7 +48,6 @@ dependencies {
 
     //DI
     implementation(Libs.Application.DependencyInjection.hilt)
-    implementation("androidx.core:core-ktx:1.10.1")
     kapt(Libs.Application.DependencyInjection.hilt_compiler)
 
 }

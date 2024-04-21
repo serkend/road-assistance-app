@@ -23,5 +23,14 @@
         android:id="@+id/mapsFragment"
         android:name="com.example.roadAssist.presentation.screens.maps.MapsFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_chooseVehicleTroubleBottomSheetFragment"
+            app:destination="@id/chooseVehicleTroubleBottomSheetFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/chooseVehicleTroubleBottomSheetFragment"
+        android:name="com.example.roadAssist.presentation.screens.requestAssist.vehicleTrouble.ChooseVehicleTroubleBottomSheetFragment"
+        android:label="fragment_choose_vehicle_trouble_bottom_sheet"
+        tools:layout="@layout/fragment_choose_vehicle_trouble_bottom_sheet" />
 </navigation>

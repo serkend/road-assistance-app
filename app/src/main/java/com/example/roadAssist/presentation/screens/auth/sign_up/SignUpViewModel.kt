@@ -4,9 +4,8 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.Resource
-import com.example.domain.model.SignUpCredentials
-import com.example.domain.usecases.auth.AuthUseCases
-import com.example.domain.model.UserModel
+import com.example.domain.auth.usecases.auth.AuthUseCases
+import com.example.domain.common.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -34,7 +33,7 @@ class SignUpViewModel @Inject constructor(private val authUseCases: AuthUseCases
     fun signUp(email: String ,password: String) {
         viewModelScope.launch {
             val imageUri = imageUriFlow.value
-            val user = UserModel(
+            val user = User(
                 email = email,
                 image = imageUri
             )
