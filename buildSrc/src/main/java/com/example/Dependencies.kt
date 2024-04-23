@@ -13,7 +13,7 @@ object Config {
     const val jvmTarget = "17"
     const val kotlinVersion = "1.8.0"
     const val gradleAndroidVersion = "8.0.0"
-    const val daggerVersion = "2.44"
+    const val daggerVersion = "2.46"
 }
 
 object Android {

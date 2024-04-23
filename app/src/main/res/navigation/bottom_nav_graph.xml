@@ -32,5 +32,21 @@
         android:id="@+id/chooseVehicleTroubleBottomSheetFragment"
         android:name="com.example.roadAssist.presentation.screens.requestAssistFlow.vehicleTrouble.ChooseVehicleTroubleBottomSheetFragment"
         android:label="fragment_choose_vehicle_trouble_bottom_sheet"
-        tools:layout="@layout/fragment_choose_vehicle_trouble_bottom_sheet" />
+        tools:layout="@layout/fragment_choose_vehicle_trouble_bottom_sheet" >
+        <action
+            android:id="@+id/action_chooseVehicleTroubleBottomSheetFragment_to_chooseVehicleBottomSheetFragment"
+            app:destination="@id/chooseVehicleBottomSheetFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/chooseVehicleBottomSheetFragment"
+        android:name="com.example.roadAssist.presentation.screens.requestAssistFlow.vehicles.ChooseVehicleBottomSheetFragment"
+        android:label="ChooseVehicleBottomSheetFragment">
+        <argument
+            android:name="troubleName"
+            app:argType="string" />
+    </dialog>
+    <fragment
+        android:id="@+id/vehicleAddUpdateBottomSheetFragment"
+        android:name="com.example.roadAssist.presentation.screens.requestAssistFlow.vehicleAddUpdate.VehicleAddUpdateBottomSheetFragment"
+        android:label="VehicleAddUpdateBottomSheetFragment"/>
 </navigation>

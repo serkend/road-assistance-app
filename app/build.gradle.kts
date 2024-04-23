@@ -4,7 +4,8 @@ plugins {
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
     id("com.google.gms.google-services")
-    id ("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -58,7 +59,6 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        compose = true
     }
     packagingOptions {
         resources {
@@ -66,9 +66,6 @@ android {
             resources.excludes.add("META-INF/LGPL2.1")
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = Libs.Compose.composeVersion
     }
 }
 
@@ -108,6 +105,7 @@ dependencies {
 
     //DI
     implementation(Libs.Application.DependencyInjection.hilt)
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     kapt(Libs.Application.DependencyInjection.hilt_compiler)
 
     //View

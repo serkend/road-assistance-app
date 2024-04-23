@@ -2,6 +2,7 @@ package com.example.data.vehicles.repository
 
 import com.example.common.ResultState
 import com.example.data.vehicles.dao.VehicleDao
+import com.example.data.vehicles.dto.VehicleDto
 import com.example.data.vehicles.entity.VehicleEntity
 import com.example.data.vehicles.entity.toDomain
 import com.example.domain.vehicles.model.Vehicle
@@ -26,13 +27,13 @@ class VehicleRepositoryImpl @Inject constructor(
         }
         emit(ResultState.Loading(data = lastCachedVehicles))
         try {
-            val snapshot = firestore.collection("vehicles").get().await()
+            val snapshot = firestore.collection(VehicleDto.FIREBASE_VEHICLES).get().await()
             val serverVehicles = snapshot.documents.mapNotNull { doc ->
                 VehicleEntity(
                     id = doc.id,
-                    make = doc.getString("make") ?: "",
-                    model = doc.getString("model") ?: "",
-                    year = doc.getLong("year")?.toInt() ?: 0
+                    make = doc.getString(VehicleDto.FIREBASE_MAKE) ?: "",
+                    model = doc.getString(VehicleDto.FIREBASE_MODEL) ?: "",
+                    year = doc.getLong(VehicleDto.FIREBASE_YEAR)?.toInt() ?: 0
                 )
             }
             withContext(Dispatchers.IO) {

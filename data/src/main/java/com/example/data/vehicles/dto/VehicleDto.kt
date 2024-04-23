@@ -10,4 +10,11 @@ data class VehicleDto(
     @PropertyName("year") val year: Int
 ) {
     fun toEntity(): VehicleEntity = VehicleEntity(id, make, model, year)
+
+    companion object {
+        const val FIREBASE_VEHICLES = "vehicles"
+        const val FIREBASE_MAKE = "make"
+        const val FIREBASE_MODEL = "model"
+        const val FIREBASE_YEAR = "year"
+    }
 }

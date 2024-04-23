@@ -69,6 +69,7 @@
                     app:tint="@color/pink" />
 
                 <TextView
+                    android:id="@+id/flatTyreTV"
                     style="@style/Text.Bold.Caption.Secondary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -104,6 +105,7 @@
                     app:tint="@color/pink" />
 
                 <TextView
+                    android:id="@+id/fuelTV"
                     style="@style/Text.Bold.Caption.Secondary"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -139,6 +141,7 @@
                     app:tint="@color/pink" />
 
                 <TextView
+                    android:id="@+id/batteryTV"
                     style="@style/Text.Bold.Caption.Secondary"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -174,6 +177,7 @@
                     app:tint="@color/pink" />
 
                 <TextView
+                    android:id="@+id/towingTV"
                     style="@style/Text.Bold.Caption.Secondary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -209,6 +213,7 @@
                     app:tint="@color/pink" />
 
                 <TextView
+                    android:id="@+id/pushTV"
                     style="@style/Text.Bold.Caption.Secondary"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -244,6 +249,7 @@
                     app:tint="@color/pink" />
 
                 <TextView
+                    android:id="@+id/lockedTV"
                     style="@style/Text.Bold.Caption.Secondary"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

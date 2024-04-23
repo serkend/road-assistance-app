@@ -5,6 +5,7 @@ import androidx.fragment.app.viewModels
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.roadAssist.R
 import com.example.roadAssist.databinding.FragmentChooseVehicleTroubleBottomSheetBinding
@@ -21,31 +22,38 @@ class ChooseVehicleTroubleBottomSheetFragment : BottomSheetDialogFragment(R.layo
         super.onViewCreated(view, savedInstanceState)
         initViews()
         bindViewModel()
-        viewModel.onCardClicked(binding.flatTyreCardView.id)
     }
 
     private fun initViews() = with(binding) {
+        viewModel.onCardClicked(flatTyreCardView.id, flatTyreTV.text.toString())
         flatTyreCardView.setOnClickListener {
-            viewModel.onCardClicked(it.id)
+            viewModel.onCardClicked(it.id, flatTyreTV.text.toString())
         }
         fuelCardView.setOnClickListener {
-            viewModel.onCardClicked(it.id)
+            viewModel.onCardClicked(it.id, fuelTV.text.toString())
         }
         batteryCardView.setOnClickListener {
-            viewModel.onCardClicked(it.id)
+            viewModel.onCardClicked(it.id, batteryTV.text.toString())
         }
         towingCardView.setOnClickListener {
-            viewModel.onCardClicked(it.id)
+            viewModel.onCardClicked(it.id, towingTV.text.toString())
         }
         pushCardView.setOnClickListener {
-            viewModel.onCardClicked(it.id)
+            viewModel.onCardClicked(it.id, pushTV.text.toString())
         }
         lockedCarView.setOnClickListener {
-            viewModel.onCardClicked(it.id)
+            viewModel.onCardClicked(it.id, lockedTV.text.toString())
+        }
+        selectButton.setOnClickListener {
+            viewModel.onSelectButtonClicked()
         }
     }
 
     private fun bindViewModel() = with(viewModel) {
+        bindSharedFlow(launchChooseCarScreenSharedFlow) {
+            val action = ChooseVehicleTroubleBottomSheetFragmentDirections.actionChooseVehicleTroubleBottomSheetFragmentToChooseVehicleBottomSheetFragment(it)
+            findNavController().navigate(action)
+        }
         bindSharedFlow(clickedCardIdSharedFlow) { (lastResId, currResId) ->
             when(lastResId) {
                 binding.flatTyreCardView.id -> {

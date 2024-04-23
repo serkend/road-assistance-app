@@ -42,7 +42,7 @@
         tools:listitem="@layout/vehicle_card_view" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/selectButton"
+        android:id="@+id/addButton"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,6 +53,7 @@
         app:backgroundTint="@android:color/transparent"
         app:cornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recyclerView"
         app:strokeColor="@color/pink2"

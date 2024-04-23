@@ -22,6 +22,8 @@
     <style name="ProgressBarStyle.Button">
 <!--        <item name="android:indeterminateDrawable">@drawable/button_progress_bar</item>-->
         <item name="android:indeterminateTint">@color/white</item>
+    </style>
 
+    <style name="TextAppearance.App.TextInputHint" parent="TextAppearance.MaterialComponents.Caption">
     </style>
 </resources>
