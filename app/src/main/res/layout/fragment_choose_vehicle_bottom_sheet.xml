@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/textView2"
@@ -38,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:itemCount="6"
+        tools:itemCount="1"
         tools:listitem="@layout/vehicle_card_view" />
 
     <com.google.android.material.button.MaterialButton
@@ -46,18 +48,15 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:paddingVertical="10dp"
+        android:layout_marginTop="24dp"
         android:text="Add new"
         android:textColor="@color/pink2"
         app:backgroundTint="@android:color/transparent"
         app:cornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recyclerView"
         app:strokeColor="@color/pink2"
         app:strokeWidth="2dp" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

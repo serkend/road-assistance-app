@@ -1,6 +1,7 @@
 package com.example.data.vehicles.dto
 
 import com.example.data.vehicles.entity.VehicleEntity
+import com.example.domain.vehicles.model.Vehicle
 import com.google.firebase.firestore.PropertyName
 
 data class VehicleDto(
@@ -18,3 +19,5 @@ data class VehicleDto(
         const val FIREBASE_YEAR = "year"
     }
 }
+
+fun Vehicle.toDto(id:String) = VehicleDto(id = id, make = make, model = model, year = year)

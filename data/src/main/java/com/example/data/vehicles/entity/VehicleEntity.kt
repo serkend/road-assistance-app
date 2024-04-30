@@ -14,4 +14,4 @@ data class VehicleEntity(
 
 fun VehicleEntity.toDomain() = Vehicle(id, make, model, year)
 
-fun Vehicle.toEntity(): VehicleEntity = VehicleEntity(id, make, model, year)
+fun Vehicle.toEntity(id: String): VehicleEntity = VehicleEntity(id = id, make, model, year)

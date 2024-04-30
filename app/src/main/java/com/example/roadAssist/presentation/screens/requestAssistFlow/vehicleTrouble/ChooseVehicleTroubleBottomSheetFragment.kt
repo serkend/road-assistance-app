@@ -12,7 +12,9 @@ import com.example.roadAssist.databinding.FragmentChooseVehicleTroubleBottomShee
 import com.example.roadAssist.presentation.utils.bindSharedFlow
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.card.MaterialCardView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChooseVehicleTroubleBottomSheetFragment : BottomSheetDialogFragment(R.layout.fragment_choose_vehicle_trouble_bottom_sheet) {
 
     private val viewModel: ChooseVehicleTroubleBottomSheetViewModel by viewModels()

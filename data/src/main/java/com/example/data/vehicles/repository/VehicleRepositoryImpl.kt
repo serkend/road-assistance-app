@@ -3,8 +3,10 @@ package com.example.data.vehicles.repository
 import com.example.common.ResultState
 import com.example.data.vehicles.dao.VehicleDao
 import com.example.data.vehicles.dto.VehicleDto
+import com.example.data.vehicles.dto.toDto
 import com.example.data.vehicles.entity.VehicleEntity
 import com.example.data.vehicles.entity.toDomain
+import com.example.data.vehicles.entity.toEntity
 import com.example.domain.vehicles.model.Vehicle
 import com.example.domain.vehicles.repository.VehiclesRepository
 import com.google.firebase.firestore.FirebaseFirestore
@@ -47,11 +49,11 @@ class VehicleRepositoryImpl @Inject constructor(
 
     override suspend fun saveVehicle(vehicle: Vehicle) {
         withContext(Dispatchers.IO) {
-            val newVehicleDocument = firestore.collection("vehicles").document()
-            val newVehicle = vehicle.copy(id = newVehicleDocument.id)
+            val newVehicleDocument = firestore.collection(VehicleDto.FIREBASE_VEHICLES).document()
+            val newVehicleDto = vehicle.toDto(newVehicleDocument.id)
             try {
-                newVehicleDocument.set(newVehicle).await()
-//                vehicleDao.insertVehicle(newVehicle.toEntity())
+                newVehicleDocument.set(newVehicleDto).await()
+                vehicleDao.insertVehicle(newVehicleDto.toEntity())
             } catch (e: Exception) {
                 throw RuntimeException("Failed to save vehicle", e)
             }
@@ -60,8 +62,10 @@ class VehicleRepositoryImpl @Inject constructor(
 
     override suspend fun deleteVehicle(vehicle: Vehicle) {
         withContext(Dispatchers.IO) {
-            firestore.collection("vehicles").document(vehicle.id).delete().await()
-//            vehicleDao.deleteVehicle(vehicle.toEntity())
+            vehicle.id?.let{
+                firestore.collection(VehicleDto.FIREBASE_VEHICLES).document(it).delete().await()
+                vehicleDao.deleteVehicle(vehicle.toEntity(it))
+            }
         }
     }
 }

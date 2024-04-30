@@ -181,7 +181,7 @@ object Libs {
         }
 
         object Database {
-            private const val roomVersion = "2.4.3"
+            const val roomVersion = "2.6.1"
 
             const val roomRuntime = "androidx.room:room-runtime:$roomVersion"
             const val roomAnnotationProcessor = "androidx.room:room-compiler:$roomVersion"

@@ -54,7 +54,7 @@
             android:id="@+id/makeEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Make "
+            android:hint="Make"
             android:inputType="textPersonName"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -74,7 +74,7 @@
             android:id="@+id/modelEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Model "
+            android:hint="Model"
             android:inputType="textPersonName"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -94,9 +94,27 @@
             android:id="@+id/yearEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Year "
-            android:inputType="textPersonName"
-            android:maxLines="1" />
+            android:hint="Year"
+            android:inputType="number"
+            android:maxLength="4" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:paddingVertical="10dp"
+        android:text="Add"
+        android:textColor="@color/pink2"
+        app:backgroundTint="@android:color/transparent"
+        app:cornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/yearTIL"
+        app:strokeColor="@color/pink2"
+        app:strokeWidth="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

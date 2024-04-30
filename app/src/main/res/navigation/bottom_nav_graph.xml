@@ -39,7 +39,7 @@
     </dialog>
     <dialog
         android:id="@+id/chooseVehicleBottomSheetFragment"
-        android:name="com.example.roadAssist.presentation.screens.requestAssistFlow.vehicles.ChooseVehicleBottomSheetFragment"
+        android:name="com.example.roadAssist.presentation.screens.requestAssistFlow.vehiclesList.ChooseVehicleBottomSheetFragment"
         android:label="ChooseVehicleBottomSheetFragment">
         <argument
             android:name="troubleName"

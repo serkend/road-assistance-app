@@ -54,7 +54,7 @@ dependencies {
     kapt(Libs.Application.DependencyInjection.hilt_compiler)
 
     //Room
-    implementation(Libs.Application.Database.roomRuntime)
     implementation(Libs.Application.Database.roomKtx)
+    kapt(Libs.Application.Database.roomKapt)
 
 }

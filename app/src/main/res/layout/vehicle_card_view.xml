@@ -4,28 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="4dp"
-    app:strokeColor="@color/gray"
-    app:strokeWidth="1dp"
-    tools:layout_margin="6dp">
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    android:layout_margin="6dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/colorSecondary"
-        android:padding="6dp">
+        android:padding="12dp">
 
         <TextView
             android:id="@+id/makeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Ford"
+            style="@style/Text.Regular.Body.Primary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
 
         <TextView
+            style="@style/Text.Regular.Body.Primary"
             android:id="@+id/modelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,12 +35,22 @@
             app:layout_constraintTop_toBottomOf="@+id/makeTextView"
             />
 
+        <TextView
+            style="@style/Text.Regular.Body.Primary"
+            android:id="@+id/yearTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="2004"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/modelTextView"
+            />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/arrow_right"
-            app:layout_constraintBottom_toBottomOf="@+id/modelTextView"
-
+            app:layout_constraintBottom_toBottomOf="@+id/yearTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/makeTextView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
