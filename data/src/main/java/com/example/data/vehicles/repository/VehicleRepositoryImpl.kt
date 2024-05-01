@@ -47,17 +47,23 @@ class VehicleRepositoryImpl @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun saveVehicle(vehicle: Vehicle) {
+    override suspend fun getVehicleById(vehicleId: String): Vehicle = withContext(Dispatchers.IO) {
+        return@withContext vehicleDao.getVehicleById(vehicleId).toDomain()
+    }
+
+    override suspend fun saveVehicle(vehicle: Vehicle) : String {
+        val newVehicleDocument = firestore.collection(VehicleDto.FIREBASE_VEHICLES).document()
+        val newVehicleDto = vehicle.toDto(newVehicleDocument.id)
         withContext(Dispatchers.IO) {
-            val newVehicleDocument = firestore.collection(VehicleDto.FIREBASE_VEHICLES).document()
-            val newVehicleDto = vehicle.toDto(newVehicleDocument.id)
             try {
                 newVehicleDocument.set(newVehicleDto).await()
                 vehicleDao.insertVehicle(newVehicleDto.toEntity())
             } catch (e: Exception) {
                 throw RuntimeException("Failed to save vehicle", e)
             }
+
         }
+        return newVehicleDto.id
     }
 
     override suspend fun deleteVehicle(vehicle: Vehicle) {

@@ -6,7 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface VehiclesRepository {
     suspend fun fetchVehicles(): Flow<ResultState<List<Vehicle>>>
-    suspend fun saveVehicle(vehicle: Vehicle)
+    suspend fun getVehicleById(vehicleId: String): Vehicle
+    suspend fun saveVehicle(vehicle: Vehicle): String
     suspend fun deleteVehicle(vehicle: Vehicle)
 
 }

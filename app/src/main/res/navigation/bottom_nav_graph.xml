@@ -41,6 +41,12 @@
         android:id="@+id/chooseVehicleBottomSheetFragment"
         android:name="com.example.roadAssist.presentation.screens.requestAssistFlow.vehiclesList.ChooseVehicleBottomSheetFragment"
         android:label="ChooseVehicleBottomSheetFragment">
+        <action
+            android:id="@+id/action_chooseVehicleBottomSheetFragment_to_vehicleAddUpdateBottomSheetFragment"
+            app:destination="@id/vehicleAddUpdateBottomSheetFragment" />
+        <action
+            android:id="@+id/action_chooseVehicleBottomSheetFragment_to_requestPreviewFragment"
+            app:destination="@id/requestPreviewFragment" />
         <argument
             android:name="troubleName"
             app:argType="string" />
@@ -48,5 +54,24 @@
     <fragment
         android:id="@+id/vehicleAddUpdateBottomSheetFragment"
         android:name="com.example.roadAssist.presentation.screens.requestAssistFlow.vehicleAddUpdate.VehicleAddUpdateBottomSheetFragment"
-        android:label="VehicleAddUpdateBottomSheetFragment"/>
+        android:label="VehicleAddUpdateBottomSheetFragment">
+        <action
+            android:id="@+id/action_vehicleAddUpdateBottomSheetFragment_to_requestPreviewFragment"
+            app:destination="@id/requestPreviewFragment" />
+        <argument
+            android:name="troubleName"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/requestPreviewFragment"
+        android:name="com.example.roadAssist.presentation.screens.requestAssistFlow.requestPreview.RequestPreviewFragment"
+        android:label="fragment_request_preview"
+        tools:layout="@layout/fragment_request_preview" >
+        <argument
+            android:name="troubleName"
+            app:argType="string" />
+        <argument
+            android:name="vehicleId"
+            app:argType="string" />
+    </fragment>
 </navigation>

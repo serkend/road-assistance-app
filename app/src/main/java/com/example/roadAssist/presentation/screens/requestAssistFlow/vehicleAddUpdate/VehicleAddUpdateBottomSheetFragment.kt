@@ -2,13 +2,14 @@ package com.example.roadAssist.presentation.screens.requestAssistFlow.vehicleAdd
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.roadAssist.R
 import com.example.roadAssist.databinding.FragmentVehicleAddUpdateBinding
+import com.example.roadAssist.presentation.screens.requestAssistFlow.vehiclesList.ChooseVehicleBottomSheetFragmentArgs
 import com.example.roadAssist.presentation.utils.bindSharedFlow
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +19,7 @@ class VehicleAddUpdateBottomSheetFragment : BottomSheetDialogFragment(R.layout.f
 
     private val binding : FragmentVehicleAddUpdateBinding by viewBinding()
     private val viewModel: VehicleAddUpdateBottomSheetViewModel by viewModels()
+    private val args: VehicleAddUpdateBottomSheetFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,6 +52,10 @@ class VehicleAddUpdateBottomSheetFragment : BottomSheetDialogFragment(R.layout.f
     private fun bindViewModel() = with(viewModel) {
         bindSharedFlow(showToastMessage) {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        }
+        bindSharedFlow(launchRequestPreviewScreenSharedFlow) { vehicleId ->
+            val action = VehicleAddUpdateBottomSheetFragmentDirections.actionVehicleAddUpdateBottomSheetFragmentToRequestPreviewFragment(troubleName = args.troubleName, vehicleId = vehicleId)
+            findNavController().navigate(action)
         }
     }
 }

@@ -3,7 +3,6 @@ package com.example.roadAssist.presentation.screens.requestAssistFlow.vehiclesLi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.ResultState
-import com.example.data.vehicles.dto.toDto
 import com.example.domain.vehicles.usecases.VehiclesUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -24,6 +23,8 @@ class ChooseVehicleBottomSheetViewModel @Inject constructor(private val vehicles
 
     private val _isRefreshingSharedFlow = MutableSharedFlow<Boolean>()
     val isRefreshingSharedFlow = _isRefreshingSharedFlow.asSharedFlow()
+
+    var launchRequestPreviewScreenSharedFlow = MutableSharedFlow<String>()
 
     init {
         fetchVehicles()
@@ -48,7 +49,9 @@ class ChooseVehicleBottomSheetViewModel @Inject constructor(private val vehicles
         }
     }
 
-    fun onCarCardClicked(carId: String?) = viewModelScope.launch {
-
+    fun onVehicleCardClicked(vehicleId: String?) = viewModelScope.launch {
+        if (vehicleId != null) {
+            launchRequestPreviewScreenSharedFlow.emit(vehicleId)
+        }
     }
 }

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SaveVehicle @Inject constructor(private val vehiclesRepository: VehiclesRepository) {
-    suspend operator fun invoke(vehicle: Vehicle) {
+    suspend operator fun invoke(vehicle: Vehicle): String {
         return vehiclesRepository.saveVehicle(vehicle)
     }
 }
