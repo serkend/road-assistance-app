@@ -7,14 +7,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.screens.requestAssistFlow.requestPreview.RequestPreviewFragment">
 
+    <TextView
+        android:id="@+id/titleTextView"
+        style="@style/Text.Bold.HeadLine6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Request Preview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/requestCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="12dp"
+        android:layout_marginTop="24dp"
         app:cardElevation="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -57,9 +68,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:text="Description:"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/yearTextView"
-                android:text="Description:" />
+                app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
 
             <TextView
                 android:id="@+id/descriptionTroubleTextView"
@@ -67,30 +78,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
+                android:text="Push Start"
                 app:layout_constraintStart_toEndOf="@id/descriptionLabelTextView"
-                app:layout_constraintTop_toTopOf="@+id/descriptionLabelTextView"
-                android:text="Push Start" />
+                app:layout_constraintTop_toTopOf="@+id/descriptionLabelTextView" />
 
             <TextView
                 android:id="@+id/priceTextView"
                 style="@style/Text.Bold.HeadLine6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/yearTextView"
-                app:layout_constraintTop_toTopOf="@+id/priceTIL"
+                android:text="Price"
                 app:layout_constraintBottom_toBottomOf="@+id/priceTIL"
-                android:text="Price" />
+                app:layout_constraintStart_toStartOf="@+id/yearTextView"
+                app:layout_constraintTop_toTopOf="@+id/priceTIL" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/priceTIL"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:hintEnabled="true"
-                app:hintTextAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                app:counterMaxLength="20"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="16dp"
+                app:counterMaxLength="20"
+                app:hintEnabled="false"
+                app:hintTextAppearance="@style/TextAppearance.MaterialComponents.Caption"
                 app:layout_constraintStart_toEndOf="@id/priceTextView"
                 app:layout_constraintTop_toBottomOf="@id/descriptionLabelTextView">
 
@@ -98,21 +109,22 @@
                     android:id="@+id/priceEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="24sp"
-                    android:hint="Price"
+                    android:hint="0"
                     android:inputType="numberDecimal"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:textSize="24sp" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
                 android:id="@+id/dollarLabelTextView"
                 style="@style/Text.Bold.HeadLine6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="$"
                 android:textSize="32sp"
-                app:layout_constraintStart_toEndOf="@+id/priceTIL"
-                app:layout_constraintTop_toTopOf="@+id/priceTIL"
                 app:layout_constraintBottom_toBottomOf="@+id/priceTIL"
-                android:text="$" />
+                app:layout_constraintStart_toEndOf="@+id/priceTIL"
+                app:layout_constraintTop_toTopOf="@+id/priceTIL" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

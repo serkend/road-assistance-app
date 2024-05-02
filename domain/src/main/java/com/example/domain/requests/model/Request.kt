@@ -1,4 +1,4 @@
-package com.example.domain.request.model
+package com.example.domain.requests.model
 
 import com.example.domain.vehicles.model.Vehicle
 
