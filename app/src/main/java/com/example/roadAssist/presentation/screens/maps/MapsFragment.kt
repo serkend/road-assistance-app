@@ -20,6 +20,7 @@ import com.example.roadAssist.databinding.FragmentMapsBinding
 import com.example.roadAssist.presentation.utils.bindSharedFlow
 import com.example.roadAssist.presentation.utils.bindStateFlow
 import com.example.common.extensions.checkLocationPermission
+import com.example.common.extensions.showToast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -27,6 +28,7 @@ import com.google.android.gms.maps.GoogleMap
 
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,10 +60,7 @@ class MapsFragment : Fragment() {
                                     ), 15f
                                 )
                             )
-                            Log.e(
-                                TAG,
-                                "current location: ${location.latitude} ${location.longitude}"
-                            )
+                            Log.e(TAG, "current location: ${location.latitude} ${location.longitude}")
                         }
                     }
                 }
@@ -130,6 +129,16 @@ class MapsFragment : Fragment() {
         bindSharedFlow(launchChooseVehicleTroubleScreen) {
             Log.e(TAG, "bindViewModel: launchChooseVehicleTroubleScreen")
             findNavController().navigate(R.id.chooseVehicleTroubleBottomSheetFragment)
+        }
+        bindSharedFlow(showToast) { requireContext().showToast(it) }
+        bindStateFlow(markersStateFlow) { markers ->
+            mMap?.clear()
+            markers.forEach { (latLng, isCurrentUser) ->
+                val markerOptions = MarkerOptions()
+                    .position(latLng)
+                    .icon(if (isCurrentUser) BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE) else BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                mMap?.addMarker(markerOptions)
+            }
         }
     }
 

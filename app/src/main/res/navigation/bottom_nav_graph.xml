@@ -3,22 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_nav_graph"
-    app:startDestination="@id/homeFragment2">
-    <fragment
-        android:id="@+id/homeFragment2"
-        android:name="com.example.roadAssist.presentation.screens.user.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+    app:startDestination="@id/mapsFragment">
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.roadAssist.presentation.screens.user.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
-    <action
-        android:id="@+id/action_global_homeFragment2"
-        app:destination="@id/homeFragment2"
-        app:popUpTo="@id/homeFragment2"
-        app:popUpToInclusive="true"/>
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.roadAssist.presentation.screens.maps.MapsFragment"

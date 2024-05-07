@@ -23,6 +23,9 @@ interface VehicleDao {
     @Delete
     suspend fun deleteVehicle(vehicle: VehicleEntity)
 
+    @Query("DELETE FROM vehicles_table")
+    suspend fun deleteAllVehicles()
+
     @Query("SELECT * FROM vehicles_table")
     fun getAllVehicles(): Flow<List<VehicleEntity>>
 

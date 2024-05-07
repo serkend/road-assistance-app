@@ -1,4 +1,4 @@
-package com.example.data.di
+package com.example.data.database.di
 
 import android.content.Context
 import androidx.room.Room
@@ -21,7 +21,13 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DataModule {
+object DatabaseModule {
+
+    @Provides
+    @Singleton
+    fun provideFirebaseFirestore(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
+    }
 
     @Singleton
     @Provides
@@ -32,39 +38,6 @@ object DataModule {
             DATABASE_NAME
         ).build()
     }
-
-    @Provides
-    fun provideVehicleDao(database: AppDatabase): VehicleDao {
-        return database.vehicleDao()
-    }
-
-    @Provides
-    fun provideVehicleRepository(firestore: FirebaseFirestore, vehicleDao: VehicleDao): VehiclesRepository {
-        return VehicleRepositoryImpl(firestore, vehicleDao)
-    }
-
-    @Provides
-    @Singleton
-    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
-
-    @Provides
-    @Singleton
-    fun provideFirebaseFirestore(): FirebaseFirestore {
-        return FirebaseFirestore.getInstance()
-    }
-
-    @Provides
-    @Singleton
-    fun provideAuthRepository(
-        mAuth: FirebaseAuth, firestore: FirebaseFirestore
-    ): AuthRepository = AuthRepositoryImpl(mAuth, firestore)
-
-    @Provides
-    @Singleton
-    fun provideUserManagerRepository(
-        mAuth: FirebaseAuth, firestore: FirebaseFirestore
-    ): UserManagerRepository =
-        UserManagerRepositoryImpl(mAuth, firestore)
 
     private const val DATABASE_NAME = "road_assist_database"
 }

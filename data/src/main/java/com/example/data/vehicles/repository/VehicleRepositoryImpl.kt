@@ -3,10 +3,11 @@ package com.example.data.vehicles.repository
 import com.example.common.ResultState
 import com.example.data.vehicles.dao.VehicleDao
 import com.example.data.vehicles.dto.VehicleDto
-import com.example.data.vehicles.dto.toDto
 import com.example.data.vehicles.entity.VehicleEntity
 import com.example.data.vehicles.entity.toDomain
 import com.example.data.vehicles.entity.toEntity
+import com.example.data.vehicles.mappers.toDto
+import com.example.data.vehicles.mappers.toEntity
 import com.example.domain.vehicles.model.Vehicle
 import com.example.domain.vehicles.repository.VehiclesRepository
 import com.google.firebase.firestore.FirebaseFirestore
@@ -39,6 +40,7 @@ class VehicleRepositoryImpl @Inject constructor(
                 )
             }
             withContext(Dispatchers.IO) {
+                vehicleDao.deleteAllVehicles()
                 vehicleDao.insertVehicles(serverVehicles)
             }
             emit(ResultState.Success(data = serverVehicles.map { it.toDomain() }))
@@ -61,7 +63,6 @@ class VehicleRepositoryImpl @Inject constructor(
             } catch (e: Exception) {
                 throw RuntimeException("Failed to save vehicle", e)
             }
-
         }
         return newVehicleDto.id
     }

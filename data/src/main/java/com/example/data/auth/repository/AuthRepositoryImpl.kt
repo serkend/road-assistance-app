@@ -5,8 +5,8 @@ import android.util.Log
 import com.example.common.Constants
 import com.example.common.Constants.TAG
 import com.example.common.Resource
-import com.example.data.common.mappers.toDto
-import com.example.data.common.dto.UserDto
+import com.example.data.userManager.mappers.toDto
+import com.example.data.userManager.dto.UserDto
 import com.example.domain.auth.model.SignInCredentials
 import com.example.domain.auth.model.SignUpCredentials
 import com.example.domain.common.User

@@ -63,7 +63,7 @@ class SignInFragment : Fragment() {
                             Log.e(TAG, "Success uiState in signIn ")
                             val navController = findNavController()
                             navController.setGraph(R.navigation.bottom_nav_graph)
-                            navController.navigate(R.id.action_global_homeFragment2)
+//                            navController.navigate(R.id.action_global_homeFragment2)
                         }
 
                         LoginState.Loading -> {

@@ -6,6 +6,6 @@ import javax.inject.Inject
 
 class GetRequestById @Inject constructor(private val requestsRepository: RequestsRepository) {
     suspend operator fun invoke(requestId: Long) : Request {
-        return requestsRepository.getRequestById(requestId)
+        return requestsRepository.getRequestById(requestId.toString())
     }
 }

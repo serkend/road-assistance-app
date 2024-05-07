@@ -3,8 +3,8 @@ package com.example.data.userManager.repository
 import android.util.Log
 import com.example.common.Constants
 import com.example.common.Resource
-import com.example.data.common.dto.UserDto
-import com.example.data.common.dto.toModel
+import com.example.data.userManager.dto.UserDto
+import com.example.data.userManager.mappers.toModel
 import com.example.domain.auth.repository.UserManagerRepository
 import com.example.domain.common.User
 import com.google.firebase.auth.FirebaseAuth

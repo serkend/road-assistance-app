@@ -7,3 +7,4 @@ data class VehicleModel(
 )
 
 fun Vehicle.toModel() = VehicleModel(id = id, make = make, model = model, year = year)
+fun VehicleModel.toDomain() = Vehicle(id = id, make = make, model = model, year = year)

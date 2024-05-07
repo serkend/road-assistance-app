@@ -1,7 +1,12 @@
 package com.example.roadAssist.presentation.screens.requestAssistFlow.requestPreview
 
+import android.location.Location
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.common.ResultState
+import com.example.domain.location.usecases.GetCurrentLocation
+import com.example.domain.requests.usecases.RequestsUseCases
+import com.example.domain.vehicles.model.Vehicle
 import com.example.domain.vehicles.usecases.VehiclesUseCases
 import com.example.roadAssist.presentation.screens.requestAssistFlow.vehiclesList.VehicleModel
 import com.example.roadAssist.presentation.screens.requestAssistFlow.vehiclesList.toModel
@@ -12,14 +17,48 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RequestPreviewViewModel @Inject constructor(private val vehiclesUseCases: VehiclesUseCases) :
-    ViewModel() {
+class RequestPreviewViewModel @Inject constructor(
+    private val vehiclesUseCases: VehiclesUseCases,
+    private val requestsUseCases: RequestsUseCases,
+    private val getCurrentLocation: GetCurrentLocation
+) : ViewModel() {
 
-    val fetchedVehicleStateFlow = MutableSharedFlow<VehicleModel>()
+    val fetchedVehicleStateFlow = MutableStateFlow<VehicleModel?>(null)
+    val showToastSharedFlow = MutableSharedFlow<String>()
+
+    private var currentLocation: Location? = null
+
+    init {
+        getUserCurrentLocation()
+    }
 
     fun getVehicleById(vehicleId: String) = viewModelScope.launch {
         val vehicle = vehiclesUseCases.getVehicleById(vehicleId)
         fetchedVehicleStateFlow.emit(vehicle.toModel())
     }
 
+    fun saveRequest(trouble: String, cost: String) = viewModelScope.launch {
+        val fetchedVehicle = fetchedVehicleStateFlow.value
+        fetchedVehicle?.let {
+            requestsUseCases.saveRequest(
+                RequestModel(
+                    trouble = trouble,
+                    cost = cost,
+                    vehicle = it,
+                    latitude = currentLocation?.latitude ?: 0.0,
+                    longitude = currentLocation?.longitude ?: 0.0
+                ).toDomain()
+            )
+        }
+    }
+
+    private fun getUserCurrentLocation() = viewModelScope.launch {
+        getCurrentLocation().collect {
+            if (it is ResultState.Success) {
+                currentLocation = it.data
+            } else if( it is ResultState.Failure) {
+                showToastSharedFlow.emit(it.e ?: "Unknown location error")
+            }
+        }
+    }
 }

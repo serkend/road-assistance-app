@@ -1,4 +1,4 @@
-package com.example.data.common.dto
+package com.example.data.userManager.dto
 
 import android.net.Uri
 import com.example.domain.common.User
@@ -18,13 +18,4 @@ data class UserDto(
     @set:PropertyName("user_name")
     var userName: String = "",
     var token: String = ""
-)
-
-fun UserDto.toModel(): User = User(
-    email = this.email,
-    createdAt = this.createdAt,
-    updatedAt = this.updatedAt,
-    image = this.image?.let { Uri.parse(it) },
-    userName = this.userName,
-    token = "",
 )

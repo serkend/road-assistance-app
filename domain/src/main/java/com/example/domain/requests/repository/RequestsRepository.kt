@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface RequestsRepository {
     suspend fun fetchRequests(): Flow<ResultState<List<Request>>>
-    suspend fun getRequestById(requestId: Long): Request
+    suspend fun getRequestById(requestId: String): Request
     suspend fun saveRequest(request: Request)
     suspend fun deleteRequest(request: Request)
 }

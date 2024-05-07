@@ -5,13 +5,11 @@ import com.example.domain.vehicles.model.Vehicle
 import com.google.firebase.firestore.PropertyName
 
 data class VehicleDto(
-    @PropertyName("id") val id: String,
-    @PropertyName("make") val make: String,
-    @PropertyName("model") val model: String,
-    @PropertyName("year") val year: Int
+    @PropertyName("id") val id: String = "",
+    @PropertyName("make") val make: String = "",
+    @PropertyName("model") val model: String = "",
+    @PropertyName("year") val year: Int = 0
 ) {
-    fun toEntity(): VehicleEntity = VehicleEntity(id, make, model, year)
-
     companion object {
         const val FIREBASE_VEHICLES = "vehicles"
         const val FIREBASE_MAKE = "make"
@@ -20,4 +18,3 @@ data class VehicleDto(
     }
 }
 
-fun Vehicle.toDto(id:String) = VehicleDto(id = id, make = make, model = model, year = year)
