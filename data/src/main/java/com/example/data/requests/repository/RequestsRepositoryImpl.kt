@@ -1,8 +1,11 @@
 package com.example.data.requests.repository
 
+import com.example.common.OrderStatus
 import com.example.common.ResultState
+import com.example.data.requests.dto.OrderDto
 import com.example.data.requests.dto.RequestDto
 import com.example.data.requests.mappers.toDto
+import com.example.domain.requests.model.Order
 import com.example.domain.requests.model.Request
 import com.example.domain.requests.repository.RequestsRepository
 import com.google.firebase.auth.FirebaseAuth
@@ -16,7 +19,10 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class RequestsRepositoryImpl @Inject constructor(private val firestore: FirebaseFirestore, private val mAuth: FirebaseAuth) : RequestsRepository {
+class RequestsRepositoryImpl @Inject constructor(
+    private val firestore: FirebaseFirestore,
+    private val mAuth: FirebaseAuth
+) : RequestsRepository {
 
     override suspend fun fetchRequests(): Flow<ResultState<List<Request>>> = callbackFlow {
         val uId = mAuth.currentUser?.uid ?: throw RuntimeException("User is null")
@@ -42,6 +48,15 @@ class RequestsRepositoryImpl @Inject constructor(private val firestore: Firebase
             .toObject(Request::class.java) ?: throw NoSuchElementException("No request found with ID $requestId")
     }
 
+    private suspend fun getRequestDtoById(requestId: String): RequestDto {
+        return firestore.collection(RequestDto.FIREBASE_REQUESTS)
+            .document(requestId)
+            .get()
+            .await()
+            .toObject(RequestDto::class.java)
+            ?: throw NoSuchElementException("No request found with ID $requestId")
+    }
+
     override suspend fun saveRequest(request: Request) {
         try {
             val uId = mAuth.currentUser?.uid ?: throw RuntimeException("User is null")
@@ -63,6 +78,26 @@ class RequestsRepositoryImpl @Inject constructor(private val firestore: Firebase
         } catch (e: Exception) {
             throw RuntimeException("Failed to delete request: ${e.message}", e)
         }
+    }
+
+    override suspend fun acceptRequest(requestId: String) {
+        val currentUser = mAuth.currentUser ?: throw RuntimeException("User not logged in")
+
+        val request = getRequestDtoById(requestId)
+        val newOrder = Order(
+            status = OrderStatus.InProgress,
+            userId = currentUser.uid,
+            clientId = request.userId ?: throw RuntimeException("Request doesn't have userId"),
+            requestId = requestId
+        )
+
+        saveOrder(newOrder)
+    }
+
+    override suspend fun saveOrder(order: Order) {
+        val orderRef = firestore.collection(OrderDto.FIREBASE_ORDERS).document()
+        val orderWithId = order.copy(id = orderRef.id)
+        orderRef.set(orderWithId).await()
     }
 
 }

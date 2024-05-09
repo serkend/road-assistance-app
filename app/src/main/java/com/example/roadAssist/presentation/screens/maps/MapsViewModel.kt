@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.ResultState
 import com.example.domain.requests.usecases.RequestsUseCases
+import com.example.roadAssist.presentation.screens.requestAssistFlow.requestPreview.RequestModel
+import com.example.roadAssist.presentation.screens.requestAssistFlow.requestPreview.toModel
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -23,17 +25,13 @@ class MapsViewModel @Inject constructor(private val requestsUseCases: RequestsUs
     private var _launchChooseVehicleTroubleScreen = MutableSharedFlow<Unit>()
     val launchChooseVehicleTroubleScreen = _launchChooseVehicleTroubleScreen.asSharedFlow()
 
-    private var _markersStateFlow: MutableStateFlow<List<Pair<LatLng, Boolean>>> = MutableStateFlow(emptyList())
+    private var _markersStateFlow: MutableStateFlow<List<RequestModel>> = MutableStateFlow(emptyList())
     val markersStateFlow = _markersStateFlow.asStateFlow()
 
     val showToast = MutableSharedFlow<String>()
 
     init {
         fetchRequestsData()
-    }
-
-    fun addMarker(latLng: LatLng) {
-        _markersPosStateFlow.update { it + latLng }
     }
 
     fun onRequestAssistClicked() = viewModelScope.launch {
@@ -44,9 +42,7 @@ class MapsViewModel @Inject constructor(private val requestsUseCases: RequestsUs
         requestsUseCases.fetchRequests().collect { result ->
             when (result) {
                 is ResultState.Success -> {
-                    _markersStateFlow.value = result.data?.map { request ->
-                        LatLng(request.latitude, request.longitude) to (request.isCurrentUser ?: false)
-                    } ?: emptyList()
+                    _markersStateFlow.value = result.data?.map { it.toModel() } ?: emptyList()
                 }
 
                 is ResultState.Failure -> showToast.emit(

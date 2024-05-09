@@ -5,10 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.ResultState
 import com.example.domain.location.usecases.GetCurrentLocation
+import com.example.domain.requests.model.Request
 import com.example.domain.requests.usecases.RequestsUseCases
 import com.example.domain.vehicles.model.Vehicle
 import com.example.domain.vehicles.usecases.VehiclesUseCases
 import com.example.roadAssist.presentation.screens.requestAssistFlow.vehiclesList.VehicleModel
+import com.example.roadAssist.presentation.screens.requestAssistFlow.vehiclesList.toDomain
 import com.example.roadAssist.presentation.screens.requestAssistFlow.vehiclesList.toModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -41,13 +43,14 @@ class RequestPreviewViewModel @Inject constructor(
         val fetchedVehicle = fetchedVehicleStateFlow.value
         fetchedVehicle?.let {
             requestsUseCases.saveRequest(
-                RequestModel(
+                Request(
+                    id = null,
                     trouble = trouble,
                     cost = cost,
-                    vehicle = it,
+                    vehicle = it.toDomain(),
                     latitude = currentLocation?.latitude ?: 0.0,
                     longitude = currentLocation?.longitude ?: 0.0
-                ).toDomain()
+                )
             )
         }
     }

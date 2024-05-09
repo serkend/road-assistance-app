@@ -34,4 +34,7 @@
 
     <color name="ripple_material_light">#1F000000</color>
     <color name="ripple_material_dark">#1FFFFFFF</color>
+
+    <color name="grip">#BDBDBD</color>
+
 </resources>

@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_mapsFragment_to_chooseVehicleTroubleBottomSheetFragment"
             app:destination="@id/chooseVehicleTroubleBottomSheetFragment" />
+        <action
+            android:id="@+id/action_mapsFragment_to_RequestDetailsBottomSheetFragment"
+            app:destination="@id/requestDetailsBottomSheetFragment" />
     </fragment>
     <dialog
         android:id="@+id/chooseVehicleTroubleBottomSheetFragment"
@@ -64,4 +67,15 @@
             android:name="vehicleId"
             app:argType="string" />
     </fragment>
+    <dialog
+        android:id="@+id/requestDetailsBottomSheetFragment"
+        android:name="com.example.roadAssist.presentation.screens.requestDetails.RequestDetailsBottomSheetFragment"
+        android:label="fragment_request_details_bottom_sheet"
+        tools:layout="@layout/fragment_request_details_bottom_sheet" >
+        <argument
+            android:name="request"
+            app:argType="com.example.roadAssist.presentation.screens.requestAssistFlow.requestPreview.RequestModel"/>
+    </dialog>
+
+
 </navigation>

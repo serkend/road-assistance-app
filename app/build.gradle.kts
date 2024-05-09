@@ -6,6 +6,7 @@ plugins {
     id("com.google.gms.google-services")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -98,6 +99,9 @@ dependencies {
     //Google API
     implementation ("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.google.android.gms:play-services-location:21.2.0")
+
+    implementation(Libs.Application.Network.Retrofit.retrofit)
+    implementation(Libs.Application.Network.Retrofit.retrofit_gson)
 
     //Lifecycle
     implementation(Libs.View.lifecycleRuntime)
