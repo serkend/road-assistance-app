@@ -14,11 +14,13 @@ class RequestDetailsBottomSheetViewModel @Inject constructor(private val request
     ViewModel() {
 
     val requestAcceptedSharedFlow = MutableSharedFlow<Unit>()
+    val showToast = MutableSharedFlow<String>()
 
     fun acceptRequest(requestId: String) = viewModelScope.launch {
         try {
             requestsRepository.acceptRequest(requestId)
             requestAcceptedSharedFlow.emit(Unit)
+            showToast.emit("Request was accepted")
         } catch (e: Exception) {
             Log.e("TAG", "acceptRequest failed")
         }

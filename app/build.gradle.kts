@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -21,6 +23,15 @@ android {
         versionName = Android.versionName
 
         testInstrumentationRunner = Android.testInstrumentalRunner
+
+        val localProperties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            localProperties.load(localPropertiesFile.inputStream())
+        }
+
+        val mapsApiKey = localProperties.getProperty("MAPS_API_KEY", "")
+        buildConfigField("String", "MAPS_API_KEY", "\"$mapsApiKey\"")
 
         vectorDrawables {
             useSupportLibrary = true
@@ -60,6 +71,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
     packagingOptions {
         resources {
@@ -83,7 +95,7 @@ dependencies {
     //View
     implementation(Libs.View.viewBindingDelegate)
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation(Libs.View.fragmentKtx)
+//    implementation(Libs.View.fragmentKtx)
     implementation(Libs.View.material)
     implementation(Libs.View.appCompat)
 
@@ -100,8 +112,10 @@ dependencies {
     implementation ("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.google.android.gms:play-services-location:21.2.0")
 
+    //Retrofit
     implementation(Libs.Application.Network.Retrofit.retrofit)
     implementation(Libs.Application.Network.Retrofit.retrofit_gson)
+    implementation(Libs.Application.Network.OkHttp.okhttp_logging)
 
     //Lifecycle
     implementation(Libs.View.lifecycleRuntime)
@@ -117,7 +131,6 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    implementation("androidx.fragment:fragment-ktx:1.6.2")
 
     //Compose
     implementation(Libs.Compose.coilCompose)

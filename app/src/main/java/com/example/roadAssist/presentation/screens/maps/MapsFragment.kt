@@ -23,6 +23,8 @@ import com.example.roadAssist.presentation.utils.bindStateFlow
 import com.example.common.extensions.checkLocationPermission
 import com.example.common.extensions.showToast
 import com.example.roadAssist.presentation.screens.requestAssistFlow.requestPreview.RequestModel
+import com.example.roadAssist.presentation.screens.requestDetails.RequestDetailsBottomSheetFragment.Companion.DRAW_ROUTE_RESULT
+import com.example.roadAssist.presentation.screens.requestDetails.RequestDetailsBottomSheetFragment.Companion.ORDER_DESTINATION
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -35,9 +37,11 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -45,7 +49,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MapsFragment : Fragment() {
     private var mMap: GoogleMap? = null
     private var fusedLocationClient: FusedLocationProviderClient? = null
-    private var currentLocation: Location? = null
+    private var currentLatLng: LatLng? = null
+    private var destinationLatLng: LatLng? = null
     private val viewModel: MapsViewModel by viewModels()
     private lateinit var binding: FragmentMapsBinding
 
@@ -59,8 +64,8 @@ class MapsFragment : Fragment() {
                 if (requireContext().checkLocationPermission()) {
                     fusedLocationClient?.lastLocation?.addOnSuccessListener { location: Location? ->
                         location?.let {
-                            currentLocation = location
-                            moveToCurrentLocation(it)
+                            currentLatLng = LatLng(it.latitude, it.longitude)
+                            moveToCurrentLocation(currentLatLng!!)
                             Log.e(TAG, "current location: ${location.latitude} ${location.longitude}")
                         }
                     }
@@ -76,7 +81,8 @@ class MapsFragment : Fragment() {
 
         if (requireContext().checkLocationPermission()) {
             mMap?.isMyLocationEnabled = true
-            currentLocation?.let { moveToCurrentLocation(it) }
+            currentLatLng?.let { moveToCurrentLocation(it) }
+            observeRouteDrawingRequest()
         }
 
         mMap?.setOnMarkerClickListener { marker ->
@@ -89,12 +95,13 @@ class MapsFragment : Fragment() {
         }
     }
 
-    private fun moveToCurrentLocation(location: Location) {
+    private fun moveToCurrentLocation(currentLatLng: LatLng) {
         mMap?.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
-                LatLng(location.latitude, location.longitude), 15f
+                LatLng(currentLatLng.latitude, currentLatLng.longitude), 15f
             )
         )
+        drawRouteToDestination(currentLatLng, destinationLatLng)
     }
 
     override fun onCreateView(
@@ -144,38 +151,72 @@ class MapsFragment : Fragment() {
         }
     }
 
-    fun drawRouteToDestination(origin: LatLng, destination: LatLng) {
-        val originStr = "${origin.latitude},${origin.longitude}"
-        val destinationStr = "${destination.latitude},${destination.longitude}"
-        val apiKey = "YOUR_API_KEY_HERE"
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://maps.googleapis.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val googleMapsApi = retrofit.create(GoogleMapsApi::class.java)
-        googleMapsApi.getDirections(originStr, destinationStr, apiKey).enqueue(object : Callback<DirectionsResponse> {
-            override fun onResponse(call: Call<DirectionsResponse>, response: Response<DirectionsResponse>) {
-                if (response.isSuccessful) {
-                    response.body()?.routes?.firstOrNull()?.let { route ->
-                        val path = ArrayList<LatLng>()
-                        route.legs.forEach { leg ->
-                            leg.steps.forEach { step ->
-                                // Decode the polyline points and add them to path
-                                path.addAll(decodePoly(step.polyline.points))
-                            }
-                        }
-                        // Drawing polyline in the Google Map
-                        mMap?.addPolyline(PolylineOptions().addAll(path).width(12f).color(Color.BLUE).geodesic(true))
+    private fun observeRouteDrawingRequest() {
+        findNavController()
+            .currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Bundle>(DRAW_ROUTE_RESULT)
+            ?.observe(viewLifecycleOwner) { bundle ->
+                bundle?.let {
+                    val destination = it.getParcelable<LatLng>(ORDER_DESTINATION)
+                    destination?.let { latLng ->
+                        destinationLatLng = latLng
+                        drawRouteToDestination(origin = currentLatLng, destination = destinationLatLng)
                     }
                 }
             }
+    }
 
-            override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
-                Log.e("MapsActivity", "Error fetching directions: ${t.message}")
+    private fun drawRouteToDestination(origin: LatLng?, destination: LatLng?) {
+        if (origin != null && destination != null) {
+            val originStr = "${origin.latitude},${origin.longitude}"
+            val destinationStr = "${destination.latitude},${destination.longitude}"
+
+            val logging = HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
             }
-        })
+
+            val httpClient = OkHttpClient.Builder()
+                .addInterceptor(logging)
+                .build()
+
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://maps.googleapis.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(httpClient)
+                .build()
+
+            val googleMapsApi = retrofit.create(GoogleMapsApi::class.java)
+            googleMapsApi.getDirections(originStr, destinationStr)
+                .enqueue(object : Callback<DirectionsResponse> {
+                    override fun onResponse(
+                        call: Call<DirectionsResponse>,
+                        response: Response<DirectionsResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            response.body()?.routes?.firstOrNull()?.let { route ->
+                                val path = ArrayList<LatLng>()
+                                route.legs.forEach { leg ->
+                                    leg.steps.forEach { step ->
+                                        path.addAll(decodePoly(step.polyline.points))
+                                    }
+                                }
+                                mMap?.addPolyline(
+                                    PolylineOptions().addAll(path)
+                                        .width(16f)
+                                        .color(requireContext().getColor(R.color.colorPrimary))
+                                        .geodesic(true)
+                                )
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
+                        Log.e("MapsActivity", "Error fetching directions: ${t.message}")
+                        showToast("Error fetching directions")
+                    }
+                })
+        }
     }
 
     fun decodePoly(encoded: String): List<LatLng> {

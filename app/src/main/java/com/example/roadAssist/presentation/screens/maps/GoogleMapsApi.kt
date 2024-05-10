@@ -1,5 +1,7 @@
 package com.example.roadAssist.presentation.screens.maps
 
+import com.example.roadAssist.BuildConfig
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -9,9 +11,8 @@ interface GoogleMapsApi {
     fun getDirections(
         @Query("origin") origin: String,
         @Query("destination") destination: String,
-        @Query("key") apiKey: String
-    ): Response<DirectionsResponse>
-
+        @Query("key") apiKey: String = BuildConfig.MAPS_API_KEY
+    ): Call<DirectionsResponse>
 
 }
 

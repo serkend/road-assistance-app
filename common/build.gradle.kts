@@ -36,4 +36,5 @@ android {
 dependencies {
     //Kotlin
     implementation(Libs.View.coreKtx)
+    implementation("androidx.fragment:fragment-ktx:1.7.0")
 }

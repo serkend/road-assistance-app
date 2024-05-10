@@ -14,7 +14,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -86,7 +85,7 @@ class RequestsRepositoryImpl @Inject constructor(
         val request = getRequestDtoById(requestId)
         val newOrder = Order(
             status = OrderStatus.InProgress,
-            userId = currentUser.uid,
+            executorId = currentUser.uid,
             clientId = request.userId ?: throw RuntimeException("Request doesn't have userId"),
             requestId = requestId
         )

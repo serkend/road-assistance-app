@@ -5,7 +5,7 @@ import com.example.common.OrderStatus
 data class OrderDto(
     val id: String? = null,
     val status: OrderStatus,
-    val userId: String,
+    val executorId: String,
     val clientId: String,
     val requestId: String
 ) {
