@@ -4,6 +4,7 @@ import com.example.common.OrderStatus
 import com.example.common.ResultState
 import com.example.data.requests.dto.OrderDto
 import com.example.data.requests.dto.RequestDto
+import com.example.data.requests.mappers.toDomain
 import com.example.data.requests.mappers.toDto
 import com.example.domain.requests.model.Order
 import com.example.domain.requests.model.Request
@@ -98,5 +99,30 @@ class RequestsRepositoryImpl @Inject constructor(
         val orderWithId = order.copy(id = orderRef.id)
         orderRef.set(orderWithId).await()
     }
+
+    override fun fetchCurrentUserOrder(): Flow<ResultState<Order>> = callbackFlow {
+        val currentUser = mAuth.currentUser?.uid ?: throw RuntimeException("User not logged in")
+
+        val query = firestore.collection(OrderDto.FIREBASE_ORDERS)
+            .whereEqualTo("executorId", currentUser)
+            .limit(1)
+
+        val listener = query.addSnapshotListener { snapshot, exception ->
+            if (exception != null) {
+                val result = ResultState.Failure<Order>(exception.message ?: "Unknown error")
+                trySend(result).isSuccess
+                return@addSnapshotListener
+            }
+            val order = snapshot?.documents?.firstOrNull()?.toObject(OrderDto::class.java)?.toDomain()
+            if (order != null) {
+                trySend(ResultState.Success(order)).isSuccess
+            } else {
+                trySend(ResultState.Failure("No order found for current user")).isSuccess
+            }
+        }
+
+        awaitClose { listener.remove() }
+    }.flowOn(Dispatchers.IO)
+
 
 }

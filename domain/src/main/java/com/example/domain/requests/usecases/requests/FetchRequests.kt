@@ -1,4 +1,4 @@
-package com.example.domain.requests.usecases
+package com.example.domain.requests.usecases.requests
 
 import com.example.common.ResultState
 import com.example.domain.requests.model.Request

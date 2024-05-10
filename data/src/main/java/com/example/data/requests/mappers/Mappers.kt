@@ -24,3 +24,12 @@ fun Order.toDto(userId: String) = OrderDto(
     requestId = requestId
 )
 
+fun OrderDto.toDomain() = Order(
+    id = id,
+    status = status,
+    executorId = executorId,
+    clientId = clientId,
+    requestId = requestId
+)
+
+

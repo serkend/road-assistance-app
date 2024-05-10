@@ -3,7 +3,8 @@ package com.example.roadAssist.presentation.screens.maps
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.ResultState
-import com.example.domain.requests.usecases.RequestsUseCases
+import com.example.domain.requests.usecases.orders.FetchMyOrder
+import com.example.domain.requests.usecases.requests.RequestsUseCases
 import com.example.roadAssist.presentation.screens.requestAssistFlow.requestPreview.RequestModel
 import com.example.roadAssist.presentation.screens.requestAssistFlow.requestPreview.toModel
 import com.google.android.gms.maps.model.LatLng
@@ -12,12 +13,11 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MapsViewModel @Inject constructor(private val requestsUseCases: RequestsUseCases) : ViewModel() {
+class MapsViewModel @Inject constructor(private val requestsUseCases: RequestsUseCases, private val fetchMyOrder: FetchMyOrder) : ViewModel() {
 
     private var _markersPosStateFlow: MutableStateFlow<List<LatLng>> = MutableStateFlow(emptyList())
     val markersPosStateFlow = _markersPosStateFlow.asStateFlow()
@@ -30,8 +30,13 @@ class MapsViewModel @Inject constructor(private val requestsUseCases: RequestsUs
 
     val showToast = MutableSharedFlow<String>()
 
+    val showRouteSharedFlow = MutableSharedFlow<LatLng>()
+
+    var hasOrder = false
+
     init {
         fetchRequestsData()
+        fetchCurrentUserOrder()
     }
 
     fun onRequestAssistClicked() = viewModelScope.launch {
@@ -53,5 +58,25 @@ class MapsViewModel @Inject constructor(private val requestsUseCases: RequestsUs
             }
         }
     }
+
+    private fun fetchCurrentUserOrder() = viewModelScope.launch {
+        fetchMyOrder().collect {
+            when(it) {
+                is ResultState.Success -> {
+                    hasOrder = true
+                    val request = requestsUseCases.getRequestById(it.data?.requestId ?: throw Exception("Request id is null while fetching"))
+                    showRouteSharedFlow.emit(LatLng(request.latitude, request.longitude))
+                }
+                is ResultState.Failure -> {
+                    showToast.emit(it.e ?: "Error while fetching current user order")
+                }
+                is ResultState.Loading -> {
+
+                }
+            }
+        }
+    }
+
+
 
 }

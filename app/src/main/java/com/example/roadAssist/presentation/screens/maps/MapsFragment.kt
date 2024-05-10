@@ -88,8 +88,15 @@ class MapsFragment : Fragment() {
         mMap?.setOnMarkerClickListener { marker ->
             val request = marker.tag as? RequestModel
             request?.let {
-                val action = MapsFragmentDirections.actionMapsFragmentToRequestDetailsBottomSheetFragment(it)
-                findNavController().navigate(action)
+                if (viewModel.hasOrder) {
+                    val action =
+                        MapsFragmentDirections.actionMapsFragmentToRequestDetailsBottomSheetFragment(
+                            it
+                        )
+                    findNavController().navigate(action)
+                } else {
+                    showToast("You already have an active order.")
+                }
             }
             true
         }
@@ -126,6 +133,10 @@ class MapsFragment : Fragment() {
             findNavController().navigate(R.id.chooseVehicleTroubleBottomSheetFragment)
         }
         bindSharedFlow(showToast) { requireContext().showToast(it) }
+        bindSharedFlow(showRouteSharedFlow) { destination ->
+            destinationLatLng = destination
+            currentLatLng?.let { current -> drawRouteToDestination(current, destination) }
+        }
         bindStateFlow(markersStateFlow) { requests ->
             mMap?.clear()
             requests.forEach { request ->
@@ -143,6 +154,7 @@ class MapsFragment : Fragment() {
                 marker?.tag = request
             }
         }
+
     }
 
     private fun initViews() = with(binding) {

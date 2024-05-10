@@ -6,8 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.common.ResultState
 import com.example.domain.location.usecases.GetCurrentLocation
 import com.example.domain.requests.model.Request
-import com.example.domain.requests.usecases.RequestsUseCases
-import com.example.domain.vehicles.model.Vehicle
+import com.example.domain.requests.usecases.requests.RequestsUseCases
 import com.example.domain.vehicles.usecases.VehiclesUseCases
 import com.example.roadAssist.presentation.screens.requestAssistFlow.vehiclesList.VehicleModel
 import com.example.roadAssist.presentation.screens.requestAssistFlow.vehiclesList.toDomain

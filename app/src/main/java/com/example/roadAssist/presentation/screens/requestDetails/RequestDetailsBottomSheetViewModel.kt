@@ -4,13 +4,14 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.requests.repository.RequestsRepository
+import com.example.domain.requests.usecases.requests.RequestsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RequestDetailsBottomSheetViewModel @Inject constructor(private val requestsRepository: RequestsRepository) :
+class RequestDetailsBottomSheetViewModel @Inject constructor(private val requestsUseCases: RequestsUseCases) :
     ViewModel() {
 
     val requestAcceptedSharedFlow = MutableSharedFlow<Unit>()
@@ -18,7 +19,7 @@ class RequestDetailsBottomSheetViewModel @Inject constructor(private val request
 
     fun acceptRequest(requestId: String) = viewModelScope.launch {
         try {
-            requestsRepository.acceptRequest(requestId)
+            requestsUseCases.acceptRequest(requestId)
             requestAcceptedSharedFlow.emit(Unit)
             showToast.emit("Request was accepted")
         } catch (e: Exception) {
