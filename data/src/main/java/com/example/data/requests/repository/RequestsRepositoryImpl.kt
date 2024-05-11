@@ -60,7 +60,7 @@ class RequestsRepositoryImpl @Inject constructor(
     override suspend fun saveRequest(request: Request) {
         try {
             val uId = mAuth.currentUser?.uid ?: throw RuntimeException("User is null")
-            val requestDto = request.toDto(uId)
+            val requestDto = request.toDto(uId).copy(userId = uId)
             val documentReference = if (requestDto.id.isNullOrEmpty()) {
                 firestore.collection(RequestDto.FIREBASE_REQUESTS).document()
             } else {

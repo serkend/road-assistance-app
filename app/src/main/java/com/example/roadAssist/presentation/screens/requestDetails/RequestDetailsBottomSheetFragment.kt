@@ -37,6 +37,9 @@ class RequestDetailsBottomSheetFragment : BottomSheetDialogFragment(R.layout.fra
         acceptButton.setOnClickListener {
             viewModel.acceptRequest(requestId = request.id ?: throw Exception("In accept request method request id is empty!"))
         }
+        sendMessageImageView.setOnClickListener {
+            viewModel.getOrCreateConversation(requestId = request.id ?: "")
+        }
     }
 
     private fun bindViewModel() = with(viewModel) {
@@ -49,10 +52,17 @@ class RequestDetailsBottomSheetFragment : BottomSheetDialogFragment(R.layout.fra
             navController.previousBackStackEntry?.savedStateHandle?.set(DRAW_ROUTE_RESULT, bundle)
             findNavController().popBackStack()
         }
-
         bindSharedFlow(showToast) {
             requireContext().showToast(it)
         }
+        bindSharedFlow(conversationIdSharedFlow) {
+            navigateToChatFragment(it)
+        }
+    }
+
+    private fun navigateToChatFragment(conversationId: String) {
+        val action = RequestDetailsBottomSheetFragmentDirections.actionRequestDetailsFragmentToChatFragment(conversationId)
+        findNavController().navigate(action)
     }
 
     companion object {

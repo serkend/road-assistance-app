@@ -48,7 +48,8 @@ class RequestPreviewViewModel @Inject constructor(
                     cost = cost,
                     vehicle = it.toDomain(),
                     latitude = currentLocation?.latitude ?: 0.0,
-                    longitude = currentLocation?.longitude ?: 0.0
+                    longitude = currentLocation?.longitude ?: 0.0,
+                    userId = null
                 )
             )
         }

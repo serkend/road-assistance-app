@@ -16,7 +16,8 @@ data class RequestModel(
     val vehicle: VehicleModel,
     val latitude: Double,
     val longitude: Double,
-    val isCurrentUser: Boolean
+    val isCurrentUser: Boolean,
+    val userId: String?
 ) : Parcelable
 
 fun RequestModel.toDomain() = Request(
@@ -25,7 +26,8 @@ fun RequestModel.toDomain() = Request(
     cost = cost,
     vehicle = vehicle.toDomain(),
     latitude = latitude,
-    longitude = longitude
+    longitude = longitude,
+    userId = userId
 )
 
 fun Request.toModel() = RequestModel(
@@ -35,5 +37,6 @@ fun Request.toModel() = RequestModel(
     vehicle = vehicle.toModel(),
     latitude = latitude,
     longitude = longitude,
-    isCurrentUser = isCurrentUser ?: false
+    isCurrentUser = isCurrentUser ?: false,
+    userId = userId
 )

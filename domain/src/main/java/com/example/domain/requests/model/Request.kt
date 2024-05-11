@@ -9,6 +9,7 @@ data class Request(
     val vehicle: Vehicle,
     val latitude: Double,
     val longitude: Double,
-    val isCurrentUser: Boolean? = null
+    val isCurrentUser: Boolean? = null,
+    val userId: String?
 )
 

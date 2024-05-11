@@ -8,16 +8,16 @@
         android:id="@+id/profileFragment"
         android:name="com.example.roadAssist.presentation.screens.user.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_itemsListFragment"
-            app:destination="@id/itemsListFragment"/>
+            app:destination="@id/itemsListFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.roadAssist.presentation.screens.maps.MapsFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" >
+        tools:layout="@layout/fragment_maps">
         <action
             android:id="@+id/action_mapsFragment_to_chooseVehicleTroubleBottomSheetFragment"
             app:destination="@id/chooseVehicleTroubleBottomSheetFragment" />
@@ -29,7 +29,7 @@
         android:id="@+id/chooseVehicleTroubleBottomSheetFragment"
         android:name="com.example.roadAssist.presentation.screens.requestAssistFlow.vehicleTrouble.ChooseVehicleTroubleBottomSheetFragment"
         android:label="fragment_choose_vehicle_trouble_bottom_sheet"
-        tools:layout="@layout/fragment_choose_vehicle_trouble_bottom_sheet" >
+        tools:layout="@layout/fragment_choose_vehicle_trouble_bottom_sheet">
         <action
             android:id="@+id/action_chooseVehicleTroubleBottomSheetFragment_to_chooseVehicleBottomSheetFragment"
             app:destination="@id/chooseVehicleBottomSheetFragment" />
@@ -63,7 +63,7 @@
         android:id="@+id/requestPreviewFragment"
         android:name="com.example.roadAssist.presentation.screens.requestAssistFlow.requestPreview.RequestPreviewFragment"
         android:label="fragment_request_preview"
-        tools:layout="@layout/fragment_request_preview" >
+        tools:layout="@layout/fragment_request_preview">
         <argument
             android:name="troubleName"
             app:argType="string" />
@@ -75,18 +75,34 @@
         android:id="@+id/requestDetailsBottomSheetFragment"
         android:name="com.example.roadAssist.presentation.screens.requestDetails.RequestDetailsBottomSheetFragment"
         android:label="fragment_request_details_bottom_sheet"
-        tools:layout="@layout/fragment_request_details_bottom_sheet" >
+        tools:layout="@layout/fragment_request_details_bottom_sheet">
         <argument
             android:name="request"
-            app:argType="com.example.roadAssist.presentation.screens.requestAssistFlow.requestPreview.RequestModel"/>
+            app:argType="com.example.roadAssist.presentation.screens.requestAssistFlow.requestPreview.RequestModel" />
+        <action
+            android:id="@+id/action_requestDetailsFragment_to_ChatFragment"
+            app:destination="@id/chatFragment" />
     </dialog>
     <fragment
         android:id="@+id/itemsListFragment"
         android:name="com.example.roadAssist.presentation.screens.itemsList.ItemsListFragment"
         android:label="fragment_items_list"
-        tools:layout="@layout/fragment_items_list" >
+        tools:layout="@layout/fragment_items_list">
         <argument
             android:name="contentType"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/conversationsFragment"
+        android:name="com.example.roadAssist.presentation.screens.chat.conversations.ConversationsFragment"
+        android:label="ConversationsFragment" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.roadAssist.presentation.screens.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat">
+        <argument
+            android:name="conversationId"
             app:argType="string" />
     </fragment>
 

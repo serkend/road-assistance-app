@@ -20,9 +20,10 @@ data class RequestDto(
         id = id ?: "",
         trouble = trouble ?: "",
         cost = cost ?: "",
-        vehicle = vehicle?.toDomain() ?: Vehicle(),  // Ensure Vehicle also has a suitable default constructor or handle it being null appropriately
+        vehicle = vehicle?.toDomain() ?: Vehicle(),
         latitude = latitude ?: 0.0,
-        longitude = longitude ?: 0.0
+        longitude = longitude ?: 0.0,
+        userId = userId
     )
 
     companion object {
