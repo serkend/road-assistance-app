@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -17,9 +18,9 @@ class VehiclesAdapter(private val onClick: (VehicleModel) -> Unit) : ListAdapter
     class VehicleViewHolder(private val binding: VehicleCardViewBinding, val onClick: (VehicleModel) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(vehicle: VehicleModel) {
-            binding.makeTextView.text = vehicle.make
-            binding.modelTextView.text = vehicle.model
-            binding.yearTextView.text = vehicle.year.toString()
+            binding.textView1.text = "Make: ${vehicle.make}"
+            binding.textView2.text = "Model: ${vehicle.model}"
+            binding.textView3.text = "Year: ${vehicle.year}"
             itemView.setOnClickListener {
                 onClick(vehicle)
             }

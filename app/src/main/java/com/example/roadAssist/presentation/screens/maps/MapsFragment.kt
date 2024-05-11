@@ -108,7 +108,7 @@ class MapsFragment : Fragment() {
                 LatLng(currentLatLng.latitude, currentLatLng.longitude), 15f
             )
         )
-        drawRouteToDestination(currentLatLng, destinationLatLng)
+//        viewModel.fetchCurrentUserOrder()
     }
 
     override fun onCreateView(
@@ -173,7 +173,7 @@ class MapsFragment : Fragment() {
                     val destination = it.getParcelable<LatLng>(ORDER_DESTINATION)
                     destination?.let { latLng ->
                         destinationLatLng = latLng
-                        drawRouteToDestination(origin = currentLatLng, destination = destinationLatLng)
+                        viewModel.fetchCurrentUserOrder()
                     }
                 }
             }

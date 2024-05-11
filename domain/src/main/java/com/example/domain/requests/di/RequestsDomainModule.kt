@@ -1,8 +1,12 @@
 package com.example.domain.requests.di
 
 import com.example.domain.requests.repository.RequestsRepository
+import com.example.domain.requests.usecases.orders.FetchMyAllOrders
+import com.example.domain.requests.usecases.orders.FetchMyOrder
+import com.example.domain.requests.usecases.orders.OrdersUseCases
 import com.example.domain.requests.usecases.requests.AcceptRequest
 import com.example.domain.requests.usecases.requests.DeleteRequest
+import com.example.domain.requests.usecases.requests.FetchMyAllRequests
 import com.example.domain.requests.usecases.requests.FetchRequests
 import com.example.domain.requests.usecases.requests.GetRequestById
 import com.example.domain.requests.usecases.requests.RequestsUseCases
@@ -24,7 +28,15 @@ object RequestsDomainModule {
         saveRequest = SaveRequest(requestsRepository),
         deleteRequest = DeleteRequest(requestsRepository),
         getRequestById = GetRequestById(requestsRepository),
-        acceptRequest = AcceptRequest(requestsRepository)
+        acceptRequest = AcceptRequest(requestsRepository),
+        fetchMyAllRequests = FetchMyAllRequests(requestsRepository)
+    )
+
+    @Provides
+    @Singleton
+    fun provideOrdersUseCases(requestsRepository: RequestsRepository): OrdersUseCases = OrdersUseCases(
+        fetchMyOrder = FetchMyOrder(requestsRepository),
+        fetchMyAllOrders = FetchMyAllOrders(requestsRepository)
     )
 
 }

@@ -45,7 +45,7 @@ class RequestsRepositoryImpl @Inject constructor(
     override suspend fun getRequestById(requestId: String): Request {
         return firestore.collection(RequestDto.FIREBASE_REQUESTS).document(requestId)
             .get().await()
-            .toObject(Request::class.java) ?: throw NoSuchElementException("No request found with ID $requestId")
+            .toObject(RequestDto::class.java)?.toDomain() ?: throw NoSuchElementException("No request found with ID $requestId")
     }
 
     private suspend fun getRequestDtoById(requestId: String): RequestDto {
@@ -100,7 +100,7 @@ class RequestsRepositoryImpl @Inject constructor(
         orderRef.set(orderWithId).await()
     }
 
-    override fun fetchCurrentUserOrder(): Flow<ResultState<Order>> = callbackFlow {
+    override suspend fun fetchCurrentUserOrder(): Flow<ResultState<Order>> = callbackFlow {
         val currentUser = mAuth.currentUser?.uid ?: throw RuntimeException("User not logged in")
 
         val query = firestore.collection(OrderDto.FIREBASE_ORDERS)
@@ -110,15 +110,58 @@ class RequestsRepositoryImpl @Inject constructor(
         val listener = query.addSnapshotListener { snapshot, exception ->
             if (exception != null) {
                 val result = ResultState.Failure<Order>(exception.message ?: "Unknown error")
-                trySend(result).isSuccess
+                trySend(result)
                 return@addSnapshotListener
             }
             val order = snapshot?.documents?.firstOrNull()?.toObject(OrderDto::class.java)?.toDomain()
-            if (order != null) {
-                trySend(ResultState.Success(order)).isSuccess
-            } else {
-                trySend(ResultState.Failure("No order found for current user")).isSuccess
+            trySend(ResultState.Success(order))
+
+        }
+        awaitClose { listener.remove() }
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun fetchMyAllOrders(): Flow<ResultState<List<Order>>> = callbackFlow {
+        val currentUserUid = mAuth.currentUser?.uid ?: throw RuntimeException("User is not logged in")
+
+        val query = firestore.collection(OrderDto.FIREBASE_ORDERS).whereEqualTo("executorId", currentUserUid)
+
+        val listener = query.addSnapshotListener { snapshot, exception ->
+            if (exception != null) {
+                trySend(ResultState.Failure(exception.localizedMessage ?: "Unknown Firestore error"))
+                close(exception)
+                return@addSnapshotListener
             }
+
+            val orders = snapshot?.documents?.mapNotNull { document ->
+                document.toObject(OrderDto::class.java)?.toDomain()
+            } ?: emptyList()
+
+            trySend(ResultState.Success(orders))
+        }
+
+        awaitClose { listener.remove() }
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun fetchMyAllRequests(): Flow<ResultState<List<Request>>>  = callbackFlow {
+        val currentUserUid = mAuth.currentUser?.uid ?: throw RuntimeException("User is not logged in")
+
+        val query = firestore.collection(RequestDto.FIREBASE_REQUESTS)
+            .whereEqualTo("userId", currentUserUid)
+
+        val listener = query.addSnapshotListener { snapshot, exception ->
+            if (exception != null) {
+                trySend(ResultState.Failure(exception.localizedMessage ?: "Unknown Firestore error"))
+                close(exception)
+                return@addSnapshotListener
+            }
+
+            val requests = snapshot?.documents?.mapNotNull { document ->
+                document.toObject(RequestDto::class.java)
+                    ?.toDomain()
+                    ?.copy(id = document.id, isCurrentUser = true)
+            } ?: emptyList()
+
+            trySend(ResultState.Success(requests))
         }
 
         awaitClose { listener.remove() }

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="6dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="0dp"
-    android:layout_margin="6dp">
+    app:cardElevation="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,43 +15,60 @@
         android:padding="12dp">
 
         <TextView
-            android:id="@+id/makeTextView"
+            android:id="@+id/textView1"
+            style="@style/Text.Regular.Body.Primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Ford"
-            style="@style/Text.Regular.Body.Primary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            />
+            tools:text="Ford" />
 
         <TextView
+            android:id="@+id/textView2"
             style="@style/Text.Regular.Body.Primary"
-            android:id="@+id/modelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="CNG Ford VX1"
             android:layout_marginTop="6dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/makeTextView"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/textView1"
+            tools:text="CNG Ford VX1" />
 
         <TextView
+            android:id="@+id/textView3"
             style="@style/Text.Regular.Body.Primary"
-            android:id="@+id/yearTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="2004"
             android:layout_marginTop="6dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/modelTextView"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            tools:text="2004" />
+
+        <TextView
+            android:id="@+id/statusTextView"
+            style="@style/Text.Regular.Body.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
+            tools:text="Completed" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/arrow_right"
-            app:layout_constraintBottom_toBottomOf="@+id/yearTextView"
+            app:layout_constraintBottom_toBottomOf="@+id/textView3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/makeTextView" />
+            app:layout_constraintTop_toTopOf="@+id/textView1" />
+
+        <TextView
+            android:id="@+id/dateTextView"
+            style="@style/Text.Regular.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="12.12.2023" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

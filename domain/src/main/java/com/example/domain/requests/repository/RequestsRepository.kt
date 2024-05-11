@@ -14,6 +14,8 @@ interface RequestsRepository {
     suspend fun saveOrder(order: Order)
     suspend fun acceptRequest(requestId: String)
 
-    fun fetchCurrentUserOrder(): Flow<ResultState<Order>>
+    suspend fun fetchCurrentUserOrder(): Flow<ResultState<Order>>
+    suspend fun fetchMyAllOrders(): Flow<ResultState<List<Order>>>
+    suspend fun fetchMyAllRequests(): Flow<ResultState<List<Request>>>
 
 }

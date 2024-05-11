@@ -59,15 +59,23 @@ class MapsViewModel @Inject constructor(private val requestsUseCases: RequestsUs
         }
     }
 
-    private fun fetchCurrentUserOrder() = viewModelScope.launch {
+    fun fetchCurrentUserOrder() = viewModelScope.launch {
         fetchMyOrder().collect {
             when(it) {
                 is ResultState.Success -> {
-                    hasOrder = true
-                    val request = requestsUseCases.getRequestById(it.data?.requestId ?: throw Exception("Request id is null while fetching"))
-                    showRouteSharedFlow.emit(LatLng(request.latitude, request.longitude))
+                    it.result?.requestId?.let { requestId ->
+                        hasOrder = true
+                        val request = requestsUseCases.getRequestById(requestId)
+                        showRouteSharedFlow.emit(
+                            LatLng(
+                                request.latitude,
+                                request.longitude
+                            )
+                        )
+                    } ?: { hasOrder = false }
                 }
                 is ResultState.Failure -> {
+                    hasOrder = false
                     showToast.emit(it.e ?: "Error while fetching current user order")
                 }
                 is ResultState.Loading -> {

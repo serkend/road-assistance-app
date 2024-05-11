@@ -8,7 +8,11 @@
         android:id="@+id/profileFragment"
         android:name="com.example.roadAssist.presentation.screens.user.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_itemsListFragment"
+            app:destination="@id/itemsListFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.roadAssist.presentation.screens.maps.MapsFragment"
@@ -76,6 +80,14 @@
             android:name="request"
             app:argType="com.example.roadAssist.presentation.screens.requestAssistFlow.requestPreview.RequestModel"/>
     </dialog>
-
+    <fragment
+        android:id="@+id/itemsListFragment"
+        android:name="com.example.roadAssist.presentation.screens.itemsList.ItemsListFragment"
+        android:label="fragment_items_list"
+        tools:layout="@layout/fragment_items_list" >
+        <argument
+            android:name="contentType"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

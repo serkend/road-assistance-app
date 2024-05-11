@@ -5,5 +5,6 @@ data class RequestsUseCases(
     val saveRequest: SaveRequest,
     val deleteRequest: DeleteRequest,
     val getRequestById: GetRequestById,
-    val acceptRequest: AcceptRequest
+    val acceptRequest: AcceptRequest,
+    val fetchMyAllRequests: FetchMyAllRequests
 )
