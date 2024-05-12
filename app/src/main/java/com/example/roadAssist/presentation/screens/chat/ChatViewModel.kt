@@ -25,23 +25,6 @@ class ChatViewModel @Inject constructor(
 
     val showToast = MutableSharedFlow<String>()
 
-    fun loadConversations() = viewModelScope.launch {
-        chatUseCases.getConversations().collect { result ->
-
-            when (result) {
-                is ResultState.Success -> {
-                    conversations.value = result.result?.map { it.toModel() } ?: emptyList()
-                }
-                is ResultState.Failure -> {
-                    showToast.emit(result.e ?: "Unknown loadConversation error")
-                }
-                is ResultState.Loading -> {
-
-                }
-            }
-        }
-    }
-
     fun loadMessages(conversationId: String) = viewModelScope.launch {
         chatUseCases.getMessages(conversationId).collect { result ->
             when (result) {

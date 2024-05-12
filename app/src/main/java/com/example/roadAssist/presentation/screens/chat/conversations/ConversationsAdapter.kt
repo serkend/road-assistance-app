@@ -8,19 +8,33 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.chat.model.Conversation
 import com.example.roadAssist.databinding.ItemConversationBinding
 import com.example.roadAssist.presentation.screens.chat.model.ConversationModel
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
-class ConversationsAdapter : ListAdapter<ConversationModel, ConversationsAdapter.ConversationViewHolder>(ConversationDiffCallback()) {
+class ConversationsAdapter(private val onClick: (String) -> Unit) : ListAdapter<ConversationModel, ConversationsAdapter.ConversationViewHolder>(ConversationDiffCallback()) {
 
-    class ConversationViewHolder(private val binding: ItemConversationBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ConversationViewHolder(
+        private val binding: ItemConversationBinding,
+        private val onClick: (String) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(conversation: ConversationModel) {
-            binding.textViewName.text = conversation.executorId  // Adjust based on your data model
-            // Add more bindings here as per your UI design
+            binding.textViewName.text = conversation.lastMessage
+            binding.textViewTimestamp.text = formatTimestamp(conversation.lastMessageTimestamp ?: 0)
+            binding.root.setOnClickListener {
+                onClick(conversation.id ?: "")
+            }
+        }
+
+        private fun formatTimestamp(timestamp: Long): String {
+            val sdf = SimpleDateFormat("dd.MM.yyyy hh:mm a", Locale.getDefault())
+            return sdf.format(Date(timestamp))
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConversationViewHolder {
         val binding = ItemConversationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ConversationViewHolder(binding)
+        return ConversationViewHolder(binding, onClick)
     }
 
     override fun onBindViewHolder(holder: ConversationViewHolder, position: Int) {

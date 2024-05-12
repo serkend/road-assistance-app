@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.roadAssist.R
 import com.example.roadAssist.databinding.FragmentConversationsBinding
+import com.example.roadAssist.presentation.screens.requestDetails.RequestDetailsBottomSheetFragmentDirections
 import com.example.roadAssist.presentation.utils.bindStateFlow
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +29,9 @@ class ConversationsFragment : Fragment(R.layout.fragment_conversations) {
 
     private fun setupRecyclerView() {
         binding.conversationsRecyclerView.layoutManager = LinearLayoutManager(context)
-        val adapter = ConversationsAdapter()
+        val adapter = ConversationsAdapter {
+            navigateToChatFragment(it)
+        }
         binding.conversationsRecyclerView.adapter = adapter
     }
 
@@ -35,5 +39,10 @@ class ConversationsFragment : Fragment(R.layout.fragment_conversations) {
         bindStateFlow(conversations) { conversations ->
             (binding.conversationsRecyclerView.adapter as ConversationsAdapter).submitList(conversations)
         }
+    }
+
+    private fun navigateToChatFragment(conversationId: String) {
+        val action = ConversationsFragmentDirections.actionConversationsFragmentToChatFragment(conversationId)
+        findNavController().navigate(action)
     }
 }

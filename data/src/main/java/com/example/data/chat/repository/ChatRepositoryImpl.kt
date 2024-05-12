@@ -23,53 +23,96 @@ class ChatRepositoryImpl @Inject constructor(
     private val auth: FirebaseAuth,
     private val requestsRepository: RequestsRepository
 ) : ChatRepository {
+
     private val conversationsCollection = firestore.collection("conversations")
     private val messagesCollection = firestore.collection("messages")
 
     override fun getConversations(): Flow<ResultState<List<Conversation>>> = callbackFlow {
         val userId = auth.currentUser?.uid ?: throw RuntimeException("User not logged in")
-        val subscription = conversationsCollection
+
+        val resultsMap = mutableMapOf<String, Conversation>()
+
+        fun updateAndSendConversations() {
+            trySend(ResultState.Success(resultsMap.values.toList()))
+        }
+
+        val executorSubscription = conversationsCollection
             .whereEqualTo("executorId", userId)
             .addSnapshotListener { snapshot, e ->
                 if (e != null) {
                     trySend(ResultState.Failure(e.message ?: "Unknown error")).isFailure
                     return@addSnapshotListener
                 }
-                val conversations = snapshot?.toObjects(ConversationDto::class.java)?.map { it.toDomain() } ?: emptyList()
-                trySend(ResultState.Success(conversations))
+                snapshot?.toObjects(ConversationDto::class.java)?.forEach {
+                    it.id?.let { id -> resultsMap[id] = it.toDomain() }
+                }
+                updateAndSendConversations()
             }
-        awaitClose { subscription.remove() }
+
+        val clientSubscription = conversationsCollection
+            .whereEqualTo("clientId", userId)
+            .addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    trySend(ResultState.Failure(e.message ?: "Unknown error")).isFailure
+                    return@addSnapshotListener
+                }
+                snapshot?.toObjects(ConversationDto::class.java)?.forEach {
+                    it.id?.let { id -> resultsMap[id] = it.toDomain() }
+                }
+                updateAndSendConversations()
+            }
+
+        awaitClose {
+            executorSubscription.remove()
+            clientSubscription.remove()
+        }
     }
 
     override fun getMessages(conversationId: String): Flow<ResultState<List<Message>>> = callbackFlow {
-        val userId = auth.currentUser?.uid ?: throw RuntimeException("User not logged in")
+        val userId = auth.currentUser?.uid
+        if (userId == null) {
+            trySend(ResultState.Failure("User not logged in")).isFailure
+            close()
+            return@callbackFlow
+        }
+
         val subscription = messagesCollection
             .whereEqualTo("conversationId", conversationId)
-            .orderBy("timestamp")
             .addSnapshotListener { snapshot, e ->
                 if (e != null) {
-                    trySend(ResultState.Failure(e.message ?: "Unknown error"))
+                    trySend(ResultState.Failure(e.message ?: "Unknown error")).isFailure
                     return@addSnapshotListener
                 }
                 val messages = snapshot?.toObjects(MessageDto::class.java)?.map { it.toDomain(isOutgoing = it.senderId == userId) } ?: emptyList()
                 trySend(ResultState.Success(messages))
             }
+
         awaitClose { subscription.remove() }
     }
 
     override suspend fun sendMessage(conversationId: String, text: String) {
         val userId = auth.currentUser?.uid ?: throw RuntimeException("User not logged in")
         val receiverId = getReceiverIdForConversation(conversationId, userId)
+        val currentTime = System.currentTimeMillis()
+
         val message = MessageDto(
             text = text,
             senderId = userId,
             receiverId = receiverId,
-            conversationId = conversationId
+            conversationId = conversationId,
+            timestamp = currentTime
         )
 
         val documentReference = messagesCollection.add(message).await()
         val messageId = documentReference.id
         messagesCollection.document(messageId).update("id", messageId).await()
+
+        val updates = mapOf(
+            "lastMessage" to text,
+            "lastMessageTimestamp" to currentTime,
+            "updatedAt" to currentTime
+        )
+        conversationsCollection.document(conversationId).update(updates).await()
     }
 
 
