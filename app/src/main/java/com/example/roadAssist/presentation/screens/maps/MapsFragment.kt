@@ -88,15 +88,15 @@ class MapsFragment : Fragment() {
         mMap?.setOnMarkerClickListener { marker ->
             val request = marker.tag as? RequestModel
             request?.let {
-                if (viewModel.hasOrder) {
+//                if (viewModel.hasOrder) {
                     val action =
                         MapsFragmentDirections.actionMapsFragmentToRequestDetailsBottomSheetFragment(
                             it
                         )
                     findNavController().navigate(action)
-                } else {
-                    showToast("You already have an active order.")
-                }
+//                } else {
+//                    showToast("You already have an active order.")
+//                }
             }
             true
         }

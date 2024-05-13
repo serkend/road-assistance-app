@@ -31,12 +31,13 @@ class SignUpViewModel @Inject constructor(private val authUseCases: AuthUseCases
     private var _snackbarState: MutableSharedFlow<String?> = MutableSharedFlow()
     var snackbarState = _snackbarState.asSharedFlow()
 
-    fun signUp(email: String ,password: String) {
+    fun signUp(email: String, password: String, userName: String) {
         viewModelScope.launch {
             val imageUri = imageUriFlow.value
             val user = User(
                 email = email,
-                image = imageUri
+                image = imageUri,
+                userName = userName
             )
             authUseCases.signUp(SignUpCredentials(email, password, imageUri), user)
                 .collect { state ->

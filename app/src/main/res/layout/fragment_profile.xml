@@ -20,6 +20,29 @@
         app:shapeAppearanceOverlay="@style/CircleImageView"
         app:srcCompat="@drawable/ic_avatar" />
 
+    <TextView
+        android:id="@+id/usernameTextView"
+        style="@style/Text.Bold.HeadLine5.Primary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/avatarIV"
+        app:layout_constraintStart_toStartOf="@id/avatarIV"
+        app:layout_constraintEnd_toEndOf="@id/avatarIV"
+        tools:text="sergey"
+        />
+
+    <TextView
+        android:id="@+id/emailTextView"
+        style="@style/Text.Regular.Body.Secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        app:layout_constraintTop_toBottomOf="@id/usernameTextView"
+        app:layout_constraintStart_toStartOf="@id/avatarIV"
+        app:layout_constraintEnd_toEndOf="@id/avatarIV"
+        tools:text="sergey@gmail.com"
+        />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/myJobsMaterialCardView"
         android:layout_width="match_parent"

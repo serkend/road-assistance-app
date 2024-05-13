@@ -71,7 +71,7 @@ class SignUpFragment : Fragment() {
 
     private fun setOnClickListeners() = with(binding) {
         createBtn.setOnClickListener {
-            viewModel.signUp(emailET.text.toString(), passwordET.text.toString())
+            viewModel.signUp(emailET.text.toString(), passwordET.text.toString(), usernameET.text.toString())
         }
         avatarIV.setOnClickListener {
             pickPhoto()

@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.bumptech.glide.Glide
 import com.example.roadAssist.R
 import com.example.roadAssist.databinding.FragmentProfileBinding
+import com.example.roadAssist.presentation.utils.bindStateFlow
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,6 +23,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        bindViewModel()
     }
 
     private fun initViews() = with(binding) {
@@ -38,6 +41,22 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
         myVehiclesMaterialCardView.setOnClickListener {
             navigateToList("vehicles")
+        }
+    }
+
+    private fun bindViewModel() = with(viewModel) {
+        bindStateFlow(profileUiState) { user ->
+            if (user != null) {
+                binding.avatarIV.let { imageView ->
+                    Glide.with(imageView.context)
+                        .load(user.image)
+                        .placeholder(R.drawable.ic_avatar)
+                        .error(R.drawable.ic_avatar)
+                        .into(imageView)
+                }
+                binding.usernameTextView.text = user.userName
+                binding.emailTextView.text = user.email
+            }
         }
     }
 

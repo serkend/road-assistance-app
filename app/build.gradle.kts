@@ -151,4 +151,7 @@ dependencies {
     androidTestImplementation(Libs.View.AndroidTest.jUnit)
     androidTestImplementation(Libs.View.AndroidTest.espresso)
 
+    // Glide
+    implementation("com.github.bumptech.glide:glide:4.13.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.13.0")
 }

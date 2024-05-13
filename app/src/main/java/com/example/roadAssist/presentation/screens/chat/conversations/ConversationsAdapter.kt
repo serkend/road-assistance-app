@@ -12,7 +12,10 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class ConversationsAdapter(private val onClick: (String) -> Unit) : ListAdapter<ConversationModel, ConversationsAdapter.ConversationViewHolder>(ConversationDiffCallback()) {
+class ConversationsAdapter(private val onClick: (String) -> Unit) :
+    ListAdapter<ConversationModel, ConversationsAdapter.ConversationViewHolder>(
+        ConversationDiffCallback()
+    ) {
 
     class ConversationViewHolder(
         private val binding: ItemConversationBinding,
