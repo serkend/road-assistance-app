@@ -45,15 +45,15 @@ class ItemsListFragment : Fragment(R.layout.fragment_items_list) {
         setupRecyclerView(args.contentType)
         when (contentType) {
             "jobs" -> {
-                textView2.text = "Your jobs"
+                textView2.text = getString(R.string.your_jobs)
                 addButton.isVisible = false
             }
             "requests" -> {
-                textView2.text = "Your requests"
+                textView2.text = getString(R.string.your_requests)
                 addButton.isVisible = false
             }
             "vehicles" -> {
-                textView2.text = "Your vehicles"
+                textView2.text = getString(R.string.your_vehicles)
                 addButton.isVisible = true
             }
             else -> ""

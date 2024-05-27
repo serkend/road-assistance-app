@@ -37,7 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Type a message..."
+            android:hint="@string/type_a_message"
             android:background="@android:color/transparent"
             android:inputType="textCapSentences|textMultiLine"/>
 
@@ -45,7 +45,7 @@
             android:id="@+id/buttonSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send"
+            android:text="@string/send"
             app:cornerRadius="18dp"
             android:backgroundTint="@color/black"/>
     </LinearLayout>

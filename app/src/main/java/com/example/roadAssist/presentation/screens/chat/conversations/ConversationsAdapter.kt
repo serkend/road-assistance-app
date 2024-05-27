@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.domain.chat.model.Conversation
+import com.example.roadAssist.R
 import com.example.roadAssist.databinding.ItemConversationBinding
 import com.example.roadAssist.presentation.screens.chat.model.ConversationModel
 import java.text.SimpleDateFormat
@@ -27,6 +29,12 @@ class ConversationsAdapter(private val onClick: (String) -> Unit) :
             binding.root.setOnClickListener {
                 onClick(conversation.id ?: "")
             }
+            Glide.with(binding.userAvatarIv)
+                .load(conversation.companionImage)
+                .placeholder(R.drawable.ic_avatar)
+                .error(R.drawable.ic_avatar)
+                .into(binding.userAvatarIv)
+            binding.usernameTextView.text = conversation.companionUsername
         }
 
         private fun formatTimestamp(timestamp: Long): String {

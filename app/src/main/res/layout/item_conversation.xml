@@ -6,15 +6,16 @@
     android:layout_height="wrap_content"
     tools:layout_margin="4dp">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/userAvatarIv"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:src="@drawable/ic_avatar"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/messageMaterialCardView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/messageMaterialCardView"
-        tools:ignore="MissingConstraints" />
+        app:shapeAppearanceOverlay="@style/CircleImageView"
+        app:srcCompat="@drawable/ic_avatar" />
 
     <TextView
         android:id="@+id/usernameTextView"
@@ -30,6 +31,7 @@
         android:id="@+id/messageMaterialCardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/userAvatarIv"
         app:layout_constraintTop_toBottomOf="@id/usernameTextView"
@@ -46,7 +48,7 @@
 
             <TextView
                 android:id="@+id/textViewName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:ellipsize="end"
@@ -54,7 +56,10 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textViewTimestamp"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintHorizontal_bias="0"
                 tools:text="Hello" />
 
             <TextView

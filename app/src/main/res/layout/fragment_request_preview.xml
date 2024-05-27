@@ -12,7 +12,7 @@
         style="@style/Text.Bold.HeadLine6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Request Preview"
+        android:text="@string/request_preview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="Description:"
+                android:text="@string/trouble"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
 
@@ -78,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
-                android:text="Push Start"
+                tools:text="Push Start"
                 app:layout_constraintStart_toEndOf="@id/descriptionLabelTextView"
                 app:layout_constraintTop_toTopOf="@+id/descriptionLabelTextView" />
 
@@ -87,7 +87,7 @@
                 style="@style/Text.Bold.HeadLine6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Price"
+                android:text="@string/price"
                 app:layout_constraintBottom_toBottomOf="@+id/priceTIL"
                 app:layout_constraintStart_toStartOf="@+id/yearTextView"
                 app:layout_constraintTop_toTopOf="@+id/priceTIL" />
@@ -120,7 +120,7 @@
                 style="@style/Text.Bold.HeadLine6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$"
+                android:text="@string/currency"
                 android:textSize="32sp"
                 app:layout_constraintBottom_toBottomOf="@+id/priceTIL"
                 app:layout_constraintStart_toEndOf="@+id/priceTIL"
@@ -135,7 +135,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Confirm"
+        android:text="@string/confirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/requestCardView" />

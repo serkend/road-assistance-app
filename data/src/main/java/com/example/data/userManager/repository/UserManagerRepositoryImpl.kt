@@ -5,7 +5,7 @@ import com.example.common.Constants
 import com.example.common.Resource
 import com.example.data.userManager.dto.UserDto
 import com.example.data.userManager.mappers.toModel
-import com.example.domain.auth.repository.UserManagerRepository
+import com.example.domain.userManager.repository.UserManagerRepository
 import com.example.domain.common.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -73,6 +73,18 @@ class UserManagerRepositoryImpl @Inject constructor(
             return Resource.Failure()
         } catch (e: Exception) {
             Resource.Failure(e)
+        }
+    }
+
+   override suspend fun getUserById(userId: String): User? {
+       return try {
+           val docRef = firestore.collection(Constants.FIREBASE_COLLECTION_USERS).document(userId)
+           val docSnapshot = docRef.get().await()
+           val user = docSnapshot.toObject<UserDto>() ?: UserDto()
+           user.toModel()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
         }
     }
 }

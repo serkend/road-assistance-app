@@ -9,5 +9,6 @@ data class User(
     var updatedAt: Date? = null,
     var image: Uri? = null,
     var userName: String = "",
-    var token: String = ""
+    var token: String = "",
+    val id: String? = null
 )

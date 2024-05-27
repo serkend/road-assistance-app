@@ -4,5 +4,6 @@ data class ChatUseCases (
     val getConversations: GetConversations,
     val getMessages: GetMessages,
     val sendMessage: SendMessage,
-    val getOrCreateConversation: GetOrCreateConversation
+    val getOrCreateConversation: GetOrCreateConversation,
+    val getReceiverIdForConversation: GetReceiverIdForConversation
 )

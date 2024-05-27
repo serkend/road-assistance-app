@@ -44,7 +44,7 @@
                 android:id="@+id/emailET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email" />
+                android:hint="@string/email" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -59,7 +59,7 @@
                 android:id="@+id/usernameET"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Username"
+                android:hint="@string/username"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,7 +68,7 @@
             android:layout_width="363dp"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_background"
-            android:hint="Password"
+            android:hint="@string/password"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
             app:passwordToggleContentDescription="description"
@@ -99,7 +99,7 @@
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create" />
+            android:text="@string/create" />
         <ProgressBar
             android:id="@+id/progressBar"
             style="@style/ProgressBarStyle.Button"

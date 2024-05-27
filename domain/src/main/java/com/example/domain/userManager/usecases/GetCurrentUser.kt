@@ -1,7 +1,7 @@
 package com.example.domain.userManager.usecases
 
 import com.example.common.Resource
-import com.example.domain.auth.repository.UserManagerRepository
+import com.example.domain.userManager.repository.UserManagerRepository
 import com.example.domain.common.User
 import javax.inject.Inject
 

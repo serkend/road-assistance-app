@@ -53,7 +53,7 @@ class SignUpFragment : Fragment() {
             if (it) {
                 binding.createBtn.text = ""
             } else {
-                binding.createBtn.text = "Create"
+                binding.createBtn.text = getString(R.string.create)
             }
             binding.progressBar.isVisible = it
         }

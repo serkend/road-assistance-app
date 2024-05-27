@@ -29,12 +29,15 @@ class ChatViewModel @Inject constructor(
         chatUseCases.getMessages(conversationId).collect { result ->
             when (result) {
                 is ResultState.Success -> {
-                    messages.value = result.result?.map { it.toModel() }?.sortedBy { it.timestamp } ?: emptyList()
+                    messages.value = result.result?.map { it.toModel() }?.sortedBy { it.timestamp }
+                            ?: emptyList()
                     Log.e("TAG", "loadMessages: ${result.result}")
                 }
+
                 is ResultState.Failure -> {
                     showToast.emit(result.e ?: "Unknown loadMessages error")
                 }
+
                 is ResultState.Loading -> {}
             }
         }

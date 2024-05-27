@@ -21,4 +21,5 @@ fun UserDto.toModel(): User = User(
     image = this.image?.let { Uri.parse(it) },
     userName = this.userName,
     token = "",
+    id = uId
 )
