@@ -1,7 +1,7 @@
 <table>
   <tr>
-    <td><img src="screenshots/scr1.png" alt="Скриншот 1" width="300"/></td>
-    <td><img src="screenshots/scr2.png" alt="Скриншот 1" width="300"/></td>
+    <td><img src="screenshots/scr1.png" alt="Скриншот 1" width="150"/></td>
+    <td><img src="screenshots/scr2.png" alt="Скриншот 1" width="150"/></td>
   </tr>
   <tr>
     <td><img src="screenshots/scr8.png" alt="Скриншот 1" width="300"/></td>
