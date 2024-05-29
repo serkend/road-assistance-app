@@ -5,11 +5,11 @@ Kotlin, Clean Architecture, MVVM, Coroutines, Hilt, Retrofit, Room, Google Maps 
 RoadAssist is a mobile application aimed to bridge the gap between drivers, ensuring quick and efficient help when it's needed the most.
 
 Features
-• Authorization and registration of users using the Firebase service.
-• A screen with a map showing my current location, requests from other users for help, and the route to the location of the breakdown.
-• Ability to request help from other drivers.
-• Chat screen for communication between users.
-• User profile screen.
+- Authorization and registration of users using the Firebase service.
+- A screen with a map showing my current location, requests from other users for help, and the route to the location of the breakdown.
+- Ability to request help from other drivers.
+- Chat screen for communication between users.
+- User profile screen.
 
 <table>
   <tr>
