@@ -6,6 +6,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.roadAssist.R
 import com.example.roadAssist.databinding.VehicleCardViewBinding
 
 class JobsAdapter(private val onClick: (JobItem) -> Unit) : ListAdapter<JobItem, JobsAdapter.JobsViewHolder>(VehicleDiffCallback()) {
