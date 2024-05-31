@@ -1,4 +1,4 @@
-RoadAssist is a mobile application designed to facilitate mutual assistance between drivers during an emergency situation.
+RoadAssist is a android app designed to facilitate mutual assistance between drivers during an emergency situation.
 
 TECHNOLOGIES: Kotlin, Clean Architecture, MVVM, Coroutines, Hilt, Retrofit, Room, Google Maps API, Directions API, Firebase Auth, Firestore, Storage.
 
