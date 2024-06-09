@@ -16,7 +16,6 @@ import com.example.roadAssist.R
 import com.example.roadAssist.databinding.FragmentSignUpBinding
 import com.example.roadAssist.presentation.utils.bindSharedFlow
 import com.example.roadAssist.presentation.utils.bindStateFlow
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -85,10 +84,10 @@ class SignUpFragment : Fragment() {
     private fun navigateToBottomNavGraph() {
         val navController = findNavController()
         val navOptions = NavOptions.Builder()
-            .setPopUpTo(R.id.bottom_nav_graph, true)
+            .setPopUpTo(R.id.main_nav_graph, true)
             .setLaunchSingleTop(true)
             .build()
 
-        navController.navigate(R.id.bottom_nav_graph, null, navOptions)
+        navController.navigate(R.id.main_nav_graph, null, navOptions)
     }
 }

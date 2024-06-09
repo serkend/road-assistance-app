@@ -53,6 +53,7 @@ class VehicleAddUpdateBottomSheetFragment : BottomSheetDialogFragment(R.layout.f
         bindSharedFlow(showToastMessage) {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
+
         bindSharedFlow(launchRequestPreviewScreenSharedFlow) { vehicleId ->
             val action = VehicleAddUpdateBottomSheetFragmentDirections.actionVehicleAddUpdateBottomSheetFragmentToRequestPreviewFragment(troubleName = args.troubleName, vehicleId = vehicleId)
             findNavController().navigate(action)

@@ -62,7 +62,7 @@ class SignInFragment : Fragment() {
                             binding.signInBtn.setTextColor(currColor)
                             Log.e(TAG, "Success uiState in signIn ")
                             val navController = findNavController()
-                            navController.setGraph(R.navigation.bottom_nav_graph)
+                            navController.setGraph(R.navigation.main_nav_graph)
 //                            navController.navigate(R.id.action_global_homeFragment2)
                         }
 

@@ -146,10 +146,15 @@ dependencies {
     implementation(Libs.Compose.tooling)
     implementation(Libs.Application.DependencyInjection.hiltNavigationCompose)
 
-    //Tests
+    //Testing
     testImplementation(Libs.View.Test.jUnit)
+    testImplementation(Libs.View.Test.mockito)
+    testImplementation(Libs.View.Test.unit_coroutines)
+
     androidTestImplementation(Libs.View.AndroidTest.jUnit)
     androidTestImplementation(Libs.View.AndroidTest.espresso)
+    androidTestImplementation(Libs.Compose.Test.uiJunit)
+    androidTestImplementation(Libs.Compose.Test.uiManifest)
 
     // Glide
     implementation("com.github.bumptech.glide:glide:4.13.0")
