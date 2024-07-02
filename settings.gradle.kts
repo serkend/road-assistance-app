@@ -1,8 +1,8 @@
 pluginManagement {
     repositories {
-        gradlePluginPortal()
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
@@ -12,15 +12,28 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
+    versionCatalogs {
+        create("libs") {
+            from(files("gradle/libs.version.toml"))
+        }
+    }
 }
 
 rootProject.name = "RoadAssist"
-include (":data")
-include (":domain")
+
 include(":app")
-include(":common")
+include(":core")
+include(":core:common")
+include(":core:data")
+include(":core:domain")
+
 include(":features")
 include(":features:map")
 include(":features:chats")
 include(":features:profile")
 include(":features:auth")
+include(":features:auth:presentation")
+include(":features:chats:presentation")
+include(":features:map:presentation")
+include(":features:profile:presentation")
+

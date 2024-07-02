@@ -6,7 +6,7 @@
     app:startDestination="@id/mapsFragment">
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.roadAssist.presentation.screens.user.profile.ProfileFragment"
+        android:name="com.example.auth.presentation.screens.user.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.example.roadAssist.presentation.screens.maps.MapsFragment"
+        android:name="com.example.auth.presentation.screens.maps.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps">
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <dialog
         android:id="@+id/chooseVehicleTroubleBottomSheetFragment"
-        android:name="com.example.roadAssist.presentation.screens.requestAssistFlow.vehicleTrouble.ChooseVehicleTroubleBottomSheetFragment"
+        android:name="com.example.auth.presentation.screens.requestAssistFlow.vehicleTrouble.ChooseVehicleTroubleBottomSheetFragment"
         android:label="fragment_choose_vehicle_trouble_bottom_sheet"
         tools:layout="@layout/fragment_choose_vehicle_trouble_bottom_sheet">
         <action
@@ -36,7 +36,7 @@
     </dialog>
     <dialog
         android:id="@+id/chooseVehicleBottomSheetFragment"
-        android:name="com.example.roadAssist.presentation.screens.requestAssistFlow.vehiclesList.ChooseVehicleBottomSheetFragment"
+        android:name="com.example.auth.presentation.screens.requestAssistFlow.vehiclesList.ChooseVehicleBottomSheetFragment"
         android:label="ChooseVehicleBottomSheetFragment">
         <action
             android:id="@+id/action_chooseVehicleBottomSheetFragment_to_vehicleAddUpdateBottomSheetFragment"
@@ -50,7 +50,7 @@
     </dialog>
     <fragment
         android:id="@+id/vehicleAddUpdateBottomSheetFragment"
-        android:name="com.example.roadAssist.presentation.screens.requestAssistFlow.vehicleAddUpdate.VehicleAddUpdateBottomSheetFragment"
+        android:name="com.example.auth.presentation.screens.requestAssistFlow.vehicleAddUpdate.VehicleAddUpdateBottomSheetFragment"
         android:label="VehicleAddUpdateBottomSheetFragment">
         <action
             android:id="@+id/action_vehicleAddUpdateBottomSheetFragment_to_requestPreviewFragment"
@@ -61,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/requestPreviewFragment"
-        android:name="com.example.roadAssist.presentation.screens.requestAssistFlow.requestPreview.RequestPreviewFragment"
+        android:name="com.example.auth.presentation.screens.requestAssistFlow.requestPreview.RequestPreviewFragment"
         android:label="fragment_request_preview"
         tools:layout="@layout/fragment_request_preview">
         <argument
@@ -73,19 +73,19 @@
     </fragment>
     <dialog
         android:id="@+id/requestDetailsBottomSheetFragment"
-        android:name="com.example.roadAssist.presentation.screens.requestDetails.RequestDetailsBottomSheetFragment"
+        android:name="com.example.auth.presentation.screens.requestDetails.RequestDetailsBottomSheetFragment"
         android:label="fragment_request_details_bottom_sheet"
         tools:layout="@layout/fragment_request_details_bottom_sheet">
         <argument
             android:name="request"
-            app:argType="com.example.roadAssist.presentation.screens.requestAssistFlow.requestPreview.RequestModel" />
+            app:argType="com.example.auth.presentation.screens.requestAssistFlow.requestPreview.RequestModel" />
         <action
             android:id="@+id/action_requestDetailsFragment_to_ChatFragment"
             app:destination="@id/chatFragment" />
     </dialog>
     <fragment
         android:id="@+id/itemsListFragment"
-        android:name="com.example.roadAssist.presentation.screens.itemsList.ItemsListFragment"
+        android:name="com.example.features.profile.presentation.itemsList.ItemsListFragment"
         android:label="fragment_items_list"
         tools:layout="@layout/fragment_items_list">
         <argument
@@ -94,7 +94,7 @@
     </fragment>
     <fragment
         android:id="@+id/conversationsFragment"
-        android:name="com.example.roadAssist.presentation.screens.chat.conversations.ConversationsFragment"
+        android:name="com.example.auth.presentation.screens.chat.conversations.ConversationsFragment"
         android:label="ConversationsFragment" >
         <action
             android:id="@+id/action_conversationsFragment_to_chatFragment"
@@ -102,7 +102,7 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.example.roadAssist.presentation.screens.chat.ChatFragment"
+        android:name="com.example.auth.presentation.screens.chat.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat">
         <argument

@@ -84,9 +84,7 @@ android {
 
 dependencies {
     //Modules
-    implementation(project(":domain"))
-    implementation(project(":data"))
-    implementation(project(":common"))
+    implementation(project(":core"))
 
     //Navigation
     implementation(Libs.Application.Navigation.navigation_fragment)
@@ -124,8 +122,8 @@ dependencies {
     //DI
     implementation(Libs.Application.DependencyInjection.hilt)
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.fragment:fragment-ktx:1.7.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation(libs.fragmentKtx)
     kapt(Libs.Application.DependencyInjection.hilt_compiler)
 
     //View

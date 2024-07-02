@@ -5,7 +5,7 @@ import org.gradle.api.JavaVersion
 object Modules {
     const val domain = ":domain"
     const val data = ":data"
-    const val common = ":common"
+    const val core = ":core"
 }
 
 object Config {
