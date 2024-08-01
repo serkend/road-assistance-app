@@ -1,10 +1,29 @@
+RoadAssist is an android app designed to facilitate mutual assistance between drivers during an emergency situation.
+
+TECHNOLOGIES: Kotlin, Clean Architecture, MVVM, Coroutines, Hilt, Retrofit, Room, Google Maps API, Directions API, Firebase Auth, Firestore, Storage.
+
+FEATURES:
+- Authorization and registration of users using the Firebase service.
+- A screen with a map showing my current location, requests from other users for help, and the route to the location of the breakdown.
+- Ability to request help from other drivers.
+- Chat screen for communication between users.
+- User profile screen.
+
 <table>
   <tr>
-    <td><img src="![изображение](https://github.com/serkend/road-assistance-app/assets/81919513/f590ebb0-9647-432e-8fa6-a6aab9b69ace)" alt="Скриншот 1" width="300"/></td>
-    <td><img src="![изображение](https://github.com/serkend/road-assistance-app/assets/81919513/6959de58-4058-4a23-aa4c-d34c6ab1b865)" alt="Скриншот 2" width="300"/></td>
+    <td style="text-align: center;"><img src="screenshots/scr1.png" alt="Скриншот 1" width="150"/></td>
+    <td style="text-align: center;"><img src="screenshots/scr2.png" alt="Скриншот 2" width="150"/></td>
   </tr>
   <tr>
-    <td><img src="![изображение](https://github.com/serkend/road-assistance-app/assets/81919513/ffa945df-e0af-4c5f-b140-5724399eaf52)" alt="Скриншот 3" width="300"/></td>
-    <td><img src="![изображение](https://github.com/serkend/road-assistance-app/assets/81919513/ac6b7804-3708-459a-a021-5f3d9df199c6)" alt="Скриншот 4" width="300"/></td>
+    <td style="text-align: center;"><img src="screenshots/scr8.png" alt="Скриншот 3" width="150"/></td>
+    <td style="text-align: center;"><img src="screenshots/scr3.png" alt="Скриншот 4" width="150"/></td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><img src="screenshots/scr4.png" alt="Скриншот 5" width="150"/></td>
+    <td style="text-align: center;"><img src="screenshots/scr5.png" alt="Скриншот 6" width="150"/></td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><img src="screenshots/scr6.png" alt="Скриншот 7" width="150"/></td>
+    <td style="text-align: center;"><img src="screenshots/scr7.png" alt="Скриншот 8" width="150"/></td>
   </tr>
 </table>
