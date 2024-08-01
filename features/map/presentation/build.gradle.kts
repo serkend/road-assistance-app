@@ -3,6 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -13,6 +15,8 @@ android {
         minSdk = 24
         targetSdk = 34
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "MAPS_API_KEY", "\"your_maps_api_key_here\"")
     }
 
     buildTypes {
@@ -21,6 +25,7 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
     buildFeatures {
         viewBinding = true
         buildConfig = true
@@ -36,44 +41,48 @@ android {
 
 dependencies {
     implementation(project(":core:domain"))
-    implementation(project(":core:data"))
     implementation(project(":core:common"))
 
     // Kotlin
     implementation(libs.kotlinStdlib)
 
-    // Navigation
-    implementation(libs.navigationFragment)
-    implementation(libs.navigationUi)
-
-    // View
-    implementation(libs.viewBindingDelegate)
-    implementation(libs.constraintLayout)
-    implementation(libs.material)
-    implementation(libs.appCompat)
+    // Core KTX
+    implementation(libs.coreKtx)
 
     // Firebase
-    implementation(platform(libs.firebaseBom))
     implementation(libs.firebaseStorage)
     implementation(libs.firebaseFirestore)
     implementation(libs.firebaseAuth)
 
+    // Hilt
+    implementation(libs.hilt)
+    kapt(libs.hiltCompiler)
+
     // Google API
-    implementation("com.google.android.gms:play-services-maps:18.2.0")
-    implementation("com.google.android.gms:play-services-location:21.2.0")
+    implementation(libs.playServicesLocation)
+    implementation(libs.playServicesMaps)
+
+    // ViewBinding
+    implementation(libs.viewBindingDelegate)
+
+    // UI components
+    implementation(libs.constraintLayout)
+    implementation(libs.material)
+    implementation(libs.appCompat)
+
+    // Navigation
+    implementation(libs.navigationFragment)
+    implementation(libs.navigationUi)
 
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofitGson)
+    implementation(libs.okhttp)
     implementation(libs.okhttpLogging)
 
     // Lifecycle
     implementation(libs.lifecycleRuntime)
     implementation(libs.lifecycleViewModel)
-
-    // DI
-    implementation(libs.hilt)
-    kapt(libs.hiltCompiler)
 
     // Fragment and RecyclerView
     implementation(libs.fragmentKtx)

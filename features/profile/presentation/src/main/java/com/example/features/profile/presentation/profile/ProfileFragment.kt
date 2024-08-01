@@ -7,16 +7,21 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
-import com.example.app.R
-import com.example.app.databinding.FragmentProfileBinding
-import com.example.app.presentation.utils.bindStateFlow
+import com.example.core.common.extensions.bindStateFlow
+import com.example.core.common.navigation.FlowNavigator
+import com.example.features.profile.presentation.R
+import com.example.features.profile.presentation.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val viewModel: ProfileViewModel by viewModels()
     private val binding: FragmentProfileBinding by viewBinding()
+
+    @Inject
+    lateinit var navigator: FlowNavigator
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,9 +32,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private fun initViews() = with(binding) {
         signOutBtn.setOnClickListener {
             viewModel.signOut()
-            val navController = findNavController()
-            navController.setGraph(R.navigation.nav_graph)
-            navController.navigate(R.id.action_global_splashFragment)
+            navigator.navigateToSplashFlow()
         }
         myJobsMaterialCardView.setOnClickListener {
             navigateToList("jobs")
@@ -48,8 +51,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 binding.avatarIV.let { imageView ->
                     Glide.with(imageView.context)
                         .load(user.image)
-                        .placeholder(R.drawable.ic_avatar)
-                        .error(R.drawable.ic_avatar)
+                        .placeholder(com.example.core.common.R.drawable.ic_avatar)
+                        .error(com.example.core.common.R.drawable.ic_avatar)
                         .into(imageView)
                 }
                 binding.usernameTextView.text = user.userName

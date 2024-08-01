@@ -12,17 +12,22 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.example.app.R
-import com.example.app.databinding.FragmentSignUpBinding
-import com.example.app.presentation.utils.bindSharedFlow
-import com.example.app.presentation.utils.bindStateFlow
+import com.example.core.common.extensions.bindSharedFlow
+import com.example.core.common.extensions.bindStateFlow
+import com.example.core.common.navigation.FlowNavigator
+import com.example.features.auth.presentation.R
+import com.example.features.auth.presentation.databinding.FragmentSignUpBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
     private val viewModel: SignUpViewModel by viewModels()
+
+    @Inject
+    lateinit var flowNavigator: FlowNavigator
 
     private val pickMedia =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
@@ -52,7 +57,7 @@ class SignUpFragment : Fragment() {
             if (it) {
                 binding.createBtn.text = ""
             } else {
-                binding.createBtn.text = getString(R.string.create)
+                binding.createBtn.text = getString(com.example.core.common.R.string.create)
             }
             binding.progressBar.isVisible = it
         }
@@ -82,12 +87,14 @@ class SignUpFragment : Fragment() {
     }
 
     private fun navigateToBottomNavGraph() {
-        val navController = findNavController()
-        val navOptions = NavOptions.Builder()
-            .setPopUpTo(R.id.main_nav_graph, true)
-            .setLaunchSingleTop(true)
-            .build()
+//        val navController = findNavController()
+//        val navOptions = NavOptions.Builder()
+//            .setPopUpTo(R.id.main_nav_graph, true)
+//            .setLaunchSingleTop(true)
+//            .build()
+//
+//        navController.navigate(R.id.main_nav_graph, null, navOptions)
 
-        navController.navigate(R.id.main_nav_graph, null, navOptions)
+        flowNavigator.navigateToMainFlow()
     }
 }

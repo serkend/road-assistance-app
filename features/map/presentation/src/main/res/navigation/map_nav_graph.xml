@@ -55,12 +55,17 @@
         <argument
             android:name="troubleName"
             app:argType="string" />
+        <action
+            android:id="@+id/action_chooseVehicleBottomSheetFragment_to_vehicleAddUpdateBottomSheetFragment"
+            app:destination="@id/vehicleAddUpdateBottomSheetFragment" />
+        <action
+            android:id="@+id/action_chooseVehicleBottomSheetFragment_to_requestPreviewFragment"
+            app:destination="@id/requestPreviewFragment" />
     </dialog>
     <dialog
         android:id="@+id/requestDetailsBottomSheetFragment"
         android:name="com.example.features.map.presentation.requestDetails.RequestDetailsBottomSheetFragment"
-        android:label="fragment_request_details_bottom_sheet"
-        tools:layout="@layout/fragment_request_details_bottom_sheet">
+        android:label="fragment_request_details_bottom_sheet">
         <argument
             android:name="request"
             app:argType="com.example.app.presentation.screens.requestAssistFlow.requestPreview.RequestModel" />

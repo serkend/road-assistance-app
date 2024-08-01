@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.common.Resource
 import com.example.domain.auth.model.SignInCredentials
-import com.example.app.presentation.model.LoginState
 import com.example.core.common.LoginState
 import com.example.domain.auth.usecases.auth.AuthUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel

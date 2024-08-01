@@ -7,9 +7,9 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.auth.R
-import com.example.auth.databinding.FragmentVehicleAddUpdateBinding
-import com.example.auth.presentation.utils.bindSharedFlow
+import com.example.core.common.extensions.bindSharedFlow
+import com.example.features.map.presentation.R
+import com.example.features.map.presentation.databinding.FragmentVehicleAddUpdateBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.common.ResultState
 import com.example.core.common.vehicles.VehicleModel
+import com.example.domain.vehicles.model.toModel
 import com.example.domain.vehicles.usecases.VehiclesUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow

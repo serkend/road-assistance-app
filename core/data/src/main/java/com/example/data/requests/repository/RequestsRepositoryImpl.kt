@@ -1,7 +1,7 @@
 package com.example.data.requests.repository
 
-import com.example.common.OrderStatus
-import com.example.common.ResultState
+import com.example.core.common.OrderStatus
+import com.example.core.common.ResultState
 import com.example.data.requests.dto.OrderDto
 import com.example.data.requests.dto.RequestDto
 import com.example.data.requests.mappers.toDomain

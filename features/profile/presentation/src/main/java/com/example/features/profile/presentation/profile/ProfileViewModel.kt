@@ -32,7 +32,7 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    fun getCurrentUser() {
+    private fun getCurrentUser() {
         viewModelScope.launch {
             when (val response = getCurrentUserUseCase()) {
                 is Resource.Success -> {

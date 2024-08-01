@@ -6,13 +6,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.core.common.extensions.bindSharedFlow
 import com.example.core.common.extensions.showToast
-import com.example.auth.R
-import com.example.auth.databinding.FragmentRequestDetailsBottomSheetBinding
-import com.example.auth.presentation.utils.bindSharedFlow
+import com.example.core.common.navigation.FlowNavigator
+import com.example.features.map.presentation.R
+import com.example.features.map.presentation.databinding.FragmentRequestDetailsBottomSheetBinding
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RequestDetailsBottomSheetFragment : BottomSheetDialogFragment(R.layout.fragment_request_details_bottom_sheet) {
@@ -20,6 +22,9 @@ class RequestDetailsBottomSheetFragment : BottomSheetDialogFragment(R.layout.fra
     private val binding: FragmentRequestDetailsBottomSheetBinding by viewBinding()
     private val viewModel: RequestDetailsBottomSheetViewModel by viewModels()
     private val args: RequestDetailsBottomSheetFragmentArgs by navArgs()
+
+    @Inject
+    lateinit var flowNavigator: FlowNavigator
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,8 +64,9 @@ class RequestDetailsBottomSheetFragment : BottomSheetDialogFragment(R.layout.fra
     }
 
     private fun navigateToChatFragment(conversationId: String) {
-        val action = RequestDetailsBottomSheetFragmentDirections.actionRequestDetailsFragmentToChatFragment(conversationId)
-        findNavController().navigate(action)
+//        val action = RequestDetailsBottomSheetFragmentDirections.actionRequestDetailsFragmentToChatFragment(conversationId)
+//        findNavController().navigate(action)
+        flowNavigator.navigateToChatsFlow(conversationId)
     }
 
     companion object {

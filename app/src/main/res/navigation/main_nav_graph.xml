@@ -3,9 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/map_navigation_graph">
+    app:startDestination="@navigation/map_nav_graph">
 
     <include app:graph="@navigation/map_nav_graph" />
     <include app:graph="@navigation/chats_nav_graph" />
     <include app:graph="@navigation/profile_nav_graph" />
+    <action
+        android:id="@+id/action_global_chats_nav_graph"
+        app:destination="@id/chats_nav_graph">
+        <argument
+            android:name="conversationId"
+            app:argType="string" />
+    </action>
 </navigation>

@@ -7,6 +7,12 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.core.common.VehiclesAdapter
+import com.example.core.common.extensions.bindSharedFlow
+import com.example.core.common.extensions.bindStateFlow
+import com.example.core.common.extensions.showToast
+import com.example.features.profile.presentation.R
+import com.example.features.profile.presentation.databinding.FragmentItemsListBinding
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,15 +46,15 @@ class ItemsListFragment : Fragment(R.layout.fragment_items_list) {
         setupRecyclerView(args.contentType)
         when (contentType) {
             "jobs" -> {
-                textView2.text = getString(R.string.your_jobs)
+                textView2.text = getString(com.example.core.common.R.string.your_jobs)
                 addButton.isVisible = false
             }
             "requests" -> {
-                textView2.text = getString(R.string.your_requests)
+                textView2.text = getString(com.example.core.common.R.string.your_requests)
                 addButton.isVisible = false
             }
             "vehicles" -> {
-                textView2.text = getString(R.string.your_vehicles)
+                textView2.text = getString(com.example.core.common.R.string.your_vehicles)
                 addButton.isVisible = true
             }
             else -> ""

@@ -7,9 +7,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.auth.R
-import com.example.auth.databinding.ItemMessageBinding
 import com.example.chat.model.MessageModel
+import com.example.core.common.databinding.ItemMessageBinding
+import com.example.features.chats.presentation.R
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -23,12 +23,12 @@ class MessagesAdapter : ListAdapter<MessageModel, MessagesAdapter.MessageViewHol
             binding.textViewMessage.text = message.text
             binding.textViewTimestamp.text = formatTimestamp(message.timestamp)
             if (message.isOutgoing) {
-                binding.textViewMessage.setBackgroundResource(R.drawable.background_message_outgoing)
-                binding.textViewMessage.setTextColor(ContextCompat.getColor(binding.root.context, R.color.white))
+                binding.textViewMessage.setBackgroundResource(com.example.core.common.R.drawable.background_message_outgoing)
+                binding.textViewMessage.setTextColor(ContextCompat.getColor(binding.root.context, com.example.core.common.R.color.white))
                 binding.root.gravity = Gravity.END
             } else {
-                binding.textViewMessage.setBackgroundResource(R.drawable.background_message_incoming)
-                binding.textViewMessage.setTextColor(ContextCompat.getColor(binding.root.context, R.color.black))
+                binding.textViewMessage.setBackgroundResource(com.example.core.common.R.drawable.background_message_incoming)
+                binding.textViewMessage.setTextColor(ContextCompat.getColor(binding.root.context, com.example.core.common.R.color.black))
                 binding.root.gravity = Gravity.START
             }
         }

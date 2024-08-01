@@ -1,8 +1,8 @@
 package com.example.data.userManager.repository
 
 import android.util.Log
-import com.example.common.Constants
-import com.example.common.Resource
+import com.example.core.common.Constants
+import com.example.core.common.Resource
 import com.example.data.userManager.dto.UserDto
 import com.example.data.userManager.mappers.toModel
 import com.example.domain.userManager.repository.UserManagerRepository

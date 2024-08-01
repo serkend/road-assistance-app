@@ -2,9 +2,9 @@ package com.example.data.auth.repository
 
 import android.net.Uri
 import android.util.Log
-import com.example.common.Constants
-import com.example.common.Constants.TAG
-import com.example.common.Resource
+import com.example.core.common.Constants
+import com.example.core.common.Constants.TAG
+import com.example.core.common.Resource
 import com.example.data.userManager.mappers.toDto
 import com.example.data.userManager.dto.UserDto
 import com.example.domain.auth.model.SignInCredentials

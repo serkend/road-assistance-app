@@ -1,21 +1,23 @@
 buildscript {
     dependencies {
-        classpath ("androidx.navigation:navigation-safe-args-gradle-plugin:2.6.0")
-        classpath ("com.google.gms:google-services:4.3.15")
+        classpath(libs.navigationSafeArgs)
+        classpath(libs.googleServices)
     }
     repositories {
+        google()
         mavenCentral()
     }
 }
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.application") version Config.gradleAndroidVersion apply false
-    id("com.android.library") version Config.gradleAndroidVersion apply false
-    id("org.jetbrains.kotlin.android") version Config.kotlinVersion apply false
-    id("com.google.dagger.hilt.android") version Config.daggerVersion apply false
-    id ("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1" apply false
+    id("com.android.application") version libs.versions.gradleAndroid apply false
+    id("com.android.library") version libs.versions.gradleAndroid apply false
+    id("org.jetbrains.kotlin.android") version libs.versions.kotlin apply false
+    id("com.google.dagger.hilt.android") version libs.versions.daggerHilt apply false
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1" apply false
 }
 
-tasks.register("clean", Delete::class) {
+tasks.register<Delete>("clean") {
     delete(rootProject.buildDir)
 }

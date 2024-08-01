@@ -7,8 +7,8 @@ import android.view.ViewTreeObserver
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.auth.R
-import com.example.auth.databinding.VehicleTroubleCardViewBinding
+import com.example.core.common.databinding.VehicleTroubleCardViewBinding
+import com.example.features.map.presentation.R
 
 class VehicleTroublesAdapter(
     private val onClick: (Int) -> Unit
@@ -31,7 +31,7 @@ class VehicleTroublesAdapter(
             val cardView = binding.root
             if (adapterPosition == selectedIndex) {
                 cardView.strokeColor =
-                    ContextCompat.getColor(binding.root.context, R.color.colorPrimary)
+                    ContextCompat.getColor(binding.root.context, com.example.core.common.R.color.colorPrimary)
                 cardView.strokeWidth = 4
             } else {
                 cardView.strokeColor = Color.TRANSPARENT
@@ -79,12 +79,12 @@ class VehicleTroublesAdapter(
     companion object {
         const val SPAN_COUNT = 3
         private val vehicleTroubleList = listOf(
-            VehicleTroubleItem(R.drawable.flat_tire, "Flat Tire Emergency"),
-            VehicleTroubleItem(R.drawable.fuel_emergency, "Fuel Emergency"),
-            VehicleTroubleItem(R.drawable.battery, "Battery Emergency"),
-            VehicleTroubleItem(R.drawable.towing, "Towing Emergency"),
-            VehicleTroubleItem(R.drawable.push_car, "Push Start"),
-            VehicleTroubleItem(R.drawable.locked, "Locked")
+            VehicleTroubleItem(com.example.core.common.R.drawable.flat_tire, "Flat Tire Emergency"),
+            VehicleTroubleItem(com.example.core.common.R.drawable.fuel_emergency, "Fuel Emergency"),
+            VehicleTroubleItem(com.example.core.common.R.drawable.battery, "Battery Emergency"),
+            VehicleTroubleItem(com.example.core.common.R.drawable.towing, "Towing Emergency"),
+            VehicleTroubleItem(com.example.core.common.R.drawable.push_car, "Push Start"),
+            VehicleTroubleItem(com.example.core.common.R.drawable.locked, "Locked")
         )
     }
 }

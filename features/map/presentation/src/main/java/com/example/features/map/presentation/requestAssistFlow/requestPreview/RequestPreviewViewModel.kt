@@ -9,7 +9,8 @@ import com.example.domain.requests.model.Request
 import com.example.domain.requests.usecases.requests.RequestsUseCases
 import com.example.domain.vehicles.usecases.VehiclesUseCases
 import com.example.core.common.vehicles.VehicleModel
-import com.example.common.vehicles.toModel
+import com.example.domain.vehicles.model.toDomain
+import com.example.domain.vehicles.model.toModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

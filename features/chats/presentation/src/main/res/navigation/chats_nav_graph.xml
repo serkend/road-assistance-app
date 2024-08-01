@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/chats_nav_graph">
 
     <fragment
@@ -14,7 +15,6 @@
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.example.chat.ChatFragment"
-        tools:layout="@layout/fragment_chat"
         android:label="fragment_chat">
         <argument
             android:name="conversationId"

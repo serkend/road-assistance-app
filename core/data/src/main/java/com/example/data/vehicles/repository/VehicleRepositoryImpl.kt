@@ -1,6 +1,6 @@
 package com.example.data.vehicles.repository
 
-import com.example.common.ResultState
+import com.example.core.common.ResultState
 import com.example.data.vehicles.dao.VehicleDao
 import com.example.data.vehicles.dto.VehicleDto
 import com.example.data.vehicles.entity.VehicleEntity

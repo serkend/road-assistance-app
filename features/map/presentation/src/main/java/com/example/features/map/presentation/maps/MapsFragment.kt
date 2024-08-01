@@ -15,8 +15,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.core.common.Constants.TAG
+import com.example.core.common.extensions.bindSharedFlow
+import com.example.core.common.extensions.bindStateFlow
 import com.example.core.common.extensions.checkLocationPermission
 import com.example.core.common.extensions.showToast
+import com.example.features.map.presentation.R
 import com.example.features.map.presentation.databinding.FragmentMapsBinding
 import com.example.features.map.presentation.requestAssistFlow.requestPreview.RequestModel
 import com.example.features.map.presentation.requestDetails.RequestDetailsBottomSheetFragment.Companion.DRAW_ROUTE_RESULT
@@ -137,9 +140,9 @@ class MapsFragment : Fragment() {
             mMap?.clear()
             requests.forEach { request ->
                 val icon = if (request.isCurrentUser) {
-                    BitmapDescriptorFactory.fromResource(R.drawable.ic_my_car)
+                    BitmapDescriptorFactory.fromResource(com.example.core.common.R.drawable.ic_my_car)
                 } else {
-                    BitmapDescriptorFactory.fromResource(R.drawable.ic_other_car)
+                    BitmapDescriptorFactory.fromResource(com.example.core.common.R.drawable.ic_other_car)
                 }
                 val latLng = LatLng(request.latitude, request.longitude)
                 val marker = mMap?.addMarker(
@@ -212,7 +215,7 @@ class MapsFragment : Fragment() {
                                 mMap?.addPolyline(
                                     PolylineOptions().addAll(path)
                                         .width(16f)
-                                        .color(requireContext().getColor(R.color.colorPrimary))
+                                        .color(requireContext().getColor(com.example.core.common.R.color.colorPrimary))
                                         .geodesic(true)
                                 )
                             }

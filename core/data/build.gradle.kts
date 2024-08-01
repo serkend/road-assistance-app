@@ -37,17 +37,22 @@ android {
 }
 
 dependencies {
-    implementation(":core:domain")
-    implementation(":core:common")
+    implementation(project(":core:domain"))
+    implementation(project(":core:common"))
 
     implementation(libs.kotlinStdlib)
     implementation(libs.coreKtx)
 
-    implementation(platform(libs.firebaseBom))
     implementation(libs.firebaseStorage)
     implementation(libs.firebaseFirestore)
     implementation(libs.firebaseAuth)
 
     implementation(libs.hilt)
     kapt(libs.hiltCompiler)
+
+    implementation(libs.roomRuntime)
+    kapt(libs.roomCompiler)
+
+    implementation(libs.playServicesLocation)
+    implementation(libs.playServicesMaps)
 }

@@ -1,6 +1,6 @@
 package com.example.data.chat.repository
 
-import com.example.common.ResultState
+import com.example.core.common.ResultState
 import com.example.data.chat.dto.ConversationDto
 import com.example.data.chat.dto.MessageDto
 import com.example.data.chat.mappers.toDomain

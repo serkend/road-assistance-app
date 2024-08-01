@@ -17,4 +17,3 @@ data class VehicleDto(
         const val FIREBASE_YEAR = "year"
     }
 }
-

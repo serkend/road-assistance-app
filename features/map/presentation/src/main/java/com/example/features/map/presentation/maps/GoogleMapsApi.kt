@@ -1,6 +1,6 @@
 package com.example.features.map.presentation.maps
 
-import com.example.auth.BuildConfig
+import com.example.features.map.presentation.BuildConfig
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

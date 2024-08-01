@@ -7,15 +7,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.auth.R
-import com.example.auth.databinding.FragmentConversationsBinding
-import com.example.auth.presentation.utils.bindStateFlow
+import com.example.core.common.extensions.bindStateFlow
+import com.example.features.chats.presentation.R
+import com.example.features.chats.presentation.databinding.FragmentConversationsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ConversationsFragment : Fragment(R.layout.fragment_conversations) {
 
-    private val binding:FragmentConversationsBinding by viewBinding()
+    private val binding: FragmentConversationsBinding by viewBinding()
     private val viewModel: ConversationsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

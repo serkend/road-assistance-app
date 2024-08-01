@@ -36,8 +36,6 @@ android {
 dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:domain"))
-    implementation(project(":core:data"))
-    implementation(project(":features:data"))
 
     // Kotlin
     implementation(libs.kotlinStdlib)
@@ -53,7 +51,6 @@ dependencies {
     implementation(libs.appCompat)
 
     // Firebase
-    implementation(platform(libs.firebaseBom))
     implementation(libs.firebaseStorage)
     implementation(libs.firebaseFirestore)
     implementation(libs.firebaseAuth)

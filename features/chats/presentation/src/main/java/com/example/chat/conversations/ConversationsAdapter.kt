@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.auth.R
-import com.example.auth.databinding.ItemConversationBinding
 import com.example.chat.model.ConversationModel
+import com.example.core.common.databinding.ItemConversationBinding
+import com.example.features.chats.presentation.R
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -30,8 +30,8 @@ class ConversationsAdapter(private val onClick: (String) -> Unit) :
             }
             Glide.with(binding.userAvatarIv)
                 .load(conversation.companionImage)
-                .placeholder(R.drawable.ic_avatar)
-                .error(R.drawable.ic_avatar)
+                .placeholder(com.example.core.common.R.drawable.ic_avatar)
+                .error(com.example.core.common.R.drawable.ic_avatar)
                 .into(binding.userAvatarIv)
             binding.usernameTextView.text = conversation.companionUsername
         }

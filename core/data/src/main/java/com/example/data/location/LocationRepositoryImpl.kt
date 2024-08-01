@@ -3,7 +3,7 @@ package com.example.data.location
 import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Looper
-import com.example.common.ResultState
+import com.example.core.common.ResultState
 import com.example.domain.location.repository.LocationRepository
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback

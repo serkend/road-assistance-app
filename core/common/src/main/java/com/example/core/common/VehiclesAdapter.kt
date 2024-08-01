@@ -1,4 +1,4 @@
-package com.example.features.map.presentation.requestAssistFlow.vehiclesList
+package com.example.core.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

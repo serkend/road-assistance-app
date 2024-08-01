@@ -14,17 +14,22 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.core.common.Constants.TAG
 import com.example.core.common.LoginState
+import com.example.core.common.navigation.FlowNavigator
 import com.example.domain.auth.model.SignInCredentials
 import com.example.features.auth.presentation.R
 import com.example.features.auth.presentation.databinding.FragmentSignInBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignInFragment : Fragment() {
 
     private lateinit var binding: FragmentSignInBinding
     private val viewModel: SignInViewModel by viewModels()
+
+    @Inject
+    lateinit var flowNavigator: FlowNavigator
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -61,9 +66,7 @@ class SignInFragment : Fragment() {
                             binding.signInProgressBar.isVisible = false
                             binding.signInBtn.setTextColor(currColor)
                             Log.e(TAG, "Success uiState in signIn ")
-                            val navController = findNavController()
-                            navController.setGraph(R.navigation.)
-//                            navController.navigate(R.id.action_global_homeFragment2)
+                            flowNavigator.navigateToMainFlow()
                         }
 
                         LoginState.Loading -> {

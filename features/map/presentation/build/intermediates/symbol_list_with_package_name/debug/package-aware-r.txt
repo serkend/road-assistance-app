@@ -1,4 +1,0 @@
-com.example.features.map.presentation
-id map
-id requestAssistButton
-layout fragment_maps

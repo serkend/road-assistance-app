@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -35,7 +36,6 @@ android {
 
 dependencies {
     implementation(project(":core:domain"))
-    implementation(project(":core:data"))
     implementation(project(":core:common"))
 
     // Kotlin
@@ -52,7 +52,6 @@ dependencies {
     implementation(libs.appCompat)
 
     // Firebase
-    implementation(platform(libs.firebaseBom))
     implementation(libs.firebaseStorage)
     implementation(libs.firebaseFirestore)
     implementation(libs.firebaseAuth)

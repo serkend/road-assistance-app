@@ -38,13 +38,13 @@ android {
 dependencies {
 
     implementation(project(":core:common"))
+
     implementation("androidx.core:core-ktx:1.10.1")
 
-    //com.example.Firebase
-    implementation(platform(Firebase.firebaseBom))
-    implementation(Firebase.storage)
-    implementation(Firebase.firestore)
-    implementation(Firebase.auth)
+    //Firebase
+    implementation(libs.firebaseStorage)
+    implementation(libs.firebaseFirestore)
+    implementation(libs.firebaseAuth)
 
     //DI
     implementation(Libs.Application.DependencyInjection.hilt)
