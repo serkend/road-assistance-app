@@ -7,9 +7,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
-import com.example.auth.R
-import com.example.auth.databinding.FragmentProfileBinding
-import com.example.auth.presentation.utils.bindStateFlow
+import com.example.app.R
+import com.example.app.databinding.FragmentProfileBinding
+import com.example.app.presentation.utils.bindStateFlow
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

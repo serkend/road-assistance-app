@@ -1,7 +1,7 @@
 package com.example.domain.location.repository
 
 import android.location.Location
-import com.example.common.ResultState
+import com.example.core.common.ResultState
 import kotlinx.coroutines.flow.Flow
 
 interface LocationRepository {

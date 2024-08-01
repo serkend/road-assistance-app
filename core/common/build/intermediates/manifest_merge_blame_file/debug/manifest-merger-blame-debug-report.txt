@@ -1,0 +1,8 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.core.common" >
+4
+5    <uses-sdk android:minSdkVersion="24" />
+5-->E:\Android\Projects\RoadAssist\RoadAssist\core\common\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest12163508744512745679.xml
+6
+7</manifest>

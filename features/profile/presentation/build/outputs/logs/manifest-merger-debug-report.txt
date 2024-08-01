@@ -1,0 +1,25 @@
+-- Merging decision tree log ---
+manifest
+ADDED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml:2:13-83
+INJECTED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml:2:13-83
+INJECTED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml:2:13-83
+	package
+		INJECTED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml
+		ADDED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml:2:13-83
+		INJECTED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml
+	xmlns:android
+		ADDED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml:2:23-81
+uses-sdk
+INJECTED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml reason: use-sdk injection requested
+INJECTED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml
+INJECTED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml
+INJECTED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml
+INJECTED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml
+	android:targetSdkVersion
+		INJECTED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml
+		ADDED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml
+		INJECTED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml
+	android:minSdkVersion
+		INJECTED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml
+		ADDED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml
+		INJECTED from E:\Android\Projects\RoadAssist\RoadAssist\features\profile\presentation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest10558061664949914457.xml

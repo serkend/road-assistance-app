@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map_nav_graph">
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.features.map.presentation.maps.MapsFragment"
+        tools:layout="@layout/fragment_maps"
+        android:label="fragment_maps">
+        <action
+            android:id="@+id/action_mapsFragment_to_chooseVehicleTroubleBottomSheetFragment"
+            app:destination="@id/chooseVehicleTroubleBottomSheetFragment" />
+        <action
+            android:id="@+id/action_mapsFragment_to_RequestDetailsBottomSheetFragment"
+            app:destination="@id/requestDetailsBottomSheetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/vehicleAddUpdateBottomSheetFragment"
+        android:name="com.example.features.map.presentation.requestAssistFlow.vehicleAddUpdate.VehicleAddUpdateBottomSheetFragment"
+        android:label="VehicleAddUpdateBottomSheetFragment">
+        <action
+            android:id="@+id/action_vehicleAddUpdateBottomSheetFragment_to_requestPreviewFragment"
+            app:destination="@id/requestPreviewFragment" />
+        <argument
+            android:name="troubleName"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/requestPreviewFragment"
+        android:name="com.example.features.map.presentation.requestAssistFlow.requestPreview.RequestPreviewFragment"
+        tools:layout="@layout/fragment_request_preview"
+        android:label="fragment_request_preview">
+        <argument
+            android:name="troubleName"
+            app:argType="string" />
+        <argument
+            android:name="vehicleId"
+            app:argType="string" />
+    </fragment>
+    <dialog
+        android:id="@+id/chooseVehicleTroubleBottomSheetFragment"
+        android:name="com.example.features.map.presentation.requestAssistFlow.vehicleTrouble.ChooseVehicleTroubleBottomSheetFragment"
+        android:label="fragment_choose_vehicle_trouble_bottom_sheet"
+        tools:layout="@layout/fragment_choose_vehicle_trouble_bottom_sheet">
+        <action
+            android:id="@+id/action_chooseVehicleTroubleBottomSheetFragment_to_chooseVehicleBottomSheetFragment"
+            app:destination="@id/chooseVehicleBottomSheetFragment" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/chooseVehicleBottomSheetFragment"
+        android:name="com.example.features.map.presentation.requestAssistFlow.vehiclesList.ChooseVehicleBottomSheetFragment"
+        android:label="ChooseVehicleBottomSheetFragment">
+        <argument
+            android:name="troubleName"
+            app:argType="string" />
+    </dialog>
+    <dialog
+        android:id="@+id/requestDetailsBottomSheetFragment"
+        android:name="com.example.features.map.presentation.requestDetails.RequestDetailsBottomSheetFragment"
+        android:label="fragment_request_details_bottom_sheet"
+        tools:layout="@layout/fragment_request_details_bottom_sheet">
+        <argument
+            android:name="request"
+            app:argType="com.example.app.presentation.screens.requestAssistFlow.requestPreview.RequestModel" />
+    </dialog>
+
+</navigation>

@@ -2,8 +2,8 @@ package com.example.features.profile.presentation.itemsList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.common.OrderStatus
-import com.example.common.ResultState
+import com.example.core.common.OrderStatus
+import com.example.core.common.ResultState
 import com.example.domain.requests.usecases.orders.OrdersUseCases
 import com.example.domain.requests.usecases.requests.RequestsUseCases
 import com.example.domain.vehicles.usecases.VehiclesUseCases

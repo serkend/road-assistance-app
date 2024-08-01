@@ -1,6 +1,6 @@
 package com.example.domain.userManager.repository
 
-import com.example.common.Resource
+import com.example.core.common.Resource
 import com.example.domain.common.User
 import kotlinx.coroutines.flow.Flow
 

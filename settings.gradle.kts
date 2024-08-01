@@ -22,16 +22,10 @@ dependencyResolutionManagement {
 rootProject.name = "RoadAssist"
 
 include(":app")
-include(":core")
 include(":core:common")
 include(":core:data")
 include(":core:domain")
 
-include(":features")
-include(":features:map")
-include(":features:chats")
-include(":features:profile")
-include(":features:auth")
 include(":features:auth:presentation")
 include(":features:chats:presentation")
 include(":features:map:presentation")

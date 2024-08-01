@@ -12,11 +12,11 @@ plugins {
 }
 
 android {
-    namespace = Android.applicationId
+    namespace = "com.example.app"
     compileSdk = Android.compileSdk
 
     defaultConfig {
-        applicationId = Android.applicationId
+        applicationId = "com.example.app"
         minSdk = Android.minSdk
         targetSdk = Android.targetSdk
         versionCode = Android.versionCode
@@ -84,7 +84,13 @@ android {
 
 dependencies {
     //Modules
-    implementation(project(":core"))
+    implementation(project(":core:common"))
+    implementation(project(":core:domain"))
+//
+    implementation(project(":features:auth:presentation"))
+    implementation(project(":features:chats:presentation"))
+    implementation(project(":features:map:presentation"))
+    implementation(project(":features:profile:presentation"))
 
     //Navigation
     implementation(Libs.Application.Navigation.navigation_fragment)
@@ -93,7 +99,6 @@ dependencies {
     //View
     implementation(Libs.View.viewBindingDelegate)
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-//    implementation(Libs.View.fragmentKtx)
     implementation(Libs.View.material)
     implementation(Libs.View.appCompat)
 

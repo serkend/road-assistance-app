@@ -1,6 +1,6 @@
 package com.example.domain.vehicles.model
 
-import com.example.common.vehicles.VehicleModel
+import com.example.core.common.vehicles.VehicleModel
 
 data class Vehicle(
     val id: String? = null,

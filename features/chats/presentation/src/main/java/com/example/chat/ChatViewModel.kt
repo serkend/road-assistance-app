@@ -3,7 +3,7 @@ package com.example.chat
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.common.ResultState
+import com.example.core.common.ResultState
 import com.example.domain.chat.usecases.ChatUseCases
 import com.example.chat.model.ConversationModel
 import com.example.chat.model.MessageModel

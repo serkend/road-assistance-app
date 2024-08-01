@@ -3,6 +3,7 @@ plugins {
     id(Plugins.kapt)
     id(Plugins.daggerHilt)
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -37,6 +38,8 @@ android {
 
 dependencies {
     implementation(":core:domain")
+    implementation(":core:common")
+
     implementation(libs.kotlinStdlib)
     implementation(libs.coreKtx)
 

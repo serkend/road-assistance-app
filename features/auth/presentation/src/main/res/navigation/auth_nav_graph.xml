@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/auth_nav_graph">
+
+    <action
+        android:id="@+id/action_signInFragment2_to_signUpFragment2"
+        app:destination="@id/signUpFragment2" />
+    <fragment
+        android:id="@+id/signInFragment2"
+        android:name="com.example.app.presentation.screens.auth.sign_in.SignInFragment"
+        tools:layout="@layout/fragment_sign_in"
+        android:label="fragment_sign_in">
+        <action
+            android:id="@+id/action_signInFragment2_to_signUpFragment2"
+            app:destination="@id/signUpFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment2"
+        android:name="com.example.app.presentation.screens.auth.sign_up.SignUpFragment"
+        android:label="SignUpFragment" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="auth_nav_graph.xml" />
+</navigation>

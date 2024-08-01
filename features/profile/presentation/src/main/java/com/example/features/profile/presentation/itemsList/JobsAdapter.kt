@@ -1,4 +1,4 @@
-package com.example.auth.presentation.screens.itemsList
+package com.example.features.profile.presentation.itemsList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,10 +6,11 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.auth.databinding.VehicleCardViewBinding
-import com.example.features.profile.presentation.itemsList.JobItem
+import com.example.core.common.databinding.VehicleCardViewBinding
 
-class JobsAdapter(private val onClick: (JobItem) -> Unit) : ListAdapter<JobItem, JobsAdapter.JobsViewHolder>(VehicleDiffCallback()) {
+class JobsAdapter(private val onClick: (JobItem) -> Unit) : ListAdapter<JobItem, JobsAdapter.JobsViewHolder>(
+    VehicleDiffCallback()
+) {
 
     class JobsViewHolder(private val binding: VehicleCardViewBinding, val onClick: (JobItem) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {

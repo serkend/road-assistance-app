@@ -34,6 +34,7 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:data"))
     implementation(project(":core:common"))
+    implementation(project(":app"))
 
     // Kotlin
     implementation(libs.kotlinStdlib)

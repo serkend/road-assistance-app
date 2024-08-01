@@ -1,6 +1,6 @@
 package com.example.domain.chat.usecases
 
-import com.example.common.ResultState
+import com.example.core.common.ResultState
 import com.example.domain.chat.model.Conversation
 import com.example.domain.chat.repository.ChatRepository
 import kotlinx.coroutines.flow.Flow

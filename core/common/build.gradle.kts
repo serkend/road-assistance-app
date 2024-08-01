@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.common"
+    namespace = "com.example.core.common"
     compileSdk = Android.compileSdk
 
     defaultConfig {
@@ -25,6 +25,9 @@ android {
             )
         }
     }
+    buildFeatures {
+        viewBinding = true
+    }
     compileOptions {
         sourceCompatibility = Config.compatibleJavaVersion
         targetCompatibility = Config.compatibleJavaVersion
@@ -38,4 +41,11 @@ dependencies {
     //Kotlin
     implementation(Libs.View.coreKtx)
     implementation("androidx.fragment:fragment-ktx:1.7.0")
+    implementation(libs.recyclerview)
+    implementation(libs.material)
+    implementation(libs.appCompat)
+
+    // Navigation
+    implementation(libs.navigationFragment)
+    implementation(libs.navigationUi)
 }

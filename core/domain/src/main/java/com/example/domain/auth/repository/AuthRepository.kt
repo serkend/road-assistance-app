@@ -1,6 +1,6 @@
 package com.example.domain.auth.repository
 
-import com.example.common.Resource
+import com.example.core.common.Resource
 import com.example.domain.auth.model.SignInCredentials
 import com.example.domain.auth.model.SignUpCredentials
 import com.example.domain.common.User

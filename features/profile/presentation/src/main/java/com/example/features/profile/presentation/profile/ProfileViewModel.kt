@@ -3,8 +3,8 @@ package com.example.features.profile.presentation.profile
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.common.Constants.TAG
-import com.example.common.Resource
+import com.example.core.common.Constants.TAG
+import com.example.core.common.Resource
 import com.example.domain.auth.usecases.auth.AuthUseCases
 import com.example.domain.userManager.usecases.GetCurrentUser
 import com.example.domain.common.User

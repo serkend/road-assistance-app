@@ -1,7 +1,7 @@
 package com.example.features.profile.presentation.itemsList
 
-import com.example.common.OrderStatus
-import com.example.requestAssistFlow.vehiclesList.VehicleModel
+import com.example.core.common.OrderStatus
+import com.example.core.common.vehicles.VehicleModel
 
 data class JobItem(
     val id: String? = null,

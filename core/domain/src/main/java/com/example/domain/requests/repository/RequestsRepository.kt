@@ -1,6 +1,6 @@
 package com.example.domain.requests.repository
 
-import com.example.common.ResultState
+import com.example.core.common.ResultState
 import com.example.domain.requests.model.Order
 import com.example.domain.requests.model.Request
 import kotlinx.coroutines.flow.Flow

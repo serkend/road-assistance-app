@@ -1,6 +1,6 @@
 package com.example.domain.chat.repository
 
-import com.example.common.ResultState
+import com.example.core.common.ResultState
 import com.example.domain.chat.model.Conversation
 import com.example.domain.chat.model.Message
 import kotlinx.coroutines.flow.Flow

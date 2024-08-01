@@ -1,6 +1,6 @@
 package com.example.domain.vehicles.repository
 
-import com.example.common.ResultState
+import com.example.core.common.ResultState
 import com.example.domain.vehicles.model.Vehicle
 import kotlinx.coroutines.flow.Flow
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profile_nav_graph">
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.features.profile.presentation.profile.ProfileFragment"
+        tools:layout="@layout/fragment_profile"
+        android:label="fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_itemsListFragment"
+            app:destination="@id/itemsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemsListFragment"
+        android:name="com.example.features.profile.presentation.itemsList.ItemsListFragment"
+        tools:layout="@layout/fragment_items_list"
+        android:label="fragment_items_list">
+        <argument
+            android:name="contentType"
+            app:argType="string" />
+    </fragment>
+</navigation>

@@ -1,6 +1,6 @@
 package com.example.domain.requests.model
 
-import com.example.common.OrderStatus
+import com.example.core.common.OrderStatus
 
 data class Order(
     val id: String? = null,

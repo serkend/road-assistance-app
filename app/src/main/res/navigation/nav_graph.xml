@@ -4,28 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/splashFragment">
-
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.auth.presentation.screens.splash.SplashFragment"
+        android:name="com.example.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_bottom_nav_graph"
             app:destination="@id/main_nav_graph" />
         <action
-            android:id="@+id/action_splashFragment_to_auth_nav_graph"
-            app:destination="@id/auth_nav_graph" />
-        <action
             android:id="@+id/action_splashFragment_to_bottom_nav_graph2"
             app:destination="@id/main_nav_graph" />
+        <action
+            android:id="@+id/action_splashFragment_to_auth_nav_graph"
+            app:destination="@id/auth_nav_graph" />
     </fragment>
 
-    <include app:graph="@navigation/auth_nav_graph" />
     <action
         android:id="@+id/action_global_splashFragment"
         app:destination="@id/splashFragment"
         app:popUpTo="@id/splashFragment"
         app:popUpToInclusive="true"/>
     <include app:graph="@navigation/main_nav_graph" />
+    <include app:graph="@navigation/auth_nav_graph" />
 </navigation>
