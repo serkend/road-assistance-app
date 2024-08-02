@@ -24,7 +24,6 @@ class ChooseVehicleBottomSheetViewModel @Inject constructor(private val vehicles
     val showToastSharedFlow = _showToastSharedFlow.asSharedFlow()
 
     private val _isRefreshingSharedFlow = MutableSharedFlow<Boolean>()
-    val isRefreshingSharedFlow = _isRefreshingSharedFlow.asSharedFlow()
 
     var launchRequestPreviewScreenSharedFlow = MutableSharedFlow<String>()
 

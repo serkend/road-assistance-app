@@ -3,7 +3,6 @@ package com.example.features.map.presentation.requestAssistFlow.requestPreview
 import android.os.Parcelable
 import com.example.domain.requests.model.Request
 import com.example.core.common.vehicles.VehicleModel
-import com.example.domain.vehicles.model.toDomain
 import com.example.domain.vehicles.model.toModel
 import kotlinx.parcelize.Parcelize
 
@@ -19,15 +18,15 @@ data class RequestModel(
     val userId: String?
 ) : Parcelable
 
-fun RequestModel.toDomain(): Request = Request(
-    id = id,
-    trouble = trouble,
-    cost = cost,
-    vehicle = vehicle.toDomain(),
-    latitude = latitude,
-    longitude = longitude,
-    userId = userId
-)
+//fun RequestModel.toDomain(): Request = Request(
+//    id = id,
+//    trouble = trouble,
+//    cost = cost,
+//    vehicle = vehicle.toDomain(),
+//    latitude = latitude,
+//    longitude = longitude,
+//    userId = userId
+//)
 
 fun Request.toModel(): RequestModel = RequestModel(
     id = id,
