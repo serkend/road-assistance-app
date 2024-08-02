@@ -15,6 +15,7 @@ import com.example.domain.requests.usecases.requests.FetchRequests
 import com.example.domain.requests.usecases.requests.GetRequestById
 import com.example.domain.requests.usecases.requests.RequestsUseCases
 import com.example.domain.requests.usecases.requests.SaveRequest
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,14 +26,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ChatDomainModule {
 
-    @Provides
-    @Singleton
-    fun provideChatUseCases(chatRepository: ChatRepository): ChatUseCases = ChatUseCases(
-        getConversations = GetConversations(chatRepository),
-        getMessages = GetMessages(chatRepository),
-        sendMessage = SendMessage(chatRepository),
-        getOrCreateConversation = GetOrCreateConversation((chatRepository)),
-        getReceiverIdForConversation = GetReceiverIdForConversation(chatRepository)
-    )
+
 
 }

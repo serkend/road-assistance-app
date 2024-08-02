@@ -5,8 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.common.ResultState
 import com.example.domain.requests.usecases.orders.FetchMyOrder
 import com.example.domain.requests.usecases.requests.RequestsUseCases
-import com.example.features.map.presentation.requestAssistFlow.requestPreview.RequestModel
-import com.example.features.map.presentation.requestAssistFlow.requestPreview.toModel
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -20,7 +18,7 @@ import javax.inject.Inject
 class MapsViewModel @Inject constructor(private val requestsUseCases: RequestsUseCases, private val fetchMyOrder: FetchMyOrder) : ViewModel() {
 
     private var _markersPosStateFlow: MutableStateFlow<List<LatLng>> = MutableStateFlow(emptyList())
-    val markersPosStateFlow = _markersPosStateFlow.asStateFlow()
+//    val markersPosStateFlow = _markersPosStateFlow.asStateFlow()
 
     private var _launchChooseVehicleTroubleScreen = MutableSharedFlow<Unit>()
     val launchChooseVehicleTroubleScreen = _launchChooseVehicleTroubleScreen.asSharedFlow()
@@ -32,7 +30,7 @@ class MapsViewModel @Inject constructor(private val requestsUseCases: RequestsUs
 
     val showRouteSharedFlow = MutableSharedFlow<LatLng>()
 
-    var hasOrder = false
+//    var hasOrder = false
 
     init {
         fetchRequestsData()
@@ -64,7 +62,7 @@ class MapsViewModel @Inject constructor(private val requestsUseCases: RequestsUs
             when(it) {
                 is ResultState.Success -> {
                     it.result?.requestId?.let { requestId ->
-                        hasOrder = true
+//                        hasOrder = true
                         val request = requestsUseCases.getRequestById(requestId)
                         showRouteSharedFlow.emit(
                             LatLng(
@@ -72,10 +70,10 @@ class MapsViewModel @Inject constructor(private val requestsUseCases: RequestsUs
                                 request.longitude
                             )
                         )
-                    } ?: { hasOrder = false }
+                    }
                 }
                 is ResultState.Failure -> {
-                    hasOrder = false
+//                    hasOrder = false
                     showToast.emit(it.e ?: "Error while fetching current user order")
                 }
                 is ResultState.Loading -> {

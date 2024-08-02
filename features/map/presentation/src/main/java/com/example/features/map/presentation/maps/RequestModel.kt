@@ -1,4 +1,4 @@
-package com.example.features.map.presentation.requestAssistFlow.requestPreview
+package com.example.features.map.presentation.maps
 
 import android.os.Parcelable
 import com.example.domain.requests.model.Request
