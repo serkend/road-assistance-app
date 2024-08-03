@@ -1,5 +1,6 @@
-package com.example.roadAssist.presentation.screens.auth.sign_in
+package com.example.auth.presentation.screens.auth.sign_in
 
+import com.example.auth.presentation.screens.auth.sign_in.SignInViewModel
 import com.example.core.common.Resource
 import com.example.domain.auth.model.SignInCredentials
 import com.example.domain.auth.usecases.auth.AuthUseCases
