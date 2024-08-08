@@ -1,4 +1,4 @@
-package com.example.core.common.navigation
+package com.example.navigation
 
 interface FlowNavigator {
     fun navigateToMainFlow()

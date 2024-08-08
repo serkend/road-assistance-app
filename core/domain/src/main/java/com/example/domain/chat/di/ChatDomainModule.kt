@@ -26,6 +26,14 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ChatDomainModule {
 
-
+    @Provides
+    @Singleton
+    fun provideChatUseCases(chatRepository: ChatRepository): ChatUseCases = ChatUseCases(
+        getConversations = GetConversations(chatRepository),
+        getMessages = GetMessages(chatRepository),
+        sendMessage = SendMessage(chatRepository),
+        getOrCreateConversation = GetOrCreateConversation((chatRepository)),
+        getReceiverIdForConversation = GetReceiverIdForConversation(chatRepository)
+    )
 
 }

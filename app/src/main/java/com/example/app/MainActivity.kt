@@ -8,7 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.app.databinding.ActivityMainBinding
-import com.example.core.common.navigation.FlowNavigator
+import com.example.navigation.FlowNavigator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,8 +40,10 @@ class MainActivity : AppCompatActivity(), FlowNavigator {
     }
 
     override fun navigateToMainFlow() {
-        val navController = findNavController(R.id.fragmentContainerView)
-        navController.navigate(R.id.main_nav_graph)
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
+        navController.setGraph(R.navigation.main_nav_graph)
     }
 
     override fun navigateToChatsFlow(conversationId: String) {

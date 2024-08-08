@@ -1,16 +1,17 @@
 plugins {
-    id(Plugins.androidLibrary)
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
+    id("kotlin-kapt")
 }
 
 android {
     namespace = "com.example.core.common"
-    compileSdk = Android.compileSdk
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -29,18 +30,18 @@ android {
         viewBinding = true
     }
     compileOptions {
-        sourceCompatibility = Config.compatibleJavaVersion
-        targetCompatibility = Config.compatibleJavaVersion
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = Config.jvmTarget
+        jvmTarget = "17"
     }
 }
 
 dependencies {
     //Kotlin
-    implementation(Libs.View.coreKtx)
-    implementation("androidx.fragment:fragment-ktx:1.7.0")
+    implementation(libs.coreKtx)
+    implementation(libs.fragmentKtx)
     implementation(libs.recyclerview)
     implementation(libs.material)
     implementation(libs.appCompat)
@@ -48,4 +49,16 @@ dependencies {
     // Navigation
     implementation(libs.navigationFragment)
     implementation(libs.navigationUi)
+
+    //Firebase
+    implementation(libs.firebaseStorage)
+    implementation(libs.firebaseFirestore)
+    implementation(libs.firebaseAuth)
+
+    // Testing
+    implementation(libs.junit)
+    implementation(libs.coroutinesTest)
+    implementation(libs.hiltTesting)
+    implementation(libs.androidxTestRunner)
+
 }

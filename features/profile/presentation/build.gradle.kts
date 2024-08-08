@@ -37,6 +37,7 @@ android {
 dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:common"))
+    implementation(project(":core:navigation"))
 
     // Kotlin
     implementation(libs.kotlinStdlib)
@@ -57,8 +58,8 @@ dependencies {
     implementation(libs.firebaseAuth)
 
     // Google API
-    implementation("com.google.android.gms:play-services-maps:18.2.0")
-    implementation("com.google.android.gms:play-services-location:21.2.0")
+    implementation(libs.playServicesLocation)
+    implementation(libs.playServicesMaps)
 
     // Retrofit
     implementation(libs.retrofit)
@@ -89,7 +90,6 @@ dependencies {
 
     // Testing
     testImplementation(libs.junit)
-    testImplementation(libs.mockito)
     testImplementation(libs.coroutinesTest)
 
     androidTestImplementation(libs.androidxJunit)

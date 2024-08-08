@@ -1,18 +1,17 @@
 plugins {
-    id(Plugins.androidLibrary)
-    id(Plugins.kapt)
-    id(Plugins.daggerHilt)
+    id("com.android.library")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
     id("org.jetbrains.kotlin.android")
 }
 
 android {
     namespace = "com.example.domain"
-    compileSdk = Android.compileSdk
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
-        targetSdk = 33
-
+        targetSdk = 34
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -27,19 +26,18 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = Config.compatibleJavaVersion
-        targetCompatibility = Config.compatibleJavaVersion
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = Config.jvmTarget
+        jvmTarget = "17"
     }
 }
 
 dependencies {
-
     implementation(project(":core:common"))
 
-    implementation("androidx.core:core-ktx:1.10.1")
+    implementation(libs.coreKtx)
 
     //Firebase
     implementation(libs.firebaseStorage)
@@ -47,7 +45,12 @@ dependencies {
     implementation(libs.firebaseAuth)
 
     //DI
-    implementation(Libs.Application.DependencyInjection.hilt)
-    kapt(Libs.Application.DependencyInjection.hilt_compiler)
+    implementation(libs.hilt)
+    kapt(libs.hiltCompiler)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.mockkAgent)
+    testImplementation(libs.coroutinesTest)
 
 }

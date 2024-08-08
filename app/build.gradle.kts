@@ -1,4 +1,4 @@
-import java.util.Properties
+import com.android.build.api.dsl.Packaging
 
 plugins {
     id("com.android.application")
@@ -13,72 +13,40 @@ plugins {
 
 android {
     namespace = "com.example.app"
-    compileSdk = Android.compileSdk
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.app"
-        minSdk = Android.minSdk
-        targetSdk = Android.targetSdk
-        versionCode = Android.versionCode
-        versionName = Android.versionName
+        minSdk = 24
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0"
 
-        testInstrumentationRunner = Android.testInstrumentalRunner
-
-        val localProperties = Properties()
-        val localPropertiesFile = rootProject.file("local.properties")
-        if (localPropertiesFile.exists()) {
-            localProperties.load(localPropertiesFile.inputStream())
-        }
-
-        val mapsApiKey = localProperties.getProperty("MAPS_API_KEY", "")
-        buildConfigField("String", "MAPS_API_KEY", "\"$mapsApiKey\"")
+        testInstrumentationRunner = "com.example.core.common.testing.HiltTestRunner"
 
         vectorDrawables {
             useSupportLibrary = true
         }
     }
 
-    buildTypes {
-        release {
-            isDebuggable = Obfuscation.releaseDebuggable
-            isMinifyEnabled = Obfuscation.releaseMinifyEnabled
-            isShrinkResources = Obfuscation.releaseMinifyEnabled
-
-            signingConfig = signingConfigs.getByName("debug")
-
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                file("proguard-rules.pro")
-            )
-        }
-        debug {
-            isDebuggable = Obfuscation.debugDebuggable
-            isMinifyEnabled = Obfuscation.debugMinifyEnabled
-            isShrinkResources = Obfuscation.debugMinifyEnabled
-
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                file("proguard-rules.pro")
-            )
-        }
-    }
     compileOptions {
-        sourceCompatibility = Config.compatibleJavaVersion
-        targetCompatibility = Config.compatibleJavaVersion
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = Config.jvmTarget
+        jvmTarget = "17"
     }
     buildFeatures {
         viewBinding = true
         buildConfig = true
     }
-    packagingOptions {
-        resources {
-            resources.excludes.add("META-INF/AL2.0")
-            resources.excludes.add("META-INF/LGPL2.1")
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
+    packaging {
+        resources.excludes.addAll(
+            listOf(
+                "META-INF/LICENSE.md",
+                "META-INF/LICENSE-notice.md",
+            )
+        )
     }
 }
 
@@ -86,80 +54,67 @@ dependencies {
     //Modules
     implementation(project(":core:common"))
     implementation(project(":core:domain"))
-//
+    implementation(project(":core:navigation"))
+
     implementation(project(":features:auth:presentation"))
     implementation(project(":features:chats:presentation"))
     implementation(project(":features:map:presentation"))
     implementation(project(":features:profile:presentation"))
+//    androidTestImplementation(project(":core:ui-test"))
 
-    //Navigation
-    implementation(Libs.Application.Navigation.navigation_fragment)
-    implementation(Libs.Application.Navigation.navigation_ui)
+    // Core KTX
+    implementation(libs.coreKtx)
 
-    //View
-    implementation(Libs.View.viewBindingDelegate)
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation(Libs.View.material)
-    implementation(Libs.View.appCompat)
-
-    //Kotlin
-    implementation(Libs.View.coreKtx)
-
-    //Firebase
-    implementation(platform(Firebase.firebaseBom))
-    implementation(Firebase.storage)
-    implementation(Firebase.firestore)
-    implementation(Firebase.auth)
-
-    //Google API
-    implementation ("com.google.android.gms:play-services-maps:18.2.0")
-    implementation("com.google.android.gms:play-services-location:21.2.0")
-
-    //Retrofit
-    implementation(Libs.Application.Network.Retrofit.retrofit)
-    implementation(Libs.Application.Network.Retrofit.retrofit_gson)
-    implementation(Libs.Application.Network.OkHttp.okhttp_logging)
-
-    //Lifecycle
-    implementation(Libs.View.lifecycleRuntime)
-    implementation(Libs.View.lifecycleViewModel)
-
-    //DI
-    implementation(Libs.Application.DependencyInjection.hilt)
+    // Hilt
+    implementation(libs.hilt)
+    kapt(libs.hiltCompiler)
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
+
+    // ViewBinding
+    implementation(libs.viewBindingDelegate)
+
+    // UI components
+    implementation(libs.constraintLayout)
+    implementation(libs.material)
+    implementation(libs.appCompat)
+
+    // Navigation
+    implementation(libs.navigationFragment)
+    implementation(libs.navigationUi)
+
+    // Lifecycle
+    implementation(libs.lifecycleRuntime)
+    implementation(libs.lifecycleViewModel)
+
+    // Fragment and RecyclerView
     implementation(libs.fragmentKtx)
-    kapt(Libs.Application.DependencyInjection.hilt_compiler)
+    implementation(libs.recyclerview)
 
-    //View
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    // Compose
+    implementation(libs.composeUi)
+    implementation(libs.composeMaterial)
+    implementation(libs.composeMaterial3)
+    implementation(libs.composeActivity)
 
-    //Compose
-    implementation(Libs.Compose.coilCompose)
-    implementation(Libs.Compose.runtime)
-    implementation(Libs.Boom.activityCompose)
-    implementation(Libs.Boom.viewModelCompose)
-    implementation(Libs.Compose.ui)
-    implementation(Libs.Compose.navigation)
-    implementation(Libs.Compose.systemUiController)
-    implementation(Libs.Compose.preview)
-    implementation(Libs.Compose.tooling)
-    implementation(Libs.Application.DependencyInjection.hiltNavigationCompose)
+    // Testing
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.coroutinesTest)
+    kaptTest(libs.hiltCompiler)
+    kaptAndroidTest(libs.hiltCompiler)
 
-    //Testing
-    testImplementation(Libs.View.Test.jUnit)
-    testImplementation(Libs.View.Test.mockito)
-    testImplementation(Libs.View.Test.unit_coroutines)
+    androidTestImplementation(libs.androidxJunit)
+    androidTestImplementation(libs.espressoCore)
+    androidTestImplementation(libs.composeUiTestJunit4)
+    androidTestImplementation(libs.composeUiTestManifest)
+    androidTestImplementation(libs.hiltTesting)
+    testImplementation(libs.hiltTesting)
 
-    androidTestImplementation(Libs.View.AndroidTest.jUnit)
-    androidTestImplementation(Libs.View.AndroidTest.espresso)
-    androidTestImplementation(Libs.Compose.Test.uiJunit)
-    androidTestImplementation(Libs.Compose.Test.uiManifest)
+    // Testing
+//    implementation(libs.junit)
+//    implementation(libs.coroutinesTest)
+//    implementation(libs.hiltTesting)
+//    implementation(libs.androidxTestRunner)
+//    implementation(libs.mockkAndroid)
 
-    // Glide
-    implementation("com.github.bumptech.glide:glide:4.13.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.13.0")
 }

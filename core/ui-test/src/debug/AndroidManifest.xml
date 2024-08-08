@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ui_test">
+
+    <application
+        android:name="com.example.core.common.testing.TestApplication"
+        android:theme="@style/Theme.RoadAssist">
+        <activity
+            android:name="com.example.debug.HiltTestActivity"
+            android:exported="false"
+            android:theme="@style/Theme.RoadAssist"/>
+    </application>
+
+</manifest>

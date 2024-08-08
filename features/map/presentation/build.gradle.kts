@@ -3,8 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -17,6 +17,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "MAPS_API_KEY", "\"your_maps_api_key_here\"")
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     buildTypes {
@@ -37,14 +40,22 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    packagingOptions {
+        resources {
+            resources.excludes.add("META-INF/AL2.0")
+            resources.excludes.add("META-INF/LGPL2.1")
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 }
 
 dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:common"))
+    implementation(project(":core:navigation"))
 
     // Kotlin
-    implementation(libs.kotlinStdlib)
+//    implementation(libs.kotlinStdlib)
 
     // Core KTX
     implementation(libs.coreKtx)
@@ -57,6 +68,7 @@ dependencies {
     // Hilt
     implementation(libs.hilt)
     kapt(libs.hiltCompiler)
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
     // Google API
     implementation(libs.playServicesLocation)
@@ -94,13 +106,8 @@ dependencies {
     implementation(libs.composeMaterial3)
     implementation(libs.composeActivity)
 
-    // Glide
-    implementation(libs.glide)
-    kapt(libs.glideCompiler)
-
     // Testing
     testImplementation(libs.junit)
-    testImplementation(libs.mockito)
     testImplementation(libs.coroutinesTest)
 
     androidTestImplementation(libs.androidxJunit)

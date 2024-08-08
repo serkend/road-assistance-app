@@ -8,7 +8,7 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.core.common.extensions.bindSharedFlow
 import com.example.core.common.extensions.showToast
-import com.example.core.common.navigation.FlowNavigator
+import com.example.navigation.FlowNavigator
 import com.example.features.map.presentation.R
 import com.example.features.map.presentation.databinding.FragmentRequestDetailsBottomSheetBinding
 import com.google.android.gms.maps.model.LatLng
@@ -24,7 +24,7 @@ class RequestDetailsBottomSheetFragment : BottomSheetDialogFragment(R.layout.fra
     private val args: RequestDetailsBottomSheetFragmentArgs by navArgs()
 
     @Inject
-    lateinit var flowNavigator: FlowNavigator
+    lateinit var flowNavigator: com.example.navigation.FlowNavigator
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -1,4 +1,4 @@
-package com.example.app.presentation.screens.auth.sign_in
+package com.example.auth.presentation.screens.auth.sign_in
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

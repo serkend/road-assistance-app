@@ -20,8 +20,8 @@ import com.example.core.common.extensions.checkLocationPermission
 import com.example.core.common.extensions.showToast
 import com.example.features.map.presentation.R
 import com.example.features.map.presentation.databinding.FragmentMapsBinding
-//import com.example.features.map.presentation.requestDetails.RequestDetailsBottomSheetFragment.Companion.DRAW_ROUTE_RESULT
-//import com.example.features.map.presentation.requestDetails.RequestDetailsBottomSheetFragment.Companion.ORDER_DESTINATION
+import com.example.features.map.presentation.requestDetails.RequestDetailsBottomSheetFragment.Companion.DRAW_ROUTE_RESULT
+import com.example.features.map.presentation.requestDetails.RequestDetailsBottomSheetFragment.Companion.ORDER_DESTINATION
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -160,19 +160,19 @@ class MapsFragment : Fragment() {
     }
 
     private fun observeRouteDrawingRequest() {
-//        findNavController()
-//            .currentBackStackEntry
-//            ?.savedStateHandle
-//            ?.getLiveData<Bundle>(DRAW_ROUTE_RESULT)
-//            ?.observe(viewLifecycleOwner) { bundle ->
-//                bundle?.let {
-//                    val destination = it.getParcelable<LatLng>(ORDER_DESTINATION)
-//                    destination?.let { latLng ->
-//                        destinationLatLng = latLng
-//                        viewModel.fetchCurrentUserOrder()
-//                    }
-//                }
-//            }
+        findNavController()
+            .currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Bundle>(DRAW_ROUTE_RESULT)
+            ?.observe(viewLifecycleOwner) { bundle ->
+                bundle?.let {
+                    val destination = it.getParcelable<LatLng>(ORDER_DESTINATION)
+                    destination?.let { latLng ->
+                        destinationLatLng = latLng
+                        viewModel.fetchCurrentUserOrder()
+                    }
+                }
+            }
     }
 
     private fun drawRouteToDestination(origin: LatLng?, destination: LatLng?) {

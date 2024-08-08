@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.example.core.common.extensions.bindStateFlow
-import com.example.core.common.navigation.FlowNavigator
+import com.example.navigation.FlowNavigator
 import com.example.features.profile.presentation.R
 import com.example.features.profile.presentation.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +21,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private val binding: FragmentProfileBinding by viewBinding()
 
     @Inject
-    lateinit var navigator: FlowNavigator
+    lateinit var navigator: com.example.navigation.FlowNavigator
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

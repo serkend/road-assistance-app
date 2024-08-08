@@ -13,7 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.app.databinding.FragmentSplashBinding
 import com.example.core.common.Constants
-import com.example.core.common.navigation.FlowNavigator
+import com.example.navigation.FlowNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,6 +23,9 @@ class SplashFragment : Fragment() {
 
     private lateinit var viewBinding: FragmentSplashBinding
     private val viewModel: SplashViewModel by viewModels()
+
+    @Inject
+    lateinit var navigator: FlowNavigator
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

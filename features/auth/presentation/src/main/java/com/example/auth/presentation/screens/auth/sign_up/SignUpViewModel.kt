@@ -1,4 +1,4 @@
-package com.example.app.presentation.screens.auth.sign_up
+package com.example.auth.presentation.screens.auth.sign_up
 
 import android.net.Uri
 import androidx.lifecycle.ViewModel

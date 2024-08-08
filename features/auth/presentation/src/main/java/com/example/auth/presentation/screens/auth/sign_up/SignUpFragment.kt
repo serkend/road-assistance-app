@@ -1,4 +1,4 @@
-package com.example.app.presentation.screens.auth.sign_up
+package com.example.auth.presentation.screens.auth.sign_up
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,12 +10,9 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavOptions
-import androidx.navigation.fragment.findNavController
 import com.example.core.common.extensions.bindSharedFlow
 import com.example.core.common.extensions.bindStateFlow
-import com.example.core.common.navigation.FlowNavigator
-import com.example.features.auth.presentation.R
+import com.example.navigation.FlowNavigator
 import com.example.features.auth.presentation.databinding.FragmentSignUpBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -27,7 +24,7 @@ class SignUpFragment : Fragment() {
     private val viewModel: SignUpViewModel by viewModels()
 
     @Inject
-    lateinit var flowNavigator: FlowNavigator
+    lateinit var flowNavigator: com.example.navigation.FlowNavigator
 
     private val pickMedia =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->

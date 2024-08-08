@@ -1,4 +1,5 @@
-package com.example.app.presentation.screens.auth.sign_in
+package com.example.auth.presentation.screens.auth.sign_in
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,7 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.core.common.Constants.TAG
 import com.example.core.common.LoginState
-import com.example.core.common.navigation.FlowNavigator
+import com.example.navigation.FlowNavigator
 import com.example.domain.auth.model.SignInCredentials
 import com.example.features.auth.presentation.R
 import com.example.features.auth.presentation.databinding.FragmentSignInBinding
@@ -26,7 +27,9 @@ import javax.inject.Inject
 class SignInFragment : Fragment() {
 
     private lateinit var binding: FragmentSignInBinding
-    private val viewModel: SignInViewModel by viewModels()
+
+    lateinit var viewModel: SignInViewModel
+    private val injectedViewModel: SignInViewModel by viewModels()
 
     @Inject
     lateinit var flowNavigator: FlowNavigator
@@ -40,6 +43,9 @@ class SignInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (!::viewModel.isInitialized) {
+            viewModel = injectedViewModel
+        }
         setOnClickListeners()
         setObservers()
     }
