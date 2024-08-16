@@ -1,12 +1,12 @@
 RoadAssist is an android app designed to facilitate mutual assistance between drivers during an emergency situation.
 
-TECHNOLOGIES: Kotlin, Clean Architecture, MVVM, Coroutines, Hilt, Retrofit, Room, Google Maps API, Directions API, Firebase Auth, Firestore, Storage, JUnit, MockK, Espresso
+TECHNOLOGIES: Kotlin, Clean Architecture, MVVM, Coroutines, Hilt, Retrofit, Room, Google Maps API, Directions API, Firebase Auth, Firestore, Storage, JUnit, MockK, Espresso, WorkManager
 
 FEATURES:
 - Authorization and registration of users using the Firebase service.
 - A screen with a map showing my current location, requests from other users for help, and the route to the location of the breakdown.
 - Ability to request help from other drivers.
-- Chat screen for communication between users.
+- Chat screen for messaging, sending photos. Photos can be downloaded to the device.
 - User profile screen.
 
 <table>
