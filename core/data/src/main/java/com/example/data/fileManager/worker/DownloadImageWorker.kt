@@ -1,7 +1,8 @@
-package com.example.data.filesManager
+package com.example.data.fileManager.worker
 
 import android.content.Context
 import android.os.Environment
+import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import kotlinx.coroutines.Dispatchers
@@ -22,10 +23,6 @@ class DownloadImageWorker(
 
         return withContext(Dispatchers.IO) {
             try {
-                val url = URL(imageUrl)
-                val connection = url.openConnection()
-                connection.connect()
-                val input: InputStream = connection.getInputStream()
                 val directory = File(
                     applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES),
                     "ChatImages"
@@ -34,6 +31,15 @@ class DownloadImageWorker(
                     directory.mkdirs()
                 }
                 val file = File(directory, imageName)
+                Log.e("TAG", "doWork: ${file.absolutePath}", )
+                if (file.exists()) {
+                    return@withContext Result.success()
+                }
+
+                val url = URL(imageUrl)
+                val connection = url.openConnection()
+                connection.connect()
+                val input: InputStream = connection.getInputStream()
                 val output = FileOutputStream(file)
 
                 input.use { inputStream ->
@@ -41,6 +47,7 @@ class DownloadImageWorker(
                         inputStream.copyTo(outputStream)
                     }
                 }
+
                 Result.success()
             } catch (e: Exception) {
                 Result.failure()

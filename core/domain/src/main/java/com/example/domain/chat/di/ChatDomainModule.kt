@@ -7,6 +7,7 @@ import com.example.domain.chat.usecases.GetMessages
 import com.example.domain.chat.usecases.GetOrCreateConversation
 import com.example.domain.chat.usecases.GetReceiverIdForConversation
 import com.example.domain.chat.usecases.SendMessage
+import com.example.domain.chat.usecases.SendPhoto
 import com.example.domain.requests.repository.RequestsRepository
 import com.example.domain.requests.usecases.requests.AcceptRequest
 import com.example.domain.requests.usecases.requests.DeleteRequest
@@ -33,7 +34,8 @@ object ChatDomainModule {
         getMessages = GetMessages(chatRepository),
         sendMessage = SendMessage(chatRepository),
         getOrCreateConversation = GetOrCreateConversation((chatRepository)),
-        getReceiverIdForConversation = GetReceiverIdForConversation(chatRepository)
+        getReceiverIdForConversation = GetReceiverIdForConversation(chatRepository),
+        sendPhoto = SendPhoto(chatRepository)
     )
 
 }

@@ -8,19 +8,7 @@
       <SelectionState runConfigName="features">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="signIn_withValidCredentials_returnSuccess()">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="signIn_withValidCredentials_returnSuccess() (1)">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="AuthRepositoryImplTest">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
       <SelectionState runConfigName="testSignIn_withValidCredentials_navigatesToMainFlow()">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="testLaunchFragmentInHiltContainer()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

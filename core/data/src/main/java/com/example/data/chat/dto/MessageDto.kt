@@ -7,4 +7,5 @@ data class MessageDto(
     val receiverId: String = "",
     val conversationId: String = "",
     val timestamp: Long = 0,
+    val imageUrl: String? = null
 )

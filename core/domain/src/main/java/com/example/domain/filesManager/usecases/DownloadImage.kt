@@ -1,11 +1,14 @@
-package com.example.domain.files
+package com.example.domain.filesManager.usecases
 
 import android.location.Location
 import com.example.core.common.ResultState
-import com.example.domain.location.repository.LocationRepository
+import com.example.domain.filesManager.model.FileDownloadingResult
+import com.example.domain.filesManager.repository.FileManagerRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class DownloadImage @Inject constructor() {
-    operator fun invoke(): Flow<ResultState<Location>> = 
+class DownloadImage @Inject constructor(private val fileManagerRepository: FileManagerRepository) {
+    operator fun invoke(url: String?, imageName: String, position: Int): Flow<ResultState<FileDownloadingResult>> =
+        fileManagerRepository.downloadImage(url, imageName, position)
+
 }

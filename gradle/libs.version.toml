@@ -38,7 +38,8 @@ truth = "1.4.2"
 androidxTestRunner = "1.6.1"
 navigationTesting = "2.7.7"
 robolectric = "4.5.1"
-
+turbine = "1.1.0"
+workManager = "2.9.1"
 
 [libraries]
 kotlinStdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
@@ -93,6 +94,8 @@ androidxTestRunner = { group = "androidx.test", name = "runner", version.ref = "
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 navigationTesting = { module = "androidx.navigation:navigation-testing", version.ref = "navigationTesting" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+workManager = { module = "androidx.work:work-runtime-ktx", version.ref = "workManager" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "gradleAndroid" }

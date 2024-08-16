@@ -8,7 +8,8 @@ data class MessageModel(
     val senderId: String,
     val receiverId: String,
     val timestamp: Long = System.currentTimeMillis(),
-    val isOutgoing: Boolean
+    val isOutgoing: Boolean,
+    val imageUrl: String? = null
 )
 
 fun Message.toModel() = MessageModel(
@@ -17,5 +18,6 @@ fun Message.toModel() = MessageModel(
     senderId = senderId,
     receiverId = receiverId,
     timestamp = timestamp,
-    isOutgoing = isOutgoing
+    isOutgoing = isOutgoing,
+    imageUrl = imageUrl
 )

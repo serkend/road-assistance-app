@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.chat.model.ConversationModel
-import com.example.core.common.databinding.ItemConversationBinding
-import com.example.features.chats.presentation.R
+import com.example.features.chats.presentation.databinding.ItemConversationBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

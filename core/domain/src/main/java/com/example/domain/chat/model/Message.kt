@@ -7,5 +7,6 @@ data class Message(
     val receiverId: String,
     val conversationId: String,
     val timestamp: Long = System.currentTimeMillis(),
-    val isOutgoing: Boolean
+    val isOutgoing: Boolean,
+    val imageUrl: String? = null
 )

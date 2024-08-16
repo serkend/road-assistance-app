@@ -7,7 +7,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.core.common.VehiclesAdapter
+import com.example.core.common.vehicles.VehiclesAdapter
 import com.example.core.common.extensions.bindSharedFlow
 import com.example.core.common.extensions.bindStateFlow
 import com.example.core.common.extensions.showToast

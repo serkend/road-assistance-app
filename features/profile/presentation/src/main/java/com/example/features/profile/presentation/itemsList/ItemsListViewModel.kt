@@ -50,6 +50,7 @@ class ItemsListViewModel @Inject constructor(
                     showToast.emit(state.e ?: "Error while fetching current user order")
                 }
                 is ResultState.Loading -> {}
+                ResultState.Initial -> {}
             }
         }
     }
@@ -92,14 +93,15 @@ class ItemsListViewModel @Inject constructor(
                         cost = request.cost,
                         status = OrderStatus.Pending
                     )
-                } ?: emptyList()
+                } ?: emptyList<JobItem>()
 
                 is ResultState.Failure -> {
                     showToast.emit(requests.e ?: "Error fetching requests")
                     emptyList<JobItem>()
                 }
 
-                is ResultState.Loading -> emptyList()
+                is ResultState.Loading -> emptyList<JobItem>()
+                ResultState.Initial -> emptyList<JobItem>()
             }
 
             orderItems + requestItems
@@ -120,6 +122,7 @@ class ItemsListViewModel @Inject constructor(
                 is ResultState.Failure -> {
                     showToast.emit(state.e ?: "Unknown error")
                 }
+                ResultState.Initial -> {}
             }
         }
     }

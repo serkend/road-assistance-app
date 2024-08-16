@@ -24,70 +24,70 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-//
-//@ExperimentalCoroutinesApi
-//class AuthRepositoryImplTest {
-//
-//    @get:Rule
-//    val coroutineTestRule = CoroutineTestRule()
-//
-//    private lateinit var authRepository: AuthRepositoryImpl
-//    private val firebaseAuth: FirebaseAuth = mockk(relaxed = true)
-//    private val firestore: FirebaseFirestore = mockk(relaxed = true)
-//
-//    @Before
-//    fun setUp() {
+
+@ExperimentalCoroutinesApi
+class AuthRepositoryImplTest {
+
+    @get:Rule
+    val coroutineTestRule = CoroutineTestRule()
+
+    private lateinit var authRepository: AuthRepositoryImpl
+    private val firebaseAuth: FirebaseAuth = mockk(relaxed = true)
+    private val firestore: FirebaseFirestore = mockk(relaxed = true)
+
+    @Before
+    fun setUp() {
 //        FirebaseApp.initializeApp(InstrumentationRegistry.getInstrumentation().targetContext)
-//        authRepository = AuthRepositoryImpl(firebaseAuth, firestore)
-//    }
-//
-//    @After
-//    fun tearDown() {
-//        unmockkAll()
-//    }
-//
-//    @Test
-//    fun `isUserAuthenticated should emit true when user is authenticated`() = runTest {
-//        val firebaseUser: FirebaseUser = mockk()
-//        every { firebaseAuth.currentUser } returns firebaseUser
-//
-//        val stateFlow = authRepository.isUserAuthenticated(this)
-//
-//        assertFalse(stateFlow.value)
-//    }
-//
-//    @Test
-//    fun `isUserAuthenticated should emit false when user is not authenticated`() = runTest {
-//        every { firebaseAuth.currentUser } returns null
-//
-//        val stateFlow = authRepository.isUserAuthenticated(this)
-//
-//        assertFalse(stateFlow.value)
-//    }
-//
-//    @Test
-//    fun `signIn should return success when credentials are correct`() = runTest {
-//        val credentials = SignInCredentials("test@example.com", "password")
-//
-//        coEvery { authRepository.signIn(credentials) } returns flowOf(Resource.Success(true))
-//
-//        val flow = authRepository.signIn(credentials)
-//
-//        assertEquals(flow.first(), Resource.Success(true))
-//    }
-//
-//    @Test
-//    fun `signIn should return failure when credentials are incorrect`() = runTest {
-//        val credentials = SignInCredentials("test@example.com", "wrong_password")
-//        val exception = FirebaseAuthException("ERROR_WRONG_PASSWORD", "The password is invalid")
-//
-//        coEvery { firebaseAuth.signInWithEmailAndPassword(credentials.email, credentials.password).await() } throws exception
-//
-//        val flow = authRepository.signIn(credentials)
-//
-////        assertThat(flow.first()).isEqualTo(Resource.Failure(exception))
-//        assertEquals(flow.first(), Resource.Failure<Exception>(exception))
-//    }
+        authRepository = AuthRepositoryImpl(firebaseAuth, firestore)
+    }
+
+    @After
+    fun tearDown() {
+        unmockkAll()
+    }
+
+    @Test
+    fun `isUserAuthenticated should emit true when user is authenticated`() = runTest {
+        val firebaseUser: FirebaseUser = mockk()
+        every { firebaseAuth.currentUser } returns firebaseUser
+
+        val stateFlow = authRepository.isUserAuthenticated(this)
+
+        assertFalse(stateFlow.value)
+    }
+
+    @Test
+    fun `isUserAuthenticated should emit false when user is not authenticated`() = runTest {
+        every { firebaseAuth.currentUser } returns null
+
+        val stateFlow = authRepository.isUserAuthenticated(this)
+
+        assertFalse(stateFlow.value)
+    }
+
+    @Test
+    fun `signIn should return success when credentials are correct`() = runTest {
+        val credentials = SignInCredentials("test@example.com", "password")
+
+        coEvery { authRepository.signIn(credentials) } returns flowOf(Resource.Success(true))
+
+        val flow = authRepository.signIn(credentials)
+
+        assertEquals(flow.first(), Resource.Success(true))
+    }
+
+    @Test
+    fun signIn_invalidCredentials_failure() = runTest {
+        val credentials = SignInCredentials("test@example.com", "wrong_password")
+        val exception = FirebaseAuthException("ERROR_WRONG_PASSWORD", "The password is invalid")
+
+        coEvery { firebaseAuth.signInWithEmailAndPassword(credentials.email, credentials.password).await() } throws exception
+
+        val flow = authRepository.signIn(credentials)
+
+//        assertThat(flow.first()).isEqualTo(Resource.Failure(exception))
+        assertEquals(flow.first(), Resource.Failure<Exception>(exception))
+    }
 //
 //    @Test
 //    fun `signUp should return success when user is created`() = runTest {
@@ -133,5 +133,5 @@ import org.junit.Test
 //
 ////        assertThat(result).isEqualTo(Resource.Failure(exception))
 //    }
-//}
+}
 

@@ -20,7 +20,7 @@ object UiTestModule {
     @Provides
     @Singleton
     fun provideFlowNavigator(): FlowNavigator {
-        return mockk(relaxed = true)
+        return mockk<FlowNavigator>(relaxed = true)
     }
 
 }

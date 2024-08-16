@@ -1,5 +1,6 @@
 package com.example.data.chat.repository
 
+import android.net.Uri
 import com.example.core.common.ResultState
 import com.example.data.chat.dto.ConversationDto
 import com.example.data.chat.dto.MessageDto
@@ -8,8 +9,11 @@ import com.example.domain.chat.model.Conversation
 import com.example.domain.chat.model.Message
 import com.example.domain.chat.repository.ChatRepository
 import com.example.domain.requests.repository.RequestsRepository
+import com.example.domain.storage.repository.StorageRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -20,7 +24,8 @@ import javax.inject.Inject
 class ChatRepositoryImpl @Inject constructor(
     private val firestore: FirebaseFirestore,
     private val auth: FirebaseAuth,
-    private val requestsRepository: RequestsRepository
+    private val requestsRepository: RequestsRepository,
+    private val storageRepository: StorageRepository
 ) : ChatRepository {
 
     private val conversationsCollection = firestore.collection("conversations")
@@ -109,6 +114,32 @@ class ChatRepositoryImpl @Inject constructor(
 
         val updates = mapOf(
             "lastMessage" to text,
+            "lastMessageTimestamp" to currentTime,
+            "updatedAt" to currentTime
+        )
+        conversationsCollection.document(conversationId).update(updates).await()
+    }
+
+    override suspend fun sendPhoto(conversationId: String, imageUri: Uri) {
+        val userId = auth.currentUser?.uid ?: throw RuntimeException("User not logged in")
+        val receiverId = getReceiverIdForConversation(conversationId)
+        val currentTime = System.currentTimeMillis()
+
+        val downloadUrl = storageRepository.saveMessagePhotoToStorage(imageUri)
+
+        val message = MessageDto(
+            senderId = userId,
+            receiverId = receiverId,
+            conversationId = conversationId,
+            timestamp = currentTime,
+            imageUrl = downloadUrl
+        )
+
+        val documentReference = messagesCollection.add(message).await()
+        val messageId = documentReference.id
+        messagesCollection.document(messageId).update("id", messageId).await()
+        val updates = mapOf(
+            "lastMessage" to "📷 Photo",
             "lastMessageTimestamp" to currentTime,
             "updatedAt" to currentTime
         )

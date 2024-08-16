@@ -1,4 +1,10 @@
-package com.example.data.filesManager.model
+package com.example.data.fileManager.model
 
-class FileDownloadingResultDto {
-}
+import com.example.domain.filesManager.model.FileDownloadingResult
+
+data class FileDownloadingResultDto (val name: String, val position: Int? = null)
+
+fun FileDownloadingResultDto.toDomain() = FileDownloadingResult(
+    name = name,
+    position = position
+)

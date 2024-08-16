@@ -24,7 +24,7 @@ class SignUpFragment : Fragment() {
     private val viewModel: SignUpViewModel by viewModels()
 
     @Inject
-    lateinit var flowNavigator: com.example.navigation.FlowNavigator
+    lateinit var flowNavigator: FlowNavigator
 
     private val pickMedia =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
@@ -84,14 +84,6 @@ class SignUpFragment : Fragment() {
     }
 
     private fun navigateToBottomNavGraph() {
-//        val navController = findNavController()
-//        val navOptions = NavOptions.Builder()
-//            .setPopUpTo(R.id.main_nav_graph, true)
-//            .setLaunchSingleTop(true)
-//            .build()
-//
-//        navController.navigate(R.id.main_nav_graph, null, navOptions)
-
         flowNavigator.navigateToMainFlow()
     }
 }

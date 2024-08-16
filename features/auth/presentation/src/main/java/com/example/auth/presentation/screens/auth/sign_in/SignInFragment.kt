@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.core.common.Constants.TAG
-import com.example.core.common.LoginState
+import com.example.core.common.AuthState
 import com.example.navigation.FlowNavigator
 import com.example.domain.auth.model.SignInCredentials
 import com.example.features.auth.presentation.R
@@ -68,19 +68,19 @@ class SignInFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.loginSharedFlow.collect { uiState ->
                     when (uiState) {
-                        LoginState.Success -> {
+                        AuthState.Success -> {
                             binding.signInProgressBar.isVisible = false
                             binding.signInBtn.setTextColor(currColor)
                             Log.e(TAG, "Success uiState in signIn ")
                             flowNavigator.navigateToMainFlow()
                         }
 
-                        LoginState.Loading -> {
+                        AuthState.Loading -> {
                             binding.signInProgressBar.isVisible = true
                             binding.signInBtn.setTextColor(binding.signInBtn.solidColor)
                         }
 
-                        is LoginState.Failure -> {
+                        is AuthState.Failure -> {
                             binding.signInProgressBar.isVisible = false
                             binding.signInBtn.setTextColor(currColor)
                             Toast.makeText(
@@ -90,7 +90,7 @@ class SignInFragment : Fragment() {
                             ).show()
                         }
 
-                        LoginState.Initial -> {
+                        AuthState.Initial -> {
                             binding.signInProgressBar.isVisible = false
                         }
                     }

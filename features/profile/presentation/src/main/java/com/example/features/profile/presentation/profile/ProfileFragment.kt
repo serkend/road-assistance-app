@@ -21,7 +21,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private val binding: FragmentProfileBinding by viewBinding()
 
     @Inject
-    lateinit var navigator: com.example.navigation.FlowNavigator
+    lateinit var navigator: FlowNavigator
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

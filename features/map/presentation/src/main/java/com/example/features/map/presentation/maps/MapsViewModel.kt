@@ -53,6 +53,7 @@ class MapsViewModel @Inject constructor(private val requestsUseCases: RequestsUs
                 )
 
                 is ResultState.Loading -> {}
+                ResultState.Initial -> {}
             }
         }
     }
@@ -76,9 +77,9 @@ class MapsViewModel @Inject constructor(private val requestsUseCases: RequestsUs
                     hasOrder = false
                     showToast.emit(it.e ?: "Error while fetching current user order")
                 }
-                is ResultState.Loading -> {
+                is ResultState.Loading -> {}
 
-                }
+                ResultState.Initial -> {}
             }
         }
     }

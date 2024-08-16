@@ -5,8 +5,10 @@ import androidx.room.Room
 import com.example.data.auth.repository.AuthRepositoryImpl
 import com.example.data.chat.repository.ChatRepositoryImpl
 import com.example.data.database.AppDatabase
+import com.example.data.fileManager.repository.FileManagerRepositoryImpl
 import com.example.data.location.LocationRepositoryImpl
 import com.example.data.requests.repository.RequestsRepositoryImpl
+import com.example.data.storage.repository.StorageRepositoryImpl
 import com.example.data.userManager.repository.UserManagerRepositoryImpl
 import com.example.data.vehicles.dao.VehicleDao
 import com.example.data.vehicles.repository.VehicleRepositoryImpl
@@ -18,8 +20,10 @@ import com.example.domain.chat.usecases.GetMessages
 import com.example.domain.chat.usecases.GetOrCreateConversation
 import com.example.domain.chat.usecases.GetReceiverIdForConversation
 import com.example.domain.chat.usecases.SendMessage
+import com.example.domain.filesManager.repository.FileManagerRepository
 import com.example.domain.location.repository.LocationRepository
 import com.example.domain.requests.repository.RequestsRepository
+import com.example.domain.storage.repository.StorageRepository
 import com.example.domain.userManager.repository.UserManagerRepository
 import com.example.domain.vehicles.repository.VehiclesRepository
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -43,9 +47,10 @@ object DataModule {
     fun provideChatRepository(
         firestore: FirebaseFirestore,
         mAuth: FirebaseAuth,
-        requestsRepository: RequestsRepository
+        requestsRepository: RequestsRepository,
+        chatRepository: StorageRepository
     ): ChatRepository {
-        return ChatRepositoryImpl(firestore, mAuth, requestsRepository)
+        return ChatRepositoryImpl(firestore, mAuth, requestsRepository, chatRepository)
     }
 
     @Provides
@@ -56,9 +61,7 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideFusedLocationProviderClient(@ApplicationContext
-    context: Context
-    ): FusedLocationProviderClient {
+    fun provideFusedLocationProviderClient(@ApplicationContext context: Context): FusedLocationProviderClient {
         return LocationServices.getFusedLocationProviderClient(context)
     }
 
@@ -99,8 +102,10 @@ object DataModule {
     @Provides
     @Singleton
     fun provideAuthRepository(
-        mAuth: FirebaseAuth, firestore: FirebaseFirestore
-    ): AuthRepository = AuthRepositoryImpl(mAuth, firestore)
+        mAuth: FirebaseAuth,
+        firestore: FirebaseFirestore,
+        storageRepository: StorageRepository
+    ): AuthRepository = AuthRepositoryImpl(mAuth, firestore, storageRepository)
 
     @Singleton
     @Provides
@@ -111,6 +116,14 @@ object DataModule {
             DATABASE_NAME
         ).build()
     }
+
+    @Provides
+    @Singleton
+    fun provideStorageRepository(): StorageRepository = StorageRepositoryImpl()
+
+    @Provides
+    @Singleton
+    fun provideFileManagerRepository(@ApplicationContext context: Context): FileManagerRepository = FileManagerRepositoryImpl(context)
 
     private const val DATABASE_NAME = "road_assist_database"
 

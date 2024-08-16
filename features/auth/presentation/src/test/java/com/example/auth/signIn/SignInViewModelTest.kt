@@ -1,8 +1,9 @@
 package com.example.auth.signIn
 
 import com.example.auth.presentation.screens.auth.sign_in.SignInViewModel
-import com.example.core.common.LoginState
+import com.example.core.common.AuthState
 import com.example.core.common.Resource
+import com.example.core.common.testing.CoroutineTestRule
 import com.example.domain.auth.model.SignInCredentials
 import com.example.domain.auth.usecases.auth.AuthUseCases
 import com.example.domain.auth.usecases.auth.SignIn
@@ -49,7 +50,7 @@ class SignInViewModelTest {
         viewModel.signIn(credentials)
 
         val state = viewModel.loginSharedFlow.first()
-        assertEquals(LoginState.Success, state)
+        assertEquals(AuthState.Success, state)
     }
 
     @Test
@@ -62,7 +63,19 @@ class SignInViewModelTest {
         viewModel.signIn(credentials)
 
         val state = viewModel.loginSharedFlow.first()
-        assertTrue(state is LoginState.Failure)
-        assertEquals(exception, (state as LoginState.Failure).error)
+        assertTrue(state is AuthState.Failure)
+        assertEquals(exception, (state as AuthState.Failure).error)
+    }
+
+    @Test
+    fun signIn_withAnyCredentials_emitsLoading() = runTest {
+        val credentials = SignInCredentials("any@example.com", "password")
+        val loadingResource = Resource.Loading
+
+        coEvery { authUseCases.signIn(credentials) } returns flowOf(loadingResource)
+        viewModel.signIn(credentials)
+
+        val state = viewModel.loginSharedFlow.first()
+        assertTrue(state is AuthState.Loading)
     }
 }

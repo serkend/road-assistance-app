@@ -52,7 +52,7 @@
         implementation(project(":core:navigation"))
 
         implementation(project(":core:ui-test"))
-        //    testImplementation(project(":core:ui-test"))
+        implementation(project(":core:data-test"))
         androidTestImplementation(project(":core:ui-test"))
 
         // Kotlin
@@ -118,4 +118,6 @@
         androidTestImplementation(libs.hiltTesting)
         androidTestImplementation(libs.fragmentTesting)
         androidTestImplementation(libs.navigationTesting)
+        androidTestImplementation(libs.truth)
+        androidTestImplementation(libs.turbine)
     }

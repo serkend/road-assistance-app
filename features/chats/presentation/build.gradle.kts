@@ -35,9 +35,14 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:domain"))
     implementation(project(":core:common"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
     implementation(project(":core:navigation"))
+
+    implementation(project(":core:ui-test"))
+    implementation(project(":core:data-test"))
+    androidTestImplementation(project(":core:ui-test"))
 
     // Kotlin
     implementation(libs.kotlinStdlib)
@@ -72,6 +77,7 @@ dependencies {
 
     // DI
     implementation(libs.hilt)
+    testImplementation("junit:junit:4.12")
     kapt(libs.hiltCompiler)
 
     // Fragment and RecyclerView
@@ -88,12 +94,24 @@ dependencies {
     implementation(libs.glide)
     kapt(libs.glideCompiler)
 
+    // WorkManager
+    implementation(libs.workManager)
+
     // Testing
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
     testImplementation(libs.coroutinesTest)
+    testImplementation(libs.hiltTesting)
+    testImplementation(libs.truth)
+    kaptTest(libs.hiltCompiler)
+    kaptAndroidTest(libs.hiltCompiler)
 
     androidTestImplementation(libs.androidxJunit)
+    androidTestImplementation(libs.mockkAndroid)
     androidTestImplementation(libs.espressoCore)
-    androidTestImplementation(libs.composeUiTestJunit4)
-    androidTestImplementation(libs.composeUiTestManifest)
+    androidTestImplementation(libs.hiltTesting)
+    androidTestImplementation(libs.fragmentTesting)
+    androidTestImplementation(libs.navigationTesting)
+    androidTestImplementation(libs.truth)
+    androidTestImplementation(libs.turbine)
 }

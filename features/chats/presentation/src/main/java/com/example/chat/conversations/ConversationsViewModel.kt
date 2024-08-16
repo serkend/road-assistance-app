@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.common.ResultState
 import com.example.domain.chat.usecases.ChatUseCases
 import com.example.domain.common.User
-import com.example.domain.userManager.usecases.GetCurrentUser
 import com.example.domain.userManager.usecases.GetUserById
 import com.example.chat.model.ConversationModel
 import com.example.chat.model.toModel
@@ -17,15 +16,19 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ConversationsViewModel @Inject constructor (private val chatUseCases: ChatUseCases, private val getUserById: GetUserById, private val getCurrentUser: GetCurrentUser) : ViewModel() {
+class ConversationsViewModel @Inject constructor (
+    private val chatUseCases: ChatUseCases,
+    private val getUserById: GetUserById
+) : ViewModel() {
+
     private val _conversations = MutableStateFlow<List<ConversationModel>>(emptyList())
     val conversations = _conversations.asStateFlow()
 
     var user : User? = null
+
     init {
         loadConversations()
     }
-
 
     private fun loadConversations() {
         viewModelScope.launch {
@@ -35,7 +38,7 @@ class ConversationsViewModel @Inject constructor (private val chatUseCases: Chat
                         _conversations.value = result.result?.map { conversation ->
                             val receiverId = chatUseCases.getReceiverIdForConversation(conversation.id ?: "")
                             val user = getUserById(receiverId)
-                            conversation.toModel(username = user?.userName, image = user?.image)
+                            conversation.toModel(companionName = user?.userName, image = user?.image)
                         } ?: emptyList()
                     }
                     is ResultState.Failure -> {
@@ -43,6 +46,7 @@ class ConversationsViewModel @Inject constructor (private val chatUseCases: Chat
                     }
 
                     is ResultState.Loading -> {}
+                    ResultState.Initial -> {}
                 }
             }
         }

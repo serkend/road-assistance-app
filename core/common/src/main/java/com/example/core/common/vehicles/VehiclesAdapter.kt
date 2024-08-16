@@ -1,11 +1,10 @@
-package com.example.core.common
+package com.example.core.common.vehicles
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.core.common.vehicles.VehicleModel
 import com.example.core.common.databinding.VehicleCardViewBinding
 
 class VehiclesAdapter(private val onClick: (VehicleModel) -> Unit) :

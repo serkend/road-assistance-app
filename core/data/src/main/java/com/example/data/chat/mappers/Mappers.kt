@@ -15,16 +15,6 @@ fun ConversationDto.toDomain() = Conversation(
     updatedAt = updatedAt
 )
 
-fun Conversation.toDto() = ConversationDto(
-    id = id,
-    executorId = executorId,
-    clientId = clientId,
-    lastMessage = lastMessage ?: "",
-    lastMessageTimestamp = lastMessageTimestamp,
-    createdAt = createdAt,
-    updatedAt = updatedAt
-)
-
 fun MessageDto.toDomain(isOutgoing: Boolean) = Message(
     id = id,
     text = text,
@@ -32,14 +22,6 @@ fun MessageDto.toDomain(isOutgoing: Boolean) = Message(
     receiverId = receiverId,
     conversationId = conversationId,
     timestamp = timestamp,
-    isOutgoing = isOutgoing
-)
-
-fun Message.toDto() = MessageDto(
-    id = id,
-    text = text,
-    senderId = senderId,
-    receiverId = receiverId,
-    conversationId = conversationId,
-    timestamp = timestamp
+    isOutgoing = isOutgoing,
+    imageUrl = imageUrl
 )

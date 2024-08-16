@@ -46,6 +46,7 @@ class ChooseVehicleBottomSheetViewModel @Inject constructor(private val vehicles
                     _isRefreshingSharedFlow.emit(false)
                     _showToastSharedFlow.emit(state.e ?: "Unknown error")
                 }
+                ResultState.Initial -> {}
             }
         }
     }

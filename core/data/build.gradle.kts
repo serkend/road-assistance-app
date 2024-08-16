@@ -58,6 +58,8 @@ dependencies {
     implementation(libs.playServicesLocation)
     implementation(libs.playServicesMaps)
 
+    implementation(libs.workManager)
+
     // Testing
     testImplementation(libs.junit)
     testImplementation(libs.mockk)

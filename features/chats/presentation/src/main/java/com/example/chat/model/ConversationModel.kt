@@ -15,7 +15,7 @@ data class ConversationModel(
     val companionImage: Uri?
 )
 
-fun Conversation.toModel(username:String?, image: Uri?) = ConversationModel(
+fun Conversation.toModel(companionName:String?, image: Uri?) = ConversationModel(
     id = id,
     executorId = executorId,
     clientId = clientId,
@@ -23,6 +23,6 @@ fun Conversation.toModel(username:String?, image: Uri?) = ConversationModel(
     lastMessageTimestamp = lastMessageTimestamp,
     createdAt = createdAt,
     updatedAt = updatedAt,
-    companionUsername = username,
+    companionUsername = companionName,
     companionImage = image
 )
