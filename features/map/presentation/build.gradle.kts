@@ -16,7 +16,6 @@ android {
         targetSdk = 34
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "MAPS_API_KEY", "\"your_maps_api_key_here\"")
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -31,7 +30,6 @@ android {
 
     buildFeatures {
         viewBinding = true
-        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -50,68 +48,44 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:domain"))
     implementation(project(":core:common"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:uikit"))
 
-    // Kotlin
-//    implementation(libs.kotlinStdlib)
-
-    // Core KTX
-    implementation(libs.coreKtx)
-
-    // Firebase
-    implementation(libs.firebaseStorage)
-    implementation(libs.firebaseFirestore)
-    implementation(libs.firebaseAuth)
-
-    // Hilt
-    implementation(libs.hilt)
-    kapt(libs.hiltCompiler)
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation(project(":core:ui-test"))
+    implementation(project(":core:data-test"))
+    androidTestImplementation(project(":core:ui-test"))
 
     // Google API
     implementation(libs.playServicesLocation)
     implementation(libs.playServicesMaps)
 
-    // ViewBinding
-    implementation(libs.viewBindingDelegate)
+    // DI
+    implementation(libs.hilt)
+    kapt(libs.hiltCompiler)
 
-    // UI components
-    implementation(libs.constraintLayout)
-    implementation(libs.material)
-    implementation(libs.appCompat)
-
-    // Navigation
-    implementation(libs.navigationFragment)
-    implementation(libs.navigationUi)
-
-    // Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.retrofitGson)
-    implementation(libs.okhttp)
-    implementation(libs.okhttpLogging)
-
-    // Lifecycle
-    implementation(libs.lifecycleRuntime)
-    implementation(libs.lifecycleViewModel)
-
-    // Fragment and RecyclerView
-    implementation(libs.fragmentKtx)
-    implementation(libs.recyclerview)
-
-    // Compose
-    implementation(libs.composeUi)
-    implementation(libs.composeMaterial)
-    implementation(libs.composeMaterial3)
-    implementation(libs.composeActivity)
+    // Glide
+    implementation(libs.glide)
+    kapt(libs.glideCompiler)
 
     // Testing
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
     testImplementation(libs.coroutinesTest)
+    testImplementation(libs.hiltTesting)
+    kaptTest(libs.hiltCompiler)
+    kaptAndroidTest(libs.hiltCompiler)
 
     androidTestImplementation(libs.androidxJunit)
+    androidTestImplementation(libs.mockkAndroid)
     androidTestImplementation(libs.espressoCore)
+    androidTestImplementation(libs.hiltTesting)
+    androidTestImplementation(libs.fragmentTesting)
+    androidTestImplementation(libs.navigationTesting)
+    androidTestImplementation(libs.truth)
+    androidTestImplementation(libs.turbine)
     androidTestImplementation(libs.composeUiTestJunit4)
-    androidTestImplementation(libs.composeUiTestManifest)
+    debugImplementation(libs.composeUiTestManifest)
 }

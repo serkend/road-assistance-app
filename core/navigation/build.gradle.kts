@@ -38,24 +38,12 @@ android {
 }
 
 dependencies {
-    //Kotlin
-    implementation(libs.coreKtx)
-    implementation(libs.fragmentKtx)
-    implementation(libs.recyclerview)
-    implementation(libs.material)
-    implementation(libs.appCompat)
-
-    // Navigation
-    implementation(libs.navigationFragment)
-    implementation(libs.navigationUi)
 
     // Hilt
-    implementation(libs.hilt)
+    api(libs.hilt)
     kapt(libs.hiltCompiler)
 
-    // Testing
-    implementation(libs.junit)
-    implementation(libs.coroutinesTest)
-    implementation(libs.hiltTesting)
-    implementation(libs.androidxTestRunner)
+    //Navigation
+    api(libs.navigationFragment)
+    api(libs.navigationUi)
 }

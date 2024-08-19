@@ -28,6 +28,7 @@ include(":core:domain")
 include(":core:navigation")
 include(":core:data-test")
 include(":core:ui-test")
+include(":core:uikit")
 
 include(":features:auth:presentation")
 include(":features:chats:presentation")

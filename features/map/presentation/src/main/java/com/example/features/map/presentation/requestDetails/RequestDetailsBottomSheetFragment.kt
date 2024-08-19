@@ -6,8 +6,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.core.common.extensions.bindSharedFlow
-import com.example.core.common.extensions.showToast
+import com.example.core.uikit.extensions.bindSharedFlow
+import com.example.core.uikit.extensions.showToast
 import com.example.navigation.FlowNavigator
 import com.example.features.map.presentation.R
 import com.example.features.map.presentation.databinding.FragmentRequestDetailsBottomSheetBinding

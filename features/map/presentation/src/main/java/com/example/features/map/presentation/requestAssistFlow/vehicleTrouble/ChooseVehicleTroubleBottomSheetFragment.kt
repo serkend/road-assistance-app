@@ -7,7 +7,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.core.common.extensions.bindSharedFlow
+import com.example.core.uikit.extensions.bindSharedFlow
 import com.example.features.map.presentation.R
 import com.example.features.map.presentation.databinding.FragmentChooseVehicleTroubleBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -105,8 +105,9 @@ class ChooseVehicleTroubleBottomSheetFragment : BottomSheetDialogFragment(R.layo
         materialCardView.strokeColor = Color.TRANSPARENT
         materialCardView.strokeWidth = 0
     }
+
     private fun pressCardView(materialCardView: MaterialCardView) {
-        materialCardView.strokeColor = ContextCompat.getColor(binding.root.context, com.example.core.common.R.color.pink2)
+        materialCardView.strokeColor = ContextCompat.getColor(binding.root.context, com.example.core.uikit.R.color.pink2)
         materialCardView.strokeWidth = 4
     }
 }

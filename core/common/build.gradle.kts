@@ -28,6 +28,10 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -46,14 +50,17 @@ dependencies {
     implementation(libs.material)
     implementation(libs.appCompat)
 
-    // Navigation
-    implementation(libs.navigationFragment)
-    implementation(libs.navigationUi)
-
     //Firebase
     implementation(libs.firebaseStorage)
     implementation(libs.firebaseFirestore)
     implementation(libs.firebaseAuth)
+
+    //Compose
+    implementation(libs.composeUi)
+    implementation(libs.composeMaterial3)
+    implementation(libs.composeActivity)
+    implementation(libs.composeTooling)
+    implementation(libs.composeRuntime)
 
     // Testing
     implementation(libs.junit)

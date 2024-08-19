@@ -11,8 +11,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.core.common.ResultState
-import com.example.core.common.extensions.bindStateFlow
-import com.example.core.common.extensions.showToast
+import com.example.core.uikit.extensions.bindStateFlow
+import com.example.core.uikit.extensions.showToast
 import com.example.features.chats.presentation.R
 import com.example.features.chats.presentation.databinding.FragmentChatBinding
 import dagger.hilt.android.AndroidEntryPoint

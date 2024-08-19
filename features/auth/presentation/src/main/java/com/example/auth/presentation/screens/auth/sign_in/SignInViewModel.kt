@@ -39,12 +39,4 @@ class SignInViewModel @Inject constructor(private val authUseCases: AuthUseCases
         }
     }
 
-    fun signOut() {
-        viewModelScope.launch {
-            authUseCases.signOut()
-        }
-    }
-
-    fun isUserAuthenticated() = authUseCases.isAuthenticated(viewModelScope)
-
 }

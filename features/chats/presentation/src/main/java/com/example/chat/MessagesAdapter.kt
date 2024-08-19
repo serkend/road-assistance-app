@@ -12,12 +12,8 @@ import com.bumptech.glide.Glide
 import com.example.chat.model.MessageModel
 import com.example.chat.model.MessageViewType
 import com.example.core.common.extensions.formatTimestamp
-import com.example.features.chats.presentation.R
 import com.example.features.chats.presentation.databinding.ItemImageMessageBinding
 import com.example.features.chats.presentation.databinding.ItemTextMessageBinding
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class MessagesAdapter(val onImageClicked: (Url: String?, position: Int, imageName: String) -> Unit) : ListAdapter<MessageModel, RecyclerView.ViewHolder>(
     MessageDiffCallback()
@@ -73,12 +69,12 @@ class MessagesAdapter(val onImageClicked: (Url: String?, position: Int, imageNam
             binding.textViewMessage.text = message.text
             binding.textViewTimestamp.text = message.timestamp.formatTimestamp()
             if (message.isOutgoing) {
-                binding.textViewMessage.setBackgroundResource(com.example.core.common.R.drawable.background_message_outgoing)
-                binding.textViewMessage.setTextColor(ContextCompat.getColor(binding.root.context, com.example.core.common.R.color.white))
+                binding.textViewMessage.setBackgroundResource(com.example.core.uikit.R.drawable.background_message_outgoing)
+                binding.textViewMessage.setTextColor(ContextCompat.getColor(binding.root.context, com.example.core.uikit.R.color.white))
                 binding.root.gravity = Gravity.END
             } else {
-                binding.textViewMessage.setBackgroundResource(com.example.core.common.R.drawable.background_message_incoming)
-                binding.textViewMessage.setTextColor(ContextCompat.getColor(binding.root.context, com.example.core.common.R.color.black))
+                binding.textViewMessage.setBackgroundResource(com.example.core.uikit.R.drawable.background_message_incoming)
+                binding.textViewMessage.setTextColor(ContextCompat.getColor(binding.root.context, com.example.core.uikit.R.color.black))
                 binding.root.gravity = Gravity.START
             }
         }

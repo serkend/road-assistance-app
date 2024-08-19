@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.library")
     id("kotlin-kapt")
@@ -14,8 +16,15 @@ android {
         targetSdk = 33
 
         testInstrumentationRunner = "com.example.core.common.testing.HiltTestRunner"
-//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        val localProperties = Properties()
+        localProperties.load(project.rootProject.file("local.properties").inputStream())
+
+        val mapsApiKey = localProperties.getProperty("MAPS_API_KEY")
+            ?: throw GradleException("MAPS_API_KEY not found in local.properties")
+
+        buildConfigField("String", "MAPS_API_KEY", "\"$mapsApiKey\"")
     }
 
     buildTypes {
@@ -31,6 +40,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+    buildFeatures {
+        buildConfig = true
+    }
     kotlinOptions {
         jvmTarget = "17"
     }
@@ -39,14 +51,18 @@ android {
 dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:domain"))
-    testImplementation(project(":core:common"))
+    implementation(project(":core:common"))
 
-    implementation(libs.kotlinStdlib)
+//    implementation(libs.kotlinStdlib)
     implementation(libs.coreKtx)
 
     implementation(libs.firebaseStorage)
     implementation(libs.firebaseFirestore)
     implementation(libs.firebaseAuth)
+
+    // Google API
+    implementation(libs.playServicesLocation)
+    implementation(libs.playServicesMaps)
 
     implementation(libs.hilt)
     kapt(libs.hiltCompiler)
@@ -54,6 +70,9 @@ dependencies {
     implementation(libs.roomRuntime)
     kapt(libs.roomCompiler)
     implementation(libs.roomKtx)
+
+    implementation(libs.retrofit)
+    implementation(libs.retrofitGson)
 
     implementation(libs.playServicesLocation)
     implementation(libs.playServicesMaps)
