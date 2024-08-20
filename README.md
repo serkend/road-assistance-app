@@ -2,8 +2,6 @@ RoadAssist is an android app designed to facilitate mutual assistance between dr
 
 TECHNOLOGIES: Kotlin, Xml + Jetpack Compose, Clean Architecture, MVVM, Coroutines, Hilt, Retrofit, Room, Google Maps API, Directions API, Firebase Auth, Firestore, Storage, JUnit, MockK, Espresso, WorkManager
 
-Currently migrating to Jetpack Compose in the [`compose`](https://github.com/serkend/road-assistance-app/tree/compose) branch.
-
 FEATURES:
 - Authorization and registration of users using the Firebase service.
 - A screen with a map showing my current location, requests from other users for help, and the route to the location of the breakdown.
