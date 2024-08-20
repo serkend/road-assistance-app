@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
-import com.example.core.common.extensions.bindStateFlow
+import com.example.core.uikit.extensions.bindStateFlow
 import com.example.navigation.FlowNavigator
 import com.example.features.profile.presentation.R
 import com.example.features.profile.presentation.databinding.FragmentProfileBinding
@@ -51,8 +51,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 binding.avatarIV.let { imageView ->
                     Glide.with(imageView.context)
                         .load(user.image)
-                        .placeholder(com.example.core.common.R.drawable.ic_avatar)
-                        .error(com.example.core.common.R.drawable.ic_avatar)
+                        .placeholder(com.example.core.uikit.R.drawable.ic_avatar)
+                        .error(com.example.core.uikit.R.drawable.ic_avatar)
                         .into(imageView)
                 }
                 binding.usernameTextView.text = user.userName

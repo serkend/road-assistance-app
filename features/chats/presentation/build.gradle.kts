@@ -19,7 +19,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -39,70 +42,25 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:data"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:uikit"))
 
     implementation(project(":core:ui-test"))
     implementation(project(":core:data-test"))
     androidTestImplementation(project(":core:ui-test"))
 
-    // Kotlin
-    implementation(libs.kotlinStdlib)
-
-    // Navigation
-    implementation(libs.navigationFragment)
-    implementation(libs.navigationUi)
-
-    // View
-    implementation(libs.viewBindingDelegate)
-    implementation(libs.constraintLayout)
-    implementation(libs.material)
-    implementation(libs.appCompat)
-
-    // Firebase
-    implementation(libs.firebaseStorage)
-    implementation(libs.firebaseFirestore)
-    implementation(libs.firebaseAuth)
-
-    // Google API
-    implementation(libs.playServicesLocation)
-    implementation(libs.playServicesMaps)
-
-    // Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.retrofitGson)
-    implementation(libs.okhttpLogging)
-
-    // Lifecycle
-    implementation(libs.lifecycleRuntime)
-    implementation(libs.lifecycleViewModel)
-
     // DI
     implementation(libs.hilt)
-    testImplementation("junit:junit:4.12")
     kapt(libs.hiltCompiler)
-
-    // Fragment and RecyclerView
-    implementation(libs.fragmentKtx)
-    implementation(libs.recyclerview)
-
-    // Compose
-    implementation(libs.composeUi)
-    implementation(libs.composeMaterial)
-    implementation(libs.composeMaterial3)
-    implementation(libs.composeActivity)
 
     // Glide
     implementation(libs.glide)
     kapt(libs.glideCompiler)
-
-    // WorkManager
-    implementation(libs.workManager)
 
     // Testing
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
     testImplementation(libs.coroutinesTest)
     testImplementation(libs.hiltTesting)
-    testImplementation(libs.truth)
     kaptTest(libs.hiltCompiler)
     kaptAndroidTest(libs.hiltCompiler)
 
@@ -114,4 +72,6 @@ dependencies {
     androidTestImplementation(libs.navigationTesting)
     androidTestImplementation(libs.truth)
     androidTestImplementation(libs.turbine)
+    androidTestImplementation(libs.composeUiTestJunit4)
+    debugImplementation(libs.composeUiTestManifest)
 }

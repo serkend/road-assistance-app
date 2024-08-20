@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.core.common.extensions.bindStateFlow
+import com.example.core.uikit.extensions.bindStateFlow
 import com.example.features.chats.presentation.R
 import com.example.features.chats.presentation.databinding.FragmentConversationsBinding
 import dagger.hilt.android.AndroidEntryPoint

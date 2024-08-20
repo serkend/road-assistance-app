@@ -13,7 +13,7 @@ import androidx.test.core.app.ApplicationProvider
 
 inline fun <reified T : Fragment> launchFragmentInHiltContainer(
     fragmentArgs: Bundle? = null,
-    themeResId: Int = com.example.core.common.R.style.Theme_RoadAssist,
+    themeResId: Int = com.example.core.uikit.R.style.Theme_RoadAssist,
     fragmentFactory: FragmentFactory? = null,
     crossinline action: T.() -> Unit = {}
 ) {

@@ -7,10 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.core.common.extensions.bindSharedFlow
-import com.example.core.common.extensions.bindStateFlow
-import com.example.core.common.extensions.checkLocationPermission
-import com.example.core.common.extensions.showToast
+import com.example.core.uikit.extensions.bindSharedFlow
+import com.example.core.uikit.extensions.bindStateFlow
+import com.example.core.uikit.extensions.checkLocationPermission
+import com.example.core.uikit.extensions.showToast
 import com.example.features.map.presentation.R
 import com.example.features.map.presentation.databinding.FragmentRequestPreviewBinding
 import dagger.hilt.android.AndroidEntryPoint

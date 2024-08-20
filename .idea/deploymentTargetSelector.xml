@@ -8,7 +8,7 @@
       <SelectionState runConfigName="features">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="testSignIn_withValidCredentials_navigatesToMainFlow()">
+      <SelectionState runConfigName="PreviewSignInScreen">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

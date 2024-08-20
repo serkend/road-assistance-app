@@ -38,7 +38,10 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        buildConfig = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
     packaging {
         resources.excludes.addAll(
@@ -55,12 +58,12 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:domain"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:uikit"))
 
     implementation(project(":features:auth:presentation"))
     implementation(project(":features:chats:presentation"))
     implementation(project(":features:map:presentation"))
     implementation(project(":features:profile:presentation"))
-//    androidTestImplementation(project(":core:ui-test"))
 
     // Core KTX
     implementation(libs.coreKtx)
@@ -68,33 +71,6 @@ dependencies {
     // Hilt
     implementation(libs.hilt)
     kapt(libs.hiltCompiler)
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-
-    // ViewBinding
-    implementation(libs.viewBindingDelegate)
-
-    // UI components
-    implementation(libs.constraintLayout)
-    implementation(libs.material)
-    implementation(libs.appCompat)
-
-    // Navigation
-    implementation(libs.navigationFragment)
-    implementation(libs.navigationUi)
-
-    // Lifecycle
-    implementation(libs.lifecycleRuntime)
-    implementation(libs.lifecycleViewModel)
-
-    // Fragment and RecyclerView
-    implementation(libs.fragmentKtx)
-    implementation(libs.recyclerview)
-
-    // Compose
-    implementation(libs.composeUi)
-    implementation(libs.composeMaterial)
-    implementation(libs.composeMaterial3)
-    implementation(libs.composeActivity)
 
     // Testing
     testImplementation(libs.junit)
@@ -109,12 +85,5 @@ dependencies {
     androidTestImplementation(libs.composeUiTestManifest)
     androidTestImplementation(libs.hiltTesting)
     testImplementation(libs.hiltTesting)
-
-    // Testing
-//    implementation(libs.junit)
-//    implementation(libs.coroutinesTest)
-//    implementation(libs.hiltTesting)
-//    implementation(libs.androidxTestRunner)
-//    implementation(libs.mockkAndroid)
 
 }

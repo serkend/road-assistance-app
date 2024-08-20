@@ -4,7 +4,7 @@ import android.location.Location
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.common.ResultState
-import com.example.domain.location.usecases.GetCurrentLocation
+import com.example.domain.maps.usecases.GetCurrentLocation
 import com.example.domain.requests.model.Request
 import com.example.domain.requests.usecases.requests.RequestsUseCases
 import com.example.domain.vehicles.usecases.VehiclesUseCases

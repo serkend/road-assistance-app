@@ -44,6 +44,10 @@ dependencies {
     implementation(libs.firebaseFirestore)
     implementation(libs.firebaseAuth)
 
+    // Google API
+    implementation(libs.playServicesLocation)
+    implementation(libs.playServicesMaps)
+
     //DI
     implementation(libs.hilt)
     kapt(libs.hiltCompiler)

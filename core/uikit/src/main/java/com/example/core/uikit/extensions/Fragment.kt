@@ -1,4 +1,4 @@
-package com.example.core.common.extensions
+package com.example.core.uikit.extensions
 
 import androidx.fragment.app.Fragment
 import android.widget.Toast

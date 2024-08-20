@@ -1,4 +1,4 @@
-package com.example.domain.location.repository
+package com.example.domain.maps.repository
 
 import android.location.Location
 import com.example.core.common.ResultState

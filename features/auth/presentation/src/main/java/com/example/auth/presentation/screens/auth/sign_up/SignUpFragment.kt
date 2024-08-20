@@ -10,8 +10,8 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import com.example.core.common.extensions.bindSharedFlow
-import com.example.core.common.extensions.bindStateFlow
+import com.example.core.uikit.extensions.bindSharedFlow
+import com.example.core.uikit.extensions.bindStateFlow
 import com.example.navigation.FlowNavigator
 import com.example.features.auth.presentation.databinding.FragmentSignUpBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,7 +54,7 @@ class SignUpFragment : Fragment() {
             if (it) {
                 binding.createBtn.text = ""
             } else {
-                binding.createBtn.text = getString(com.example.core.common.R.string.create)
+                binding.createBtn.text = getString(com.example.core.uikit.R.string.create)
             }
             binding.progressBar.isVisible = it
         }

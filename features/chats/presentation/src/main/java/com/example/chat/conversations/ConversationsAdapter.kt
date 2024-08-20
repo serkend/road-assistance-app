@@ -29,8 +29,8 @@ class ConversationsAdapter(private val onClick: (String) -> Unit) :
             }
             Glide.with(binding.userAvatarIv)
                 .load(conversation.companionImage)
-                .placeholder(com.example.core.common.R.drawable.ic_avatar)
-                .error(com.example.core.common.R.drawable.ic_avatar)
+                .placeholder(com.example.core.uikit.R.drawable.ic_avatar)
+                .error(com.example.core.uikit.R.drawable.ic_avatar)
                 .into(binding.userAvatarIv)
             binding.usernameTextView.text = conversation.companionUsername
         }

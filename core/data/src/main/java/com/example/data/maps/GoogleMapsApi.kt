@@ -1,18 +1,18 @@
-package com.example.features.map.presentation.maps
+package com.example.data.maps
 
-import com.example.features.map.presentation.BuildConfig
-import retrofit2.Call
+import com.example.data.BuildConfig
+import com.google.gson.annotations.SerializedName
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface GoogleMapsApi {
     @GET("maps/api/directions/json")
-    fun getDirections(
+    suspend fun getDirections(
         @Query("origin") origin: String,
         @Query("destination") destination: String,
         @Query("key") apiKey: String = BuildConfig.MAPS_API_KEY
-    ): Call<DirectionsResponse>
-
+    ): Response<DirectionsResponse>
 }
 
 data class DirectionsResponse(
@@ -28,8 +28,10 @@ data class Leg(
 )
 
 data class Step(
-    val start_location: Location,
-    val end_location: Location,
+    @SerializedName("start_location")
+    val startLocation: Location,
+    @SerializedName("end_location")
+    val endLocation: Location,
     val polyline: Polyline
 )
 

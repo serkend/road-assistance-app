@@ -37,12 +37,10 @@ android {
 dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:uikit"))
 //    androidTestImplementation(project(":core:navigation"))
 //    implementation(project(":app"))
 //    androidTestImplementation(project(":app"))
-
-    implementation(libs.appCompat)
-    implementation(libs.material)
 
     implementation(libs.kotlinStdlib)
     implementation(libs.coreKtx)
