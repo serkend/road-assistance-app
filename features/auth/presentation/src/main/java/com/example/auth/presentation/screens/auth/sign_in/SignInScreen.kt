@@ -105,7 +105,7 @@ private fun SignInContent(
                     modifier = Modifier.fillMaxWidth(),
                     visualTransformation = PasswordVisualTransformation()
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(32.dp))
 
                 Button(
                     onClick = { onSignInClicked(SignInCredentials(email, password)) },

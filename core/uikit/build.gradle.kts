@@ -58,6 +58,7 @@ dependencies {
 
     // Compose
     api(libs.composeUi)
+    api(libs.composeCoil)
     api(libs.composeMaterial3)
     api(libs.composeActivity)
     debugApi(libs.composeTooling)
