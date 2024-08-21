@@ -18,7 +18,7 @@ class SignUpViewModel @Inject constructor(private val authUseCases: AuthUseCases
     private val _state = MutableStateFlow(SignUpState())
     val state: StateFlow<SignUpState> = _state.asStateFlow()
 
-    private val _showSnackbar = MutableSharedFlow<Unit>()
+    private val _showSnackbar = MutableSharedFlow<String?>()
     val showSnackbar = _showSnackbar.asSharedFlow()
 
     fun onEvent(event: SignUpEvent) {
@@ -61,8 +61,8 @@ class SignUpViewModel @Inject constructor(private val authUseCases: AuthUseCases
                         }
 
                         is Resource.Failure -> {
-//                            _state.update { it.copy(isLoading = false, snackbarMessage = result.e?.localizedMessage) }
-                            _showSnackbar.emit(Unit)
+                            _state.update { it.copy(isLoading = false) }
+                            _showSnackbar.emit(result.e?.localizedMessage)
                         }
 
                         else -> {}

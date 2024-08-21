@@ -9,5 +9,4 @@ data class SignUpState(
     val imageUri: Uri? = null,
     val isLoading: Boolean = false,
     val isSignUpSuccessful: Boolean = false,
-    val snackbarMessage: String? = null
 )

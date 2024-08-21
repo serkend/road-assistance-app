@@ -1,5 +1,4 @@
 package com.example.auth.presentation.screens.auth.sign_up
-import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,12 +16,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -52,15 +50,19 @@ fun SignUpScreen(
     viewModel: SignUpViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
+    val snackbarHostState = remember { SnackbarHostState() }
+
     val context = LocalContext.current
 
     val pickMedia = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         viewModel.onEvent(SignUpEvent.PickPhoto(uri))
     }
 
-    LaunchedEffect(state.snackbarMessage) {
-        state.snackbarMessage?.let { message ->
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    LaunchedEffect(Unit) {
+        viewModel.showSnackbar.collect { message ->
+            snackbarHostState.showSnackbar(
+                message = message ?: context.getString(R.string.unknown_error)
+            )
         }
     }
 
@@ -72,6 +74,7 @@ fun SignUpScreen(
 
     SignUpContent(
         state = state,
+        snackbarHostState = snackbarHostState,
         onImageClicked = { pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) },
         onAction = { viewModel.onEvent(it) }
     )
@@ -81,84 +84,83 @@ fun SignUpScreen(
 @Composable
 fun SignUpContent(
     state: SignUpState,
+    snackbarHostState: SnackbarHostState,
     onImageClicked : () -> Unit,
     onAction: (SignUpEvent) -> Unit
 ) {
-    Scaffold(
-        content = { paddingValues ->
-            Column(
+    Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceAround
+        ) {
+            Image(
+                painter = state.imageUri?.let {
+                    rememberAsyncImagePainter(it)
+                } ?: painterResource(id = R.drawable.ic_avatar),
+                contentDescription = "User Avatar",
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceAround
-            ) {
-                Image(
-                    painter = state.imageUri?.let {
-                        rememberAsyncImagePainter(it)
-                    } ?: painterResource(id = R.drawable.ic_avatar),
-                    contentDescription = "User Avatar",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(124.dp)
-                        .clickable { onImageClicked() }
-                )
+                    .size(124.dp)
+                    .clickable { onImageClicked() }
+            )
 
 //                Spacer(modifier = Modifier.height(16.dp))
 
-                Column {
-                    OutlinedTextField(
-                        value = state.email,
-                        onValueChange = { onAction(SignUpEvent.EmailChanged(it)) },
-                        label = { Text(text = "Email") },
-                        modifier = Modifier.fillMaxWidth(),
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
-                    )
+            Column {
+                OutlinedTextField(
+                    value = state.email,
+                    onValueChange = { onAction(SignUpEvent.EmailChanged(it)) },
+                    label = { Text(text = "Email") },
+                    modifier = Modifier.fillMaxWidth(),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+                )
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
-                    OutlinedTextField(
-                        value = state.username,
-                        onValueChange = { onAction(SignUpEvent.UsernameChanged(it)) },
-                        label = { Text(text = "Username") },
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                OutlinedTextField(
+                    value = state.username,
+                    onValueChange = { onAction(SignUpEvent.UsernameChanged(it)) },
+                    label = { Text(text = "Username") },
+                    modifier = Modifier.fillMaxWidth()
+                )
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
-                    OutlinedTextField(
-                        value = state.password,
-                        onValueChange = { onAction(SignUpEvent.PasswordChanged(it)) },
-                        label = { Text(text = "Password") },
-                        modifier = Modifier.fillMaxWidth(),
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                        visualTransformation = PasswordVisualTransformation()
-                    )
+                OutlinedTextField(
+                    value = state.password,
+                    onValueChange = { onAction(SignUpEvent.PasswordChanged(it)) },
+                    label = { Text(text = "Password") },
+                    modifier = Modifier.fillMaxWidth(),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    visualTransformation = PasswordVisualTransformation()
+                )
 
-                }
+            }
 
 //                Spacer(modifier = Modifier.height(32.dp))
 
-                Box(contentAlignment = Alignment.Center) {
-                    Button(
-                        onClick = { onAction(SignUpEvent.SignUp) },
-                        enabled = !state.isLoading,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        if (state.isLoading) {
-                            CircularProgressIndicator(
-                                color = Color.White,
-                                modifier = Modifier.size(20.dp)
-                            )
-                        } else {
-                            Text(text = "Create")
-                        }
+            Box(contentAlignment = Alignment.Center) {
+                Button(
+                    onClick = { onAction(SignUpEvent.SignUp) },
+                    enabled = !state.isLoading,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    if (state.isLoading) {
+                        CircularProgressIndicator(
+                            color = Color.White,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    } else {
+                        Text(text = "Create")
                     }
                 }
             }
         }
-    )
+    }
 }
 
 @Composable
@@ -171,10 +173,9 @@ fun SignUpScreenPreview() {
                 password = "",
                 imageUri = null,
                 isLoading = false,
-                isSignUpSuccessful = false,
-                snackbarMessage = null
+                isSignUpSuccessful = false
             ),
-            onImageClicked = {},
+            snackbarHostState = SnackbarHostState(), onImageClicked = {},
             onAction = {})
     }
 }
