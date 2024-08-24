@@ -38,6 +38,7 @@ turbine = "1.1.0"
 workManager = "2.9.1"
 compose = "1.6.8"
 composeMaterial3 = "1.2.1"
+composeCoil = "2.7.0"
 composeActivity = "1.9.1"
 hiltCompose = "1.2.0"
 navigationCompose = "2.7.7"
@@ -99,6 +100,7 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 composeUi = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 composeMaterial = { module = "androidx.compose.material:material", version.ref = "compose" }
 composeMaterial3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" }
+composeCoil = { module = "io.coil-kt:coil-compose", version.ref = "composeCoil" }
 composeActivity = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
 composeTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 composeToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
