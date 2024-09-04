@@ -11,7 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.core.common.ResultState
-import com.example.core.uikit.extensions.bindStateFlow
+import com.example.core.uikit.extensions.bindFlow
 import com.example.core.uikit.extensions.showToast
 import com.example.features.chats.presentation.R
 import com.example.features.chats.presentation.databinding.FragmentChatBinding
@@ -58,10 +58,10 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
     }
 
     private fun bindViewModel() = with(viewModel) {
-        bindStateFlow(messages) {
+        bindFlow(messages) {
             messagesAdapter?.submitList(it)
         }
-        bindStateFlow(downloadState) { state ->
+        bindFlow(downloadState) { state ->
             val holder = state.result?.position?.let {
                 binding.messageRecyclerView.findViewHolderForAdapterPosition(it)
             }

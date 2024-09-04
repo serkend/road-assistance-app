@@ -8,8 +8,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.core.common.vehicles.VehiclesAdapter
-import com.example.core.uikit.extensions.bindSharedFlow
-import com.example.core.uikit.extensions.bindStateFlow
+import com.example.core.uikit.extensions.bindFlow
 import com.example.core.uikit.extensions.showToast
 import com.example.features.profile.presentation.R
 import com.example.features.profile.presentation.databinding.FragmentItemsListBinding
@@ -62,17 +61,17 @@ class ItemsListFragment : Fragment(R.layout.fragment_items_list) {
     }
 
     private fun bindViewModel() = with(viewModel) {
-        bindSharedFlow(showToast) {
+        bindFlow(showToast) {
             showToast(it)
         }
-        bindStateFlow(jobItemsStateFlow) {
+        bindFlow(jobItemsStateFlow) {
             when(contentType) {
                 "jobs" -> jobsAdapter?.submitList(it)
                 "requests" -> jobsAdapter?.submitList(it)
                 else -> { showToast("Content type is null or empty") }
             }
         }
-        bindStateFlow(vehiclesStateFlow) {
+        bindFlow(vehiclesStateFlow) {
             when(contentType) {
                 "vehicles" -> vehiclesAdapter?.submitList(it)
                 else -> { showToast("Content type is null or empty") }

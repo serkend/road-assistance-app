@@ -14,7 +14,7 @@ fun Fragment.showToast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT
     Toast.makeText(this.context, message, duration).show()
 }
 
-fun <T> Fragment.bindStateFlow(
+fun <T> Fragment.bindFlow(
     flow: StateFlow<T>,
     lifecycleState: Lifecycle.State = Lifecycle.State.STARTED,
     action: (T) -> Unit
@@ -28,7 +28,7 @@ fun <T> Fragment.bindStateFlow(
     }
 }
 
-fun <T> Fragment.bindSharedFlow(
+fun <T> Fragment.bindFlow(
     flow: SharedFlow<T>,
     lifecycleState: Lifecycle.State= Lifecycle.State.STARTED,
     action: (T) -> Unit

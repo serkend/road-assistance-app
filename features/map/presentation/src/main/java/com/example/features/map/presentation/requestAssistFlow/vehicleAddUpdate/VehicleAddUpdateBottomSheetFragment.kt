@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.core.uikit.extensions.bindSharedFlow
+import com.example.core.uikit.extensions.bindFlow
 import com.example.features.map.presentation.R
 import com.example.features.map.presentation.databinding.FragmentVehicleAddUpdateBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -49,11 +49,11 @@ class VehicleAddUpdateBottomSheetFragment : BottomSheetDialogFragment(R.layout.f
     }
 
     private fun bindViewModel() = with(viewModel) {
-        bindSharedFlow(showToastMessage) {
+        bindFlow(showToastMessage) {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
 
-        bindSharedFlow(launchRequestPreviewScreenSharedFlow) { vehicleId ->
+        bindFlow(launchRequestPreviewScreenSharedFlow) { vehicleId ->
             val action = VehicleAddUpdateBottomSheetFragmentDirections.actionVehicleAddUpdateBottomSheetFragmentToRequestPreviewFragment(troubleName = args.troubleName, vehicleId = vehicleId)
             findNavController().navigate(action)
         }

@@ -24,7 +24,6 @@ import javax.inject.Inject
 import com.example.debug.HiltTestActivity
 import com.example.domain.auth.usecases.auth.AuthUseCases
 import com.example.ui_test.launchFragmentInHiltContainer
-import com.google.firebase.FirebaseApp
 import io.mockk.verify
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.runBlocking
@@ -43,13 +42,13 @@ class SignInFragmentTest {
     @get:Rule
     var activityScenarioRule = ActivityScenarioRule(HiltTestActivity::class.java)
 
-//    @Inject
+    @Inject
     lateinit var flowNavigator: FlowNavigator
 
     @Before
     fun init() {
         hiltRule.inject()
-        FirebaseApp.initializeApp(ApplicationProvider.getApplicationContext())
+//        FirebaseApp.initializeApp(ApplicationProvider.getApplicationContext())
     }
 
     @Test

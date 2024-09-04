@@ -7,7 +7,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.core.uikit.extensions.bindSharedFlow
+import com.example.core.uikit.extensions.bindFlow
 import com.example.features.map.presentation.R
 import com.example.features.map.presentation.databinding.FragmentChooseVehicleTroubleBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -52,11 +52,11 @@ class ChooseVehicleTroubleBottomSheetFragment : BottomSheetDialogFragment(R.layo
     }
 
     private fun bindViewModel() = with(viewModel) {
-        bindSharedFlow(launchChooseCarScreenSharedFlow) {
+        bindFlow(launchChooseCarScreenSharedFlow) {
             val action = ChooseVehicleTroubleBottomSheetFragmentDirections.actionChooseVehicleTroubleBottomSheetFragmentToChooseVehicleBottomSheetFragment(it)
             findNavController().navigate(action)
         }
-        bindSharedFlow(clickedCardIdSharedFlow) { (lastResId, currResId) ->
+        bindFlow(clickedCardIdSharedFlow) { (lastResId, currResId) ->
             when(lastResId) {
                 binding.flatTyreCardView.id -> {
                     unpressCardView(binding.flatTyreCardView)

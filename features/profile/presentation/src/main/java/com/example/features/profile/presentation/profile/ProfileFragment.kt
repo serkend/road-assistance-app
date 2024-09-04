@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
-import com.example.core.uikit.extensions.bindStateFlow
+import com.example.core.uikit.extensions.bindFlow
 import com.example.navigation.FlowNavigator
 import com.example.features.profile.presentation.R
 import com.example.features.profile.presentation.databinding.FragmentProfileBinding
@@ -46,7 +46,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun bindViewModel() = with(viewModel) {
-        bindStateFlow(profileUiState) { user ->
+        bindFlow(profileUiState) { user ->
             if (user != null) {
                 binding.avatarIV.let { imageView ->
                     Glide.with(imageView.context)

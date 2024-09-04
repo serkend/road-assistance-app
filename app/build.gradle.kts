@@ -59,6 +59,8 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:navigation"))
     implementation(project(":core:uikit"))
+    implementation(project(":core:ui-test"))
+    implementation(project(":core:data-test"))
 
     implementation(project(":features:auth:presentation"))
     implementation(project(":features:chats:presentation"))
@@ -76,14 +78,19 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
     testImplementation(libs.coroutinesTest)
+    testImplementation(libs.hiltTesting)
     kaptTest(libs.hiltCompiler)
     kaptAndroidTest(libs.hiltCompiler)
 
     androidTestImplementation(libs.androidxJunit)
+    androidTestImplementation(libs.mockkAndroid)
     androidTestImplementation(libs.espressoCore)
-    androidTestImplementation(libs.composeUiTestJunit4)
-    androidTestImplementation(libs.composeUiTestManifest)
     androidTestImplementation(libs.hiltTesting)
-    testImplementation(libs.hiltTesting)
+    androidTestImplementation(libs.fragmentTesting)
+    androidTestImplementation(libs.navigationTesting)
+    androidTestImplementation(libs.truth)
+    androidTestImplementation(libs.turbine)
+    androidTestImplementation(libs.composeUiTestJunit4)
+    debugImplementation(libs.composeUiTestManifest)
 
 }

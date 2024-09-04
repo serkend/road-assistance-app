@@ -1,6 +1,7 @@
 package com.example.data_test.repository
 
 import com.example.core.common.Resource
+import com.example.core.common.ResultState
 import com.example.domain.auth.model.SignInCredentials
 import com.example.domain.auth.model.SignUpCredentials
 import com.example.domain.auth.repository.AuthRepository
@@ -10,13 +11,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 
 class FakeAuthRepository : AuthRepository {
 
     private var isAuthenticated = false
 
-    override fun isUserAuthenticated(viewModelScope: CoroutineScope): StateFlow<Boolean> =
-        MutableStateFlow(isAuthenticated)
+    override fun isUserAuthenticated(): Flow<ResultState<Boolean>> = flowOf(ResultState.Success(isAuthenticated))
 
     override suspend fun signIn(credentials: SignInCredentials): Flow<Resource<Boolean>> = flow {
         emit(Resource.Loading)

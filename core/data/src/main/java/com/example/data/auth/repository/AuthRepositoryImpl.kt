@@ -1,7 +1,9 @@
 package com.example.data.auth.repository
 
+import com.example.core.common.AuthState
 import com.example.core.common.Constants
 import com.example.core.common.Resource
+import com.example.core.common.ResultState
 import com.example.data.userManager.dto.UserDto
 import com.example.data.userManager.mappers.toDto
 import com.example.domain.auth.model.SignInCredentials
@@ -23,23 +25,27 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
-    private val mAuth: FirebaseAuth, private val firestore: FirebaseFirestore, private val storageRepository: StorageRepository
+    private val mAuth: FirebaseAuth,
+    private val firestore: FirebaseFirestore,
+    private val storageRepository: StorageRepository
 ) : AuthRepository {
 
-    override fun isUserAuthenticated(viewModelScope: CoroutineScope): StateFlow<Boolean> =
+    override fun isUserAuthenticated(): Flow<ResultState<Boolean>> =
         callbackFlow {
-            val authStateListener = FirebaseAuth.AuthStateListener { auth ->
-                trySend(auth.currentUser != null)
+            try {
+                trySend(ResultState.Loading())
+                val authStateListener = FirebaseAuth.AuthStateListener { auth ->
+                    val isAuthenticated = auth.currentUser != null
+                    trySend(ResultState.Success(isAuthenticated))
+                }
+                mAuth.addAuthStateListener(authStateListener)
+                awaitClose {
+                    mAuth.removeAuthStateListener(authStateListener)
+                }
+            } catch (e: Exception) {
+                trySend(ResultState.Failure(e.localizedMessage))
             }
-            mAuth.addAuthStateListener(authStateListener)
-            awaitClose {
-                mAuth.removeAuthStateListener(authStateListener)
-            }
-        }.stateIn(
-            viewModelScope,
-            started = SharingStarted.WhileSubscribed(),
-            initialValue = mAuth.currentUser != null
-        )
+        }
 
     override suspend fun signIn(credentials : SignInCredentials): Flow<Resource<Boolean>> =
         flow {
@@ -70,20 +76,6 @@ class AuthRepositoryImpl @Inject constructor(
     } catch (e: Exception) {
         Resource.Failure(e)
     }
-
-//    private suspend fun saveProfilePictureToStorage(imageUri: Uri): String {
-//        return try {
-//            val storageRef = Firebase.storage.reference
-//            val imageName = UUID.randomUUID().toString()
-//            val profilePicturesRef = storageRef.child("profile_images/$imageName")
-//            val profilePictureUrl =
-//                profilePicturesRef.putFile(imageUri).await().storage.downloadUrl.await()
-//            profilePictureUrl.toString()
-//        } catch (e: Exception) {
-//            Log.e(TAG, "saveProfilePictureToStorage error : ${e.message}")
-//            ""
-//        }
-//    }
 
     private suspend fun saveCurrUserToFirebase(userDto: UserDto) {
         val uid = mAuth.currentUser?.uid

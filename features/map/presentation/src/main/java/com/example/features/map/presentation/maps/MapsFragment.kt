@@ -11,14 +11,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.core.uikit.extensions.bindSharedFlow
-import com.example.core.uikit.extensions.bindStateFlow
+import com.example.core.uikit.extensions.bindFlow
 import com.example.core.uikit.extensions.checkLocationPermission
 import com.example.core.uikit.extensions.showToast
 import com.example.features.map.presentation.R
 import com.example.features.map.presentation.databinding.FragmentMapsBinding
 import com.example.features.map.presentation.requestDetails.RequestDetailsBottomSheetFragment.Companion.DRAW_ROUTE_RESULT
-import com.example.features.map.presentation.requestDetails.RequestDetailsBottomSheetFragment.Companion.ORDER_DESTINATION
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -93,11 +91,11 @@ class MapsFragment : Fragment() {
     }
 
     private fun bindViewModel() = with(viewModel) {
-        bindSharedFlow(launchChooseVehicleTroubleScreen) {
+        bindFlow(launchChooseVehicleTroubleScreen) {
             findNavController().navigate(R.id.chooseVehicleTroubleBottomSheetFragment)
         }
-        bindSharedFlow(showToast) { showToast(it) }
-        bindSharedFlow(showRouteSharedFlow) { path ->
+        bindFlow(showToast) { showToast(it) }
+        bindFlow(showRouteSharedFlow) { path ->
             mMap?.addPolyline(
                 PolylineOptions().addAll(path)
                     .width(16f)
@@ -105,11 +103,11 @@ class MapsFragment : Fragment() {
                     .geodesic(true)
             )
         }
-        bindStateFlow(currentLocation) { location ->
+        bindFlow(currentLocation) { location ->
             location?.let { moveToCurrentLocation(it) }
             destinationLatLng?.let { viewModel.drawRoute() }
         }
-        bindStateFlow(markersStateFlow) { requests ->
+        bindFlow(markersStateFlow) { requests ->
             mMap?.clear()
             requests.forEach { request ->
                 val icon = if (request.isCurrentUser) {
@@ -119,9 +117,7 @@ class MapsFragment : Fragment() {
                 }
                 val latLng = LatLng(request.latitude, request.longitude)
                 val marker = mMap?.addMarker(
-                    MarkerOptions()
-                        .position(latLng)
-                        .icon(icon)
+                    MarkerOptions().position(latLng).icon(icon)
                 )
                 marker?.tag = request
             }

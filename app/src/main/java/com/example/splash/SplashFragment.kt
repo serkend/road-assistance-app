@@ -7,46 +7,48 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.app.databinding.FragmentSplashBinding
 import com.example.core.common.Constants
+import com.example.core.uikit.extensions.bindFlow
 import com.example.navigation.FlowNavigator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashFragment : Fragment() {
 
     private lateinit var viewBinding: FragmentSplashBinding
-    private val viewModel: SplashViewModel by viewModels()
+
+    private val testViewModel: SplashViewModel by viewModels()
+    lateinit var viewModel: SplashViewModel
 
     @Inject
-    lateinit var navigator: FlowNavigator
+    lateinit var flowNavigator: FlowNavigator
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        if (!::viewModel.isInitialized) {
+            viewModel = testViewModel
+        }
         viewBinding = FragmentSplashBinding.inflate(layoutInflater)
         return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.isUserAuthenticated().collect { isAuthenticated ->
-                    Log.e(Constants.TAG, "isAuthenticated: $isAuthenticated")
-                    if (isAuthenticated) {
-                        findNavController().navigate(com.example.app.R.id.action_splashFragment_to_bottom_nav_graph)
-                    } else {
-                        findNavController().navigate(com.example.app.R.id.action_splashFragment_to_auth_nav_graph)
-                    }
-                }
+        bindViewModel()
+    }
+
+    private fun bindViewModel() = with(viewModel) {
+        bindFlow(isUserAuthenticatedStateFlow) { isAuthenticated ->
+            when (isAuthenticated) {
+                true -> flowNavigator.navigateToMainFlow()
+                false -> findNavController().navigate(com.example.app.R.id.action_splashFragment_to_auth_nav_graph)
+                null -> {}
             }
+            Log.e(Constants.TAG, "isAuthenticated: $isAuthenticated")
         }
     }
 }

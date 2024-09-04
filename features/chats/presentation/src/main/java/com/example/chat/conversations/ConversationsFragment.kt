@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.core.uikit.extensions.bindStateFlow
+import com.example.core.uikit.extensions.bindFlow
 import com.example.features.chats.presentation.R
 import com.example.features.chats.presentation.databinding.FragmentConversationsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,7 +33,7 @@ class ConversationsFragment : Fragment(R.layout.fragment_conversations) {
     }
 
     private fun observeViewModel() = with(viewModel) {
-        bindStateFlow(conversations) { conversations ->
+        bindFlow(conversations) { conversations ->
             (binding.conversationsRecyclerView.adapter as ConversationsAdapter).submitList(conversations)
         }
     }

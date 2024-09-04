@@ -6,9 +6,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.core.uikit.extensions.bindSharedFlow
+import com.example.core.uikit.extensions.bindFlow
 import com.example.core.uikit.extensions.showToast
-import com.example.navigation.FlowNavigator
 import com.example.features.map.presentation.R
 import com.example.features.map.presentation.databinding.FragmentRequestDetailsBottomSheetBinding
 import com.google.android.gms.maps.model.LatLng
@@ -46,7 +45,7 @@ class RequestDetailsBottomSheetFragment : BottomSheetDialogFragment(R.layout.fra
     }
 
     private fun bindViewModel() = with(viewModel) {
-        bindSharedFlow(requestAcceptedSharedFlow) {
+        bindFlow(requestAcceptedSharedFlow) {
             val navController = findNavController()
             val request = args.request
             val bundle = Bundle().apply {
@@ -55,10 +54,10 @@ class RequestDetailsBottomSheetFragment : BottomSheetDialogFragment(R.layout.fra
             navController.previousBackStackEntry?.savedStateHandle?.set(DRAW_ROUTE_RESULT, bundle)
             findNavController().popBackStack()
         }
-        bindSharedFlow(showToast) {
+        bindFlow(showToast) {
             requireContext().showToast(it)
         }
-        bindSharedFlow(conversationIdSharedFlow) {
+        bindFlow(conversationIdSharedFlow) {
             navigateToChatFragment(it)
         }
     }

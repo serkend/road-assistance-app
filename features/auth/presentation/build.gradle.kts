@@ -61,7 +61,6 @@ dependencies {
 
     implementation(project(":core:ui-test"))
     implementation(project(":core:data-test"))
-    androidTestImplementation(project(":core:ui-test"))
 
     // Retrofit
     implementation(libs.retrofit)

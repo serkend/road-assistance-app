@@ -8,8 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.core.common.vehicles.VehiclesAdapter
-import com.example.core.uikit.extensions.bindSharedFlow
-import com.example.core.uikit.extensions.bindStateFlow
+import com.example.core.uikit.extensions.bindFlow
 import com.example.features.map.presentation.R
 import com.example.features.map.presentation.databinding.FragmentChooseVehicleBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -45,18 +44,16 @@ class ChooseVehicleBottomSheetFragment :
     }
 
     private fun bindViewModel() = with(viewModel) {
-        bindStateFlow(vehiclesStateFlow) {
+        bindFlow(vehiclesStateFlow) {
             adapter.submitList(it)
         }
-        bindSharedFlow(showToastSharedFlow) {
+        bindFlow(showToastSharedFlow) {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
-        bindSharedFlow(launchRequestPreviewScreenSharedFlow) { vehicleId ->
-            val action =
-                ChooseVehicleBottomSheetFragmentDirections.actionChooseVehicleBottomSheetFragmentToRequestPreviewFragment(
-                    troubleName = args.troubleName,
-                    vehicleId = vehicleId
-                )
+        bindFlow(launchRequestPreviewScreenSharedFlow) { vehicleId ->
+            val action = ChooseVehicleBottomSheetFragmentDirections.actionChooseVehicleBottomSheetFragmentToRequestPreviewFragment(
+                troubleName = args.troubleName, vehicleId = vehicleId
+            )
             findNavController().navigate(action)
         }
     }
