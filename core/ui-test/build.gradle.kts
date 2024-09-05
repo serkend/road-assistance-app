@@ -38,26 +38,19 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:navigation"))
     implementation(project(":core:uikit"))
-//    androidTestImplementation(project(":core:navigation"))
-//    implementation(project(":app"))
-//    androidTestImplementation(project(":app"))
 
-    implementation(libs.kotlinStdlib)
-    implementation(libs.coreKtx)
-
-    implementation(libs.firebaseStorage)
-    implementation(libs.firebaseFirestore)
-    implementation(libs.firebaseAuth)
+//    implementation(libs.kotlinStdlib)
+//    implementation(libs.coreKtx)
 
     implementation(libs.hilt)
     kapt(libs.hiltCompiler)
+//
+//    implementation(libs.roomRuntime)
+//    kapt(libs.roomCompiler)
+//    implementation(libs.roomKtx)
 
-    implementation(libs.roomRuntime)
-    kapt(libs.roomCompiler)
-    implementation(libs.roomKtx)
-
-    implementation(libs.playServicesLocation)
-    implementation(libs.playServicesMaps)
+//    implementation(libs.playServicesLocation)
+//    implementation(libs.playServicesMaps)
 
     // Testing
     implementation(libs.junit)

@@ -33,7 +33,7 @@ class ChatViewModel @Inject constructor(private val chatUseCases: ChatUseCases, 
             when (result) {
                 is ResultState.Success -> {
                     messages.value = result.result?.map { it.toModel() }?.sortedBy { it.timestamp } ?: emptyList()
-                    Log.e("TAG", "loadMessages: ${result.result}")
+//                    Log.e("TAG", "loadMessages: ${result.result}")
                 }
 
                 is ResultState.Failure -> {

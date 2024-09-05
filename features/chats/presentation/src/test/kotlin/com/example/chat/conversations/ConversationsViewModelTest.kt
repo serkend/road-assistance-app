@@ -12,6 +12,7 @@ import com.example.domain.chat.usecases.GetMessages
 import com.example.domain.chat.usecases.GetOrCreateConversation
 import com.example.domain.chat.usecases.GetReceiverIdForConversation
 import com.example.domain.chat.usecases.SendMessage
+import com.example.domain.chat.usecases.SendPhoto
 import com.example.domain.userManager.usecases.GetUserById
 import com.google.common.truth.Truth
 import org.junit.Before
@@ -42,7 +43,8 @@ class ConversationsViewModelTest {
             getMessages = GetMessages(fakeChatRepository),
             sendMessage = SendMessage(fakeChatRepository),
             getOrCreateConversation = GetOrCreateConversation(fakeChatRepository),
-            getReceiverIdForConversation = GetReceiverIdForConversation(fakeChatRepository)
+            getReceiverIdForConversation = GetReceiverIdForConversation(fakeChatRepository),
+            sendPhoto = SendPhoto(fakeChatRepository)
         )
         getUserById = GetUserById(fakeUserManagerRepository)
         viewModel = ConversationsViewModel(chatUseCases, getUserById)
