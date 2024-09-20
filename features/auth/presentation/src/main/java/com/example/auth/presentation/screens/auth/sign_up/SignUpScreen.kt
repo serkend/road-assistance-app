@@ -38,8 +38,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
+import com.example.auth.presentation.screens.auth.sign_in.state.SignInState
 import com.example.auth.presentation.screens.auth.sign_up.state.SignUpEvent
-import com.example.auth.presentation.screens.auth.sign_up.state.SignUpState
 import com.example.core.uikit.R
 import com.example.core.uikit.ui.AppTheme
 import com.example.navigation.FlowNavigator
@@ -66,8 +66,8 @@ fun SignUpScreen(
         }
     }
 
-    LaunchedEffect(state.isSignUpSuccessful) {
-        if (state.isSignUpSuccessful) {
+    LaunchedEffect(state.isSignInSuccessful) {
+        if (state.isSignInSuccessful) {
             flowNavigator.navigateToMainFlow()
         }
     }
@@ -83,7 +83,7 @@ fun SignUpScreen(
 
 @Composable
 fun SignUpContent(
-    state: SignUpState,
+    state: SignInState,
     snackbarHostState: SnackbarHostState,
     onImageClicked : () -> Unit,
     onAction: (SignUpEvent) -> Unit
@@ -167,13 +167,13 @@ fun SignUpContent(
 fun SignUpScreenPreview() {
     AppTheme {
         SignUpContent(
-            state = SignUpState(
+            state = SignInState(
                 email = "",
                 username = "",
                 password = "",
                 imageUri = null,
                 isLoading = false,
-                isSignUpSuccessful = false
+                isSignInSuccessful = false
             ),
             snackbarHostState = SnackbarHostState(), onImageClicked = {},
             onAction = {})

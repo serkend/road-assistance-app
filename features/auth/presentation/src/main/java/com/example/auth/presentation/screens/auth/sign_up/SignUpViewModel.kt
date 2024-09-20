@@ -1,8 +1,8 @@
 package com.example.auth.presentation.screens.auth.sign_up
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.auth.presentation.screens.auth.sign_in.state.SignInState
 import com.example.auth.presentation.screens.auth.sign_up.state.SignUpEvent
-import com.example.auth.presentation.screens.auth.sign_up.state.SignUpState
 import com.example.core.common.Resource
 import com.example.domain.auth.model.SignUpCredentials
 import com.example.domain.auth.usecases.auth.AuthUseCases
@@ -15,8 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SignUpViewModel @Inject constructor(private val authUseCases: AuthUseCases) : ViewModel() {
 
-    private val _state = MutableStateFlow(SignUpState())
-    val state: StateFlow<SignUpState> = _state.asStateFlow()
+    private val _state = MutableStateFlow(SignInState())
+    val state: StateFlow<SignInState> = _state.asStateFlow()
 
     private val _showSnackbar = MutableSharedFlow<String?>()
     val showSnackbar = _showSnackbar.asSharedFlow()
@@ -57,7 +57,7 @@ class SignUpViewModel @Inject constructor(private val authUseCases: AuthUseCases
                         }
 
                         is Resource.Success -> {
-                            _state.update { it.copy(isLoading = false, isSignUpSuccessful = true) }
+                            _state.update { it.copy(isLoading = false, isSignInSuccessful = true) }
                         }
 
                         is Resource.Failure -> {

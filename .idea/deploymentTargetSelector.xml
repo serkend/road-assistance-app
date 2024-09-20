@@ -8,13 +8,7 @@
       <SelectionState runConfigName="features">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="testSignIn_withValidCredentials_navigatesToMainFlow()">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="testSplashFragment_whenUserIsAuthenticated_navigatesToMainFlow()">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="testSplashFragment_whenUserIsNotAuthenticated_navigatesToAuthFlow()">
+      <SelectionState runConfigName="PreviewSignInScreen">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

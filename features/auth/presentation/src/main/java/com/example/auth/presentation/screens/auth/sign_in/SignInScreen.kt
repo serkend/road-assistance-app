@@ -21,9 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,10 +32,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.core.common.AuthState
+import com.example.auth.presentation.screens.auth.sign_in.state.SignInEvent
+import com.example.auth.presentation.screens.auth.sign_in.state.SignInState
 import com.example.core.uikit.ui.AppTheme
-import com.example.domain.auth.model.SignInCredentials
 import com.example.features.auth.presentation.R
 import com.example.navigation.FlowNavigator
 
@@ -47,25 +44,29 @@ fun SignInScreen(
     navController: NavController,
     viewModel: SignInViewModel = hiltViewModel(),
 ) {
-    val state by viewModel.loginSharedFlow.collectAsState(initial = AuthState.Initial)
+    val state by viewModel.signInStateFlow.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
-    when (state) {
-        is AuthState.Failure -> {
-            LaunchedEffect(snackbarHostState) {
-                snackbarHostState.showSnackbar(
-                    message = (state as AuthState.Failure).error.localizedMessage
-                        ?: context.getString(com.example.core.uikit.R.string.unknown_error)
-                )
-            }
+
+
+    LaunchedEffect(state) {
+        if (state.isSignInSuccessful) flowNavigator?.navigateToMainFlow()
+        else if (state.showToast != null) {
+            snackbarHostState.showSnackbar(
+                message = state.showToast ?: context.getString(com.example.core.uikit.R.string.unknown_error)
+            )
         }
-        AuthState.Success -> flowNavigator?.navigateToMainFlow()
-        else -> Unit
+//        viewModel.showToast.collect {
+//            snackbarHostState.showSnackbar(
+//                message = state.showToast ?: context.getString(com.example.core.uikit.R.string.unknown_error)
+//            )
+//        }
     }
+
     SignInContent(
-        snackbarHostState,
-        state is AuthState.Loading,
-        onSignInClicked = { viewModel.signIn(it) },
+        snackbarHostState = snackbarHostState,
+        signInState = state,
+        onAction = { viewModel.onEvent(it) },
         onSignUpClicked = { navController.navigate(R.id.action_signInFragment2_to_signUpFragment2) }
     )
 }
@@ -73,12 +74,10 @@ fun SignInScreen(
 @Composable
 private fun SignInContent(
     snackbarHostState: SnackbarHostState,
-    isLoading: Boolean,
-    onSignInClicked: (SignInCredentials) -> Unit,
+    signInState: SignInState,
+    onAction: (SignInEvent) -> Unit,
     onSignUpClicked: () -> Unit
 ) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
     Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { paddingValues ->
         Box(modifier = Modifier
             .fillMaxSize()
@@ -92,15 +91,15 @@ private fun SignInContent(
                 verticalArrangement = Arrangement.Center
             ) {
                 OutlinedTextField(
-                    value = email,
-                    onValueChange = { email = it },
+                    value = signInState.email,
+                    onValueChange = { onAction(SignInEvent.EmailChanged(it)) },
                     label = { Text(stringResource(com.example.core.uikit.R.string.email)) },
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
-                    value = password,
-                    onValueChange = { password = it },
+                    value = signInState.password,
+                    onValueChange = { onAction(SignInEvent.PasswordChanged(it)) },
                     label = { Text(stringResource(com.example.core.uikit.R.string.password)) },
                     modifier = Modifier.fillMaxWidth(),
                     visualTransformation = PasswordVisualTransformation()
@@ -108,10 +107,10 @@ private fun SignInContent(
                 Spacer(modifier = Modifier.height(32.dp))
 
                 Button(
-                    onClick = { onSignInClicked(SignInCredentials(email, password)) },
+                    onClick = { onAction(SignInEvent.SignIn) },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    if (isLoading) {
+                    if (signInState.isLoading) {
                         CircularProgressIndicator(
                             color = Color.White,
                             modifier = Modifier.height(24.dp).width(24.dp)
@@ -138,8 +137,8 @@ fun SignInScreenPreview() {
     AppTheme {
         SignInContent(
             remember { SnackbarHostState() },
-            false,
-            onSignInClicked = {  },
+            signInState = SignInState(),
+            onAction = { },
             onSignUpClicked = {  }
         )
     }
