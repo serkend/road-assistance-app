@@ -11,5 +11,3 @@ data class SignInState(
     val isSignInSuccessful: Boolean = false,
     val showToast: String? = null
 )
-
-fun SignInState.resetState() = this.copy(isLoading = false, showToast = null)

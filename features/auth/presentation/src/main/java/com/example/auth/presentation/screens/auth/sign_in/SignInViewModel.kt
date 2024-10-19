@@ -3,7 +3,6 @@ package com.example.auth.presentation.screens.auth.sign_in
 import androidx.lifecycle.viewModelScope
 import com.example.auth.presentation.screens.auth.sign_in.state.SignInEvent
 import com.example.auth.presentation.screens.auth.sign_in.state.SignInState
-import com.example.auth.presentation.screens.auth.sign_in.state.resetState
 import com.example.core.common.Resource
 import com.example.domain.auth.model.SignInCredentials
 import com.example.core.uikit.base.BaseViewModel
@@ -45,7 +44,8 @@ class SignInViewModel @Inject constructor(private val authUseCases: AuthUseCases
                         _signInStateFlow.update { it.copy(isSignInSuccessful = true, isLoading = false) }
                     }
                     is Resource.Failure -> {
-                        _signInStateFlow.update { it.copy(showToast = state.e?.localizedMessage ?: "Unknown error", isLoading = false) }
+                        _showToast.emit (state.e?.localizedMessage ?: "Unknown error")
+                        _signInStateFlow.update { it.copy(isLoading = false) }
 //                        _showToast.emit(state.e?.localizedMessage ?: "Unknown error")
                     }
                     Resource.Initial -> {}

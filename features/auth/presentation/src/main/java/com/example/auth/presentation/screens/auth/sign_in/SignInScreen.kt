@@ -44,28 +44,27 @@ fun SignInScreen(
     navController: NavController,
     viewModel: SignInViewModel = hiltViewModel(),
 ) {
-    val state by viewModel.signInStateFlow.collectAsState()
+    val uiState by viewModel.signInStateFlow.collectAsState()
+    val showErrorState by viewModel.showToast.collectAsState(null)
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
 
 
-    LaunchedEffect(state) {
-        if (state.isSignInSuccessful) flowNavigator?.navigateToMainFlow()
-        else if (state.showToast != null) {
+    LaunchedEffect(uiState) {
+        if (uiState.isSignInSuccessful) flowNavigator?.navigateToMainFlow()
+    }
+    LaunchedEffect(showErrorState) {
+        if (!showErrorState.isNullOrBlank()) {
             snackbarHostState.showSnackbar(
-                message = state.showToast ?: context.getString(com.example.core.uikit.R.string.unknown_error)
+                message = uiState.showToast
+                    ?: context.getString(com.example.core.uikit.R.string.unknown_error)
             )
         }
-//        viewModel.showToast.collect {
-//            snackbarHostState.showSnackbar(
-//                message = state.showToast ?: context.getString(com.example.core.uikit.R.string.unknown_error)
-//            )
-//        }
     }
 
     SignInContent(
         snackbarHostState = snackbarHostState,
-        signInState = state,
+        signInState = uiState,
         onAction = { viewModel.onEvent(it) },
         onSignUpClicked = { navController.navigate(R.id.action_signInFragment2_to_signUpFragment2) }
     )

@@ -54,9 +54,10 @@ class UserManagerRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             Log.e(Constants.TAG, "Error getRegisteredUserList(): ${e.message}")
             trySend(Resource.Failure(e))
-        }
-        awaitClose {
-            snapshotListener?.remove()
+        } finally {
+            awaitClose {
+                snapshotListener?.remove()
+            }
         }
     }
 

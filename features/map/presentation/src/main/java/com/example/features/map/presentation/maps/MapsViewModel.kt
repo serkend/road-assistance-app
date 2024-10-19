@@ -114,7 +114,7 @@ class MapsViewModel @Inject constructor(
                     )
                 }
             }
-        } ?: _showToast.emit("Error while fetching current location")
+        } ?: _showToast.emit("Error while drawing route")
     }
 
     fun getMyCurrentLocation() = viewModelScope.launch {
