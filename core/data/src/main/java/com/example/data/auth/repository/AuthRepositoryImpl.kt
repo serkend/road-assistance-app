@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.tasks.await
@@ -32,19 +33,17 @@ class AuthRepositoryImpl @Inject constructor(
 
     override fun isUserAuthenticated(): Flow<ResultState<Boolean>> =
         callbackFlow {
-            try {
-                trySend(ResultState.Loading())
-                val authStateListener = FirebaseAuth.AuthStateListener { auth ->
-                    val isAuthenticated = auth.currentUser != null
-                    trySend(ResultState.Success(isAuthenticated))
-                }
-                mAuth.addAuthStateListener(authStateListener)
-                awaitClose {
-                    mAuth.removeAuthStateListener(authStateListener)
-                }
-            } catch (e: Exception) {
-                trySend(ResultState.Failure(e.localizedMessage))
+            trySend(ResultState.Loading())
+            val authStateListener = FirebaseAuth.AuthStateListener { auth ->
+                val isAuthenticated = auth.currentUser != null
+                trySend(ResultState.Success(isAuthenticated))
             }
+            mAuth.addAuthStateListener(authStateListener)
+            awaitClose {
+                mAuth.removeAuthStateListener(authStateListener)
+            }
+        }.catch {
+            emit(ResultState.Failure(it.localizedMessage))
         }
 
     override suspend fun signIn(credentials : SignInCredentials): Flow<Resource<Boolean>> =
