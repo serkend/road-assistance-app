@@ -7,7 +7,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.core.common.vehicles.VehiclesAdapter
+import com.example.core.uikit.components.vehicles.VehiclesAdapter
 import com.example.core.uikit.extensions.bindFlow
 import com.example.core.uikit.extensions.showToast
 import com.example.features.profile.presentation.R
@@ -68,13 +68,13 @@ class ItemsListFragment : Fragment(R.layout.fragment_items_list) {
             when(contentType) {
                 "jobs" -> jobsAdapter?.submitList(it)
                 "requests" -> jobsAdapter?.submitList(it)
-                else -> { showToast("Content type is null or empty") }
+                else -> { }
             }
         }
         bindFlow(vehiclesStateFlow) {
             when(contentType) {
                 "vehicles" -> vehiclesAdapter?.submitList(it)
-                else -> { showToast("Content type is null or empty") }
+                else -> { }
             }
         }
     }

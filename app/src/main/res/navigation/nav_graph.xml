@@ -13,9 +13,6 @@
             android:id="@+id/action_splashFragment_to_bottom_nav_graph"
             app:destination="@id/main_nav_graph" />
         <action
-            android:id="@+id/action_splashFragment_to_bottom_nav_graph2"
-            app:destination="@id/main_nav_graph" />
-        <action
             android:id="@+id/action_splashFragment_to_auth_nav_graph"
             app:destination="@id/auth_nav_graph" />
     </fragment>

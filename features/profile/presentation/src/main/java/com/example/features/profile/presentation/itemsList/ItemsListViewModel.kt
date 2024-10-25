@@ -72,16 +72,16 @@ class ItemsListViewModel @Inject constructor(
                             status = order.status
                         )
                     }
-                } ?: emptyList<JobItem>()
+                } ?: emptyList()
 
                 is ResultState.Failure -> {
                     showToast.emit(orders.e ?: "Error fetching orders")
-                    emptyList<JobItem>()
+                    emptyList()
                 }
 
-                is ResultState.Loading -> emptyList<JobItem>()
+                is ResultState.Loading -> emptyList()
 
-                else -> emptyList<JobItem>()
+                else -> emptyList()
             }
 
             val requestItems = when (requests) {
@@ -93,15 +93,15 @@ class ItemsListViewModel @Inject constructor(
                         cost = request.cost,
                         status = OrderStatus.Pending
                     )
-                } ?: emptyList<JobItem>()
+                } ?: emptyList()
 
                 is ResultState.Failure -> {
                     showToast.emit(requests.e ?: "Error fetching requests")
-                    emptyList<JobItem>()
+                    emptyList()
                 }
 
-                is ResultState.Loading -> emptyList<JobItem>()
-                ResultState.Initial -> emptyList<JobItem>()
+                is ResultState.Loading -> emptyList()
+                ResultState.Initial -> emptyList()
             }
 
             orderItems + requestItems

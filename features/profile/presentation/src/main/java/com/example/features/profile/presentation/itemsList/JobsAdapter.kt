@@ -6,13 +6,12 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.core.common.databinding.VehicleCardViewBinding
+import com.example.core.uikit.databinding.VehicleCardViewBinding
 
 class JobsAdapter(private val onClick: (JobItem) -> Unit) : ListAdapter<JobItem, JobsAdapter.JobsViewHolder>(
     VehicleDiffCallback()
 ) {
-
-    class JobsViewHolder(private val binding: VehicleCardViewBinding, val onClick: (JobItem) -> Unit) :
+    inner class JobsViewHolder(private val binding: VehicleCardViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind (job: JobItem) = with(binding) {
             statusTextView.isVisible = true
@@ -29,7 +28,7 @@ class JobsAdapter(private val onClick: (JobItem) -> Unit) : ListAdapter<JobItem,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JobsViewHolder {
         val binding = VehicleCardViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return JobsViewHolder(binding, onClick)
+        return JobsViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: JobsViewHolder, position: Int) {

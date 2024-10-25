@@ -53,8 +53,9 @@ class MainActivity : AppCompatActivity(), FlowNavigator {
     }
 
     override fun navigateToSplashFlow() {
-        val navController = findNavController(R.id.fragmentContainerView)
-        val action = NavGraphDirections.actionGlobalSplashFragment()
-        navController.navigate(action)
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
+        navController.setGraph(R.navigation.nav_graph)
     }
 }

@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.core.common.vehicles.VehiclesAdapter
+import com.example.core.uikit.components.vehicles.VehiclesAdapter
 import com.example.core.uikit.extensions.bindFlow
 import com.example.features.map.presentation.R
 import com.example.features.map.presentation.databinding.FragmentChooseVehicleBottomSheetBinding

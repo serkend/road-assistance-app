@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":core:common"))
     // View
     api(libs.viewBindingDelegate)
     api(libs.constraintLayout)

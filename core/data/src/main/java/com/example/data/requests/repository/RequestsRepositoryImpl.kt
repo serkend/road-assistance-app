@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -57,19 +58,35 @@ class RequestsRepositoryImpl @Inject constructor(
             ?: throw NoSuchElementException("No request found with ID $requestId")
     }
 
-    override suspend fun saveRequest(request: Request) {
+    override suspend fun saveRequest(request: Request): Flow<ResultState<Unit>> = flow {
+        emit(ResultState.Loading())
         try {
             val uId = mAuth.currentUser?.uid ?: throw RuntimeException("User is null")
-            val requestDto = request.toDto(uId).copy(userId = uId)
-            val documentReference = if (requestDto.id.isNullOrEmpty()) {
-                firestore.collection(RequestDto.FIREBASE_REQUESTS).document()
+
+            if (checkIfUserAlreadyHasRequest(uId)) {
+                emit(ResultState.Failure("User already has an active request"))
             } else {
-                firestore.collection(RequestDto.FIREBASE_REQUESTS).document(requestDto.id)
+                val requestDto = request.toDto(uId).copy(userId = uId)
+                val documentReference = if (requestDto.id.isNullOrEmpty()) {
+                    firestore.collection(RequestDto.FIREBASE_REQUESTS).document()
+                } else {
+                    firestore.collection(RequestDto.FIREBASE_REQUESTS).document(requestDto.id)
+                }
+
+                documentReference.set(requestDto.copy(id = documentReference.id)).await()
+                emit(ResultState.Success(Unit))
             }
-            documentReference.set(requestDto.copy(id = documentReference.id)).await()
         } catch (e: Exception) {
-            throw RuntimeException("Failed to save request: ${e.message}", e)
+            emit(ResultState.Failure("Failed to save request: ${e.message}"))
         }
+    }
+
+    private suspend fun checkIfUserAlreadyHasRequest(uId: String): Boolean {
+        val existingRequestSnapshot = firestore.collection(RequestDto.FIREBASE_REQUESTS)
+            .whereEqualTo("userId", uId)
+            .get()
+            .await()
+        return !existingRequestSnapshot.isEmpty
     }
 
     override suspend fun deleteRequest(request: Request) {
@@ -80,24 +97,47 @@ class RequestsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun acceptRequest(requestId: String) {
+    override suspend fun acceptRequest(requestId: String): Flow<ResultState<Unit>> = flow {
         val currentUser = mAuth.currentUser ?: throw RuntimeException("User not logged in")
 
         val request = getRequestDtoById(requestId)
-        val newOrder = Order(
-            status = OrderStatus.InProgress,
-            executorId = currentUser.uid,
-            clientId = request.userId ?: throw RuntimeException("Request doesn't have userId"),
-            requestId = requestId
-        )
+        if (checkIfUserAlreadyAcceptedRequest(currentUser.uid)) {
+            emit(ResultState.Failure("You have already accepted order"))
+        } else if (checkIfRequestIsAlreadyAccepted(requestId)) {
+            emit(ResultState.Failure("The request is accepted by another user"))
+        } else {
+            val newOrder = Order(
+                status = OrderStatus.InProgress,
+                executorId = currentUser.uid,
+                clientId = request.userId
+                    ?: throw RuntimeException("Request doesn't have userId"),
+                requestId = requestId
+            )
 
-        saveOrder(newOrder)
+            saveOrder(newOrder)
+        }
     }
 
     override suspend fun saveOrder(order: Order) {
         val orderRef = firestore.collection(OrderDto.FIREBASE_ORDERS).document()
         val orderWithId = order.copy(id = orderRef.id)
         orderRef.set(orderWithId).await()
+    }
+
+    private suspend fun checkIfUserAlreadyAcceptedRequest(uId: String): Boolean {
+        val existingRequestSnapshot = firestore.collection(OrderDto.FIREBASE_ORDERS)
+            .whereEqualTo("executorId", uId)
+            .get()
+            .await()
+        return !existingRequestSnapshot.isEmpty
+    }
+
+    private suspend fun checkIfRequestIsAlreadyAccepted(requestId: String): Boolean {
+        val acceptedRequest = firestore.collection(OrderDto.FIREBASE_ORDERS)
+            .whereEqualTo("requestId", requestId)
+            .get()
+            .await()
+        return !acceptedRequest.isEmpty
     }
 
     override suspend fun fetchCurrentUserOrder(): Flow<ResultState<Order>> = callbackFlow {

@@ -5,9 +5,6 @@
     app:startDestination="@id/signInFragment2"
     android:id="@+id/auth_nav_graph">
 
-    <action
-        android:id="@+id/action_signInFragment2_to_signUpFragment2"
-        app:destination="@id/signUpFragment2" />
     <fragment
         android:id="@+id/signInFragment2"
         android:name="com.example.auth.presentation.screens.auth.sign_in.SignInFragment"
