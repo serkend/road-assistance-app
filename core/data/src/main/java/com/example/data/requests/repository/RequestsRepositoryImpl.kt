@@ -2,10 +2,13 @@ package com.example.data.requests.repository
 
 import com.example.core.common.OrderStatus
 import com.example.core.common.ResultState
+import com.example.data.requests.dao.RequestsDao
 import com.example.data.requests.dto.OrderDto
 import com.example.data.requests.dto.RequestDto
+import com.example.data.requests.entity.RequestEntity
 import com.example.data.requests.mappers.toDomain
 import com.example.data.requests.mappers.toDto
+import com.example.data.vehicles.mappers.toEntity
 import com.example.domain.requests.model.Order
 import com.example.domain.requests.model.Request
 import com.example.domain.requests.repository.RequestsRepository
@@ -15,30 +18,89 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class RequestsRepositoryImpl @Inject constructor(
     private val firestore: FirebaseFirestore,
-    private val mAuth: FirebaseAuth
+    private val mAuth: FirebaseAuth,
+    private val requestDao: RequestsDao
 ) : RequestsRepository {
 
-    override suspend fun fetchRequests(): Flow<ResultState<List<Request>>> = callbackFlow {
+//    override suspend fun fetchRequests(): Flow<ResultState<List<Request>>> = callbackFlow {
+//        val uId = mAuth.currentUser?.uid ?: throw RuntimeException("User is null")
+//        val collectionRef = firestore.collection(RequestDto.FIREBASE_REQUESTS)
+//        val listener = collectionRef.addSnapshotListener { snapshot, e ->
+//            if (e != null) {
+//                trySend(ResultState.Failure(e = e.localizedMessage))
+//                close(e)
+//                return@addSnapshotListener
+//            }
+//            val requests = snapshot?.documents?.mapNotNull { doc ->
+//                val requestDto = doc.toObject(RequestDto::class.java)
+//                requestDto?.toDomain()?.copy(id = doc.id, isCurrentUser = (requestDto.userId == uId))
+//            } ?: emptyList()
+//            trySend(ResultState.Success(requests))
+//        }
+//        awaitClose { listener.remove() }
+//    }.flowOn(Dispatchers.IO)
+
+    override suspend fun fetchRequests(): Flow<ResultState<List<Request>>> = channelFlow {
+        val cachedRequests = requestDao.getAllRequests()
+            .map { entities ->
+                entities.map { it.toDomain() }
+            }
+            .onEach { requests ->
+                send(ResultState.Loading(data = requests))
+            }
+            .firstOrNull()
+
         val uId = mAuth.currentUser?.uid ?: throw RuntimeException("User is null")
         val collectionRef = firestore.collection(RequestDto.FIREBASE_REQUESTS)
+
         val listener = collectionRef.addSnapshotListener { snapshot, e ->
             if (e != null) {
-                trySend(ResultState.Failure(e = e.localizedMessage))
-                close(e)
+                trySend(ResultState.Failure(e = e.localizedMessage, data = cachedRequests))
                 return@addSnapshotListener
             }
-            val requests = snapshot?.documents?.mapNotNull { doc ->
-                val requestDto = doc.toObject(RequestDto::class.java)
-                requestDto?.toDomain()?.copy(id = doc.id, isCurrentUser = (requestDto.userId == uId))
-            } ?: emptyList()
-            trySend(ResultState.Success(requests))
+
+            launch(Dispatchers.IO) {
+                try {
+                    val requests = snapshot?.documents?.mapNotNull { doc ->
+                        val requestDto = doc.toObject(RequestDto::class.java)
+                        requestDto?.let {
+                            RequestEntity(
+                                id = doc.id,
+                                userId = it.userId,
+                                trouble = it.trouble,
+                                cost = it.cost,
+                                vehicle = it.vehicle?.toEntity(),
+                                latitude = it.latitude,
+                                longitude = it.longitude
+                            )
+                        }
+                    } ?: emptyList()
+
+                    requestDao.updateRequests(requests)
+
+                    val domainRequests = requests.map { entity ->
+                        entity.toDomain().copy(
+                            isCurrentUser = (entity.userId == uId)
+                        )
+                    }
+                    send(ResultState.Success(domainRequests))
+                } catch (e: Exception) {
+                    send(ResultState.Failure(e.message ?: "Unknown error", data = cachedRequests))
+                }
+            }
         }
         awaitClose { listener.remove() }
     }.flowOn(Dispatchers.IO)
@@ -102,7 +164,7 @@ class RequestsRepositoryImpl @Inject constructor(
 
         val request = getRequestDtoById(requestId)
         if (checkIfUserAlreadyAcceptedRequest(currentUser.uid)) {
-            emit(ResultState.Failure("You have already accepted order"))
+            emit(ResultState.Failure("You have already accepted request"))
         } else if (checkIfRequestIsAlreadyAccepted(requestId)) {
             emit(ResultState.Failure("The request is accepted by another user"))
         } else {

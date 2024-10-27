@@ -2,12 +2,15 @@ package com.example.features.map.presentation.maps
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.IntentSender
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,8 +20,14 @@ import com.example.core.uikit.extensions.showToast
 import com.example.features.map.presentation.R
 import com.example.features.map.presentation.databinding.FragmentMapsBinding
 import com.example.features.map.presentation.requestDetails.RequestDetailsBottomSheetFragment.Companion.DRAW_ROUTE_RESULT
+import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.LocationSettingsResponse
+import com.google.android.gms.location.Priority
+import com.google.android.gms.location.SettingsClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -27,14 +36,27 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MapsFragment : Fragment() {
+
     private var mMap: GoogleMap? = null
     private var fusedLocationClient: FusedLocationProviderClient? = null
+
     private val viewModel: MapsViewModel by viewModels()
     private lateinit var binding: FragmentMapsBinding
+
+    private val enableLocationLauncher = registerForActivityResult(
+        ActivityResultContracts.StartIntentSenderForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            setupMap()
+        } else {
+            showToast(getString(R.string.location_required))
+        }
+    }
 
     @SuppressLint("MissingPermission")
     private val locationPermissionLauncher =
@@ -51,6 +73,32 @@ class MapsFragment : Fragment() {
     private val callback = OnMapReadyCallback { googleMap ->
         mMap = googleMap
         setupMap()
+    }
+
+    private fun checkLocationSettings() {
+        val locationRequest = LocationRequest.create().apply {
+            priority = Priority.PRIORITY_HIGH_ACCURACY
+        }
+        val builder = LocationSettingsRequest.Builder()
+            .addLocationRequest(locationRequest)
+            .setAlwaysShow(true)
+
+        LocationServices.getSettingsClient(requireActivity())
+            .checkLocationSettings(builder.build())
+            .addOnSuccessListener {
+                locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+            .addOnFailureListener { exception ->
+                if (exception is ResolvableApiException) {
+                    try {
+                        enableLocationLauncher.launch(
+                            IntentSenderRequest.Builder(exception.resolution).build()
+                        )
+                    } catch (sendEx: IntentSender.SendIntentException) {
+                        // TODO ignore error
+                    }
+                }
+            }
     }
 
     @SuppressLint("MissingPermission")
@@ -83,9 +131,11 @@ class MapsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
-        locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+
+        checkLocationSettings()
         initViews()
         bindViewModel()
     }

@@ -1,9 +1,7 @@
 package com.example.splash
 
-import androidx.annotation.VisibleForTesting
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.core.common.handleStateSuspended
+import com.example.core.common.handleState
 import com.example.core.uikit.base.BaseViewModel
 import com.example.domain.auth.usecases.auth.AuthUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,15 +22,14 @@ class SplashViewModel @Inject constructor(private val authUseCases: AuthUseCases
 
     private fun isUserAuthenticated() = viewModelScope.launch {
         authUseCases.isAuthenticated().collect { state ->
-            state.handleStateSuspended(
+            state.handleState(
                 onSuccess = {
                     _isUserAuthenticatedStateFlow.value = it
                 },
                 onFailure = { e ->
-                    _showToast.emit(e ?: "Unknown error")
+                    emitToast(e)
                 }
             )
         }
     }
-
 }

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="is_not_granted">Location permission is not granted</string>
+    <string name="location_required">Location is disabled</string>
 </resources>

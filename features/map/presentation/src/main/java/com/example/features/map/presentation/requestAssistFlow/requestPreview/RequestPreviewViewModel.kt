@@ -1,18 +1,18 @@
 package com.example.features.map.presentation.requestAssistFlow.requestPreview
 
 import android.location.Location
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.common.ResultState
+import com.example.core.common.handleState
 import com.example.domain.maps.usecases.GetCurrentLocation
 import com.example.domain.requests.model.Request
 import com.example.domain.requests.usecases.requests.RequestsUseCases
 import com.example.domain.vehicles.usecases.VehiclesUseCases
 import com.example.core.common.vehicles.VehicleModel
+import com.example.core.uikit.base.BaseViewModel
 import com.example.domain.vehicles.model.toDomain
 import com.example.domain.vehicles.model.toModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,11 +22,9 @@ class RequestPreviewViewModel @Inject constructor(
     private val vehiclesUseCases: VehiclesUseCases,
     private val requestsUseCases: RequestsUseCases,
     private val getCurrentLocation: GetCurrentLocation
-) : ViewModel() {
+) : BaseViewModel() {
 
     val fetchedVehicleStateFlow = MutableStateFlow<VehicleModel?>(null)
-    val showToastSharedFlow = MutableSharedFlow<String>()
-
     private var currentLocation: Location? = null
 
     init {
@@ -51,7 +49,16 @@ class RequestPreviewViewModel @Inject constructor(
                     longitude = currentLocation?.longitude ?: 0.0,
                     userId = null
                 )
-            )
+            ).collect { state ->
+                state.handleState(
+                    onSuccess = {
+                        emitToast("Request was successfully sent.")
+                    },
+                    onFailure = { error ->
+                        emitToast(error)
+                    }
+                )
+            }
         }
     }
 
@@ -60,7 +67,7 @@ class RequestPreviewViewModel @Inject constructor(
             if (it is ResultState.Success) {
                 currentLocation = it.data
             } else if( it is ResultState.Failure) {
-                showToastSharedFlow.emit(it.e ?: "Unknown location error")
+                emitToast(it.e)
             }
         }
     }

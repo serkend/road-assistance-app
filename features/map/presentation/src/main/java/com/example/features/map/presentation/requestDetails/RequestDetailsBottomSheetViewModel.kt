@@ -3,6 +3,8 @@ package com.example.features.map.presentation.requestDetails
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.core.common.handleState
+import com.example.core.uikit.base.BaseViewModel
 import com.example.domain.chat.usecases.ChatUseCases
 import com.example.domain.requests.usecases.requests.RequestsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,22 +13,28 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RequestDetailsBottomSheetViewModel @Inject constructor(private val requestsUseCases: RequestsUseCases, val chatUseCases: ChatUseCases) :
-    ViewModel() {
+class RequestDetailsBottomSheetViewModel @Inject constructor(
+    private val requestsUseCases: RequestsUseCases,
+    private val chatUseCases: ChatUseCases
+) : BaseViewModel() {
 
     val requestAcceptedSharedFlow = MutableSharedFlow<Unit>()
-    val showToast = MutableSharedFlow<String>()
 
     val conversationIdSharedFlow = MutableSharedFlow<String>()
 
     fun acceptRequest(requestId: String) = viewModelScope.launch {
-        try {
-            requestsUseCases.acceptRequest(requestId)
-            requestAcceptedSharedFlow.emit(Unit)
-            showToast.emit("Request was accepted")
-        } catch (e: Exception) {
-            Log.e("TAG", "acceptRequest failed")
+        requestsUseCases.acceptRequest(requestId).collect { state ->
+            state.handleState(
+                onSuccess = {
+                    emitToast("Request was accepted")
+                    requestAcceptedSharedFlow.emit(Unit)
+                },
+                onFailure = {
+                    emitToast(it)
+                }
+            )
         }
+        requestAcceptedSharedFlow.emit(Unit)
     }
 
     fun getOrCreateConversation(requestId: String) = viewModelScope.launch {

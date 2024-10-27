@@ -6,7 +6,7 @@ import com.example.domain.vehicles.model.Vehicle
 
 @Entity(tableName = "vehicles_table")
 data class VehicleEntity(
-    @PrimaryKey val id: String,
+    @PrimaryKey val id: String? = null,
     val make: String,
     val model: String,
     val year: Int
@@ -14,4 +14,4 @@ data class VehicleEntity(
 
 fun VehicleEntity.toDomain() = Vehicle(id, make, model, year)
 
-fun Vehicle.toEntity(id: String): VehicleEntity = VehicleEntity(id = id, make, model, year)
+fun Vehicle.toEntity(id: String?): VehicleEntity = VehicleEntity(id = id, make, model, year)

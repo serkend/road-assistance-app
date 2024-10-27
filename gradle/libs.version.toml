@@ -40,7 +40,7 @@ compose = "1.6.8"
 composeMaterial3 = "1.2.1"
 composeCoil = "2.7.0"
 composeActivity = "1.9.1"
-hiltCompose = "1.2.0"
+hilt = "1.2.0"
 navigationCompose = "2.7.7"
 composeCompiler = "1.5.14"
 composeBom = "2024.06.00"
@@ -57,6 +57,7 @@ roomKtx = { module = "androidx.room:room-ktx", version.ref = "room" }
 roomCompiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 workManager = { module = "androidx.work:work-runtime-ktx", version.ref = "workManager" }
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "daggerHilt" }
+hiltWork = { module = "androidx.hilt:hilt-work", version.ref = "hilt" }
 hiltCompiler = { module = "com.google.dagger:hilt-compiler", version.ref = "daggerHilt" }
 navigationFragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 navigationUi = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
@@ -105,7 +106,7 @@ composeActivity = { module = "androidx.activity:activity-compose", version.ref =
 composeTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 composeToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 composeRuntime = { module = "androidx.compose.runtime:runtime", version.ref = "compose" }
-hiltNavigationCompose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltCompose" }
+hiltNavigationCompose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt" }
 navigationCompose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 composeUiTestJunit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
 composeUiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }

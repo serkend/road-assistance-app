@@ -7,10 +7,10 @@ sealed class ResultState<out T>(val result: T? = null) {
     data object Initial : ResultState<Nothing>()
 }
 
-suspend fun <T> ResultState<T>.handleStateSuspended(
-    onSuccess: suspend (result: T?) -> Unit,
-    onFailure: suspend (e: String?) -> Unit,
-    onLoading: suspend (result: T?) -> Unit = {},
+inline fun <T> ResultState<T>.handleState(
+    onSuccess: (result: T?) -> Unit,
+    onFailure: (e: String?) -> Unit,
+    onLoading: (result: T?) -> Unit = {},
     onInitial: () -> Unit = {},
 ) {
     when(this) {

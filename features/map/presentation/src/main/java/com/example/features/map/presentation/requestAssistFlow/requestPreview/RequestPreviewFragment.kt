@@ -31,7 +31,7 @@ class RequestPreviewFragment : Fragment(R.layout.fragment_request_preview) {
         descriptionTroubleTextView.text = args.troubleName
         confirmButton.setOnClickListener {
             if (requireContext().checkLocationPermission()) {
-                requireContext().showToast("Location Permissions are granted")
+//                requireContext().showToast("Location Permissions are granted")
                 viewModel.saveRequest(
                     trouble = args.troubleName,
                     cost = priceEditText.text.toString()
@@ -50,8 +50,8 @@ class RequestPreviewFragment : Fragment(R.layout.fragment_request_preview) {
                 binding.yearTextView.text = it.year.toString()
             }
         }
-        bindFlow(showToastSharedFlow) {
-            requireContext().showToast(it)
+        bindFlow(showToast) {
+            showToast(it)
         }
     }
 }

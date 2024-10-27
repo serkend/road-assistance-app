@@ -44,7 +44,7 @@ class SignInViewModel @Inject constructor(private val authUseCases: AuthUseCases
                         _signInStateFlow.update { it.copy(isSignInSuccessful = true, isLoading = false) }
                     }
                     is Resource.Failure -> {
-                        _showToast.emit (state.e?.localizedMessage ?: "Unknown error")
+                        emitToast(state.e?.localizedMessage)
                         _signInStateFlow.update { it.copy(isLoading = false) }
 //                        _showToast.emit(state.e?.localizedMessage ?: "Unknown error")
                     }

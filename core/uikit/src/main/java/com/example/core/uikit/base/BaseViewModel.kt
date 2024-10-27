@@ -7,6 +7,10 @@ import kotlinx.coroutines.flow.asSharedFlow
 
 @HiltViewModel
 open class BaseViewModel : ViewModel() {
-    protected var _showToast = MutableSharedFlow<String>()
+    private var _showToast = MutableSharedFlow<String>()
     val showToast = _showToast.asSharedFlow()
+
+    protected suspend fun emitToast(message: String?) {
+        _showToast.emit(message ?: "Unknown error")
+    }
 }

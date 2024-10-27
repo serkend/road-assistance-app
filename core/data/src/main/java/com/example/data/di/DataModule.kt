@@ -9,6 +9,7 @@ import com.example.data.fileManager.repository.FileManagerRepositoryImpl
 import com.example.data.maps.GoogleMapsApi
 import com.example.data.maps.LocationRepositoryImpl
 import com.example.data.maps.MapsRepositoryImpl
+import com.example.data.requests.dao.RequestsDao
 import com.example.data.requests.repository.RequestsRepositoryImpl
 import com.example.data.storage.repository.StorageRepositoryImpl
 import com.example.data.userManager.repository.UserManagerRepositoryImpl
@@ -53,8 +54,14 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideRequestsRepository(firestore: FirebaseFirestore, mAuth: FirebaseAuth): RequestsRepository {
-        return RequestsRepositoryImpl(firestore, mAuth)
+    fun provideRequestsDao(database: AppDatabase): RequestsDao {
+        return database.requestsDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRequestsRepository(firestore: FirebaseFirestore, mAuth: FirebaseAuth, requestsDao: RequestsDao): RequestsRepository {
+        return RequestsRepositoryImpl(firestore, mAuth, requestsDao)
     }
 
     @Provides
@@ -136,7 +143,6 @@ object DataModule {
     @Provides
     @Singleton
     fun provideMapsRepository(googleMapsApi: GoogleMapsApi): MapsRepository = MapsRepositoryImpl(googleMapsApi)
-
 
     private const val DATABASE_NAME = "road_assist_database"
 

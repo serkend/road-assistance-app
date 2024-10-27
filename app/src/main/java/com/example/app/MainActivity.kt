@@ -6,23 +6,31 @@ import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.app.databinding.ActivityMainBinding
 import com.example.navigation.FlowNavigator
+import com.google.android.material.navigation.NavigationBarView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), FlowNavigator {
 
     private lateinit var binding: ActivityMainBinding
+    private var navController: NavController? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
             .apply { setContentView(this.root) }
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        val navController = navHostFragment.navController
-        setBottomNavigationListener(navController)
-        setupBottomNavigation(navController)
+        navController = navHostFragment.navController
+        navController?.let {
+            setBottomNavigationListener(it)
+            setupBottomNavigation(it)
+        }
     }
 
     private fun setBottomNavigationListener(navController: NavController) = with(binding) {
@@ -37,6 +45,10 @@ class MainActivity : AppCompatActivity(), FlowNavigator {
 
     private fun setupBottomNavigation(navController: NavController) {
         binding.bottomNavBar.setupWithNavController(navController)
+        binding.bottomNavBar.setOnItemSelectedListener { item ->
+            NavigationUI.onNavDestinationSelected(item, navController)
+            true
+        }
     }
 
     override fun navigateToMainFlow() {

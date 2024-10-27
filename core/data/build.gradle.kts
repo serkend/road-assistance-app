@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.playServicesMaps)
 
     implementation(libs.hilt)
+    implementation(libs.hiltWork)
     kapt(libs.hiltCompiler)
 
     implementation(libs.roomRuntime)

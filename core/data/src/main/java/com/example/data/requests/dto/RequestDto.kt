@@ -1,7 +1,10 @@
 package com.example.data.requests.dto
 
+import com.example.data.requests.entity.RequestEntity
 import com.example.data.vehicles.dto.VehicleDto
+import com.example.data.vehicles.entity.VehicleEntity
 import com.example.data.vehicles.mappers.toDomain
+import com.example.data.vehicles.mappers.toEntity
 import com.example.domain.requests.model.Request
 import com.example.domain.vehicles.model.Vehicle
 import com.google.firebase.firestore.PropertyName
@@ -15,17 +18,6 @@ data class RequestDto(
     @PropertyName("latitude") val latitude: Double? = null,
     @PropertyName("longitude") val longitude: Double? = null
 ) {
-
-    fun toDomain() = Request(
-        id = id ?: "",
-        trouble = trouble ?: "",
-        cost = cost ?: "",
-        vehicle = vehicle?.toDomain() ?: Vehicle(),
-        latitude = latitude ?: 0.0,
-        longitude = longitude ?: 0.0,
-        userId = userId
-    )
-
     companion object {
         const val FIREBASE_REQUESTS = "requests"
     }

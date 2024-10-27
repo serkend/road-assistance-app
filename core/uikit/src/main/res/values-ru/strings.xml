@@ -45,4 +45,5 @@
     <string name="enter_your_vehicle_to_request_assist">Введите данные вашего авто</string>
     <string name="trouble_name">Проблема: %1$s</string>
     <string name="is_not_granted">Разрешение не предоставлено</string>
+    <string name="location_required">Геолокация отключена</string>
 </resources>

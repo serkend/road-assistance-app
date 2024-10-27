@@ -3,7 +3,7 @@ package com.example.features.map.presentation.maps
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.common.ResultState
-import com.example.core.common.handleStateSuspended
+import com.example.core.common.handleState
 import com.example.domain.maps.usecases.GetCurrentLocation
 import com.example.domain.maps.usecases.GetRoute
 import com.example.domain.requests.usecases.orders.FetchMyOrder
@@ -75,7 +75,7 @@ class MapsViewModel @Inject constructor(
 
     fun getDestinationAndDrawRoute() = viewModelScope.launch {
         fetchMyOrder().collect {
-            it.handleStateSuspended(
+            it.handleState(
                 onSuccess = { order ->
                     order?.requestId?.let { requestId ->
                         hasOrder = true
@@ -104,7 +104,7 @@ class MapsViewModel @Inject constructor(
             val dest = destinationLatLng
             if (dest != null) {
                 getRoute(currLocation, dest).collect { state ->
-                    state.handleStateSuspended(
+                    state.handleState(
                         onSuccess = { path ->
                             _showRouteSharedFlow.emit(path ?: emptyList())
                         },
@@ -119,7 +119,7 @@ class MapsViewModel @Inject constructor(
 
     fun getMyCurrentLocation() = viewModelScope.launch {
         getCurrentLocation().collect {
-            it.handleStateSuspended(
+            it.handleState(
                 onSuccess = { currLatLng ->
                     _currentLocation.value = LatLng(currLatLng?.latitude ?: 0.0, currLatLng?.longitude ?: 0.0)
                 },
