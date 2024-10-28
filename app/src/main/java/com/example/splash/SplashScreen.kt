@@ -24,7 +24,10 @@ fun SplashScreen(
     SplashContent()
     LaunchedEffect(isAuthenticated) {
         when (isAuthenticated) {
-            true -> flowNavigator.navigateToMainFlow()
+            true -> {
+
+                flowNavigator.navigateToMainFlow()
+            }
             false -> navController.navigate(com.example.app.R.id.action_splashFragment_to_auth_nav_graph)
             null -> {}
         }

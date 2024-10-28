@@ -1,8 +1,9 @@
-package com.example.data.sync
+package com.example.data.sync.repository
 
+import com.example.core.common.IoDispatcher
 import com.example.domain.requests.repository.RequestsRepository
 import com.example.domain.sync.SyncPreferences
-import com.example.domain.sync.model.SyncStatus
+import com.example.domain.sync.model.SyncState
 import com.example.domain.sync.repository.SyncRepository
 import com.example.domain.vehicles.repository.VehiclesRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -17,7 +18,7 @@ class SyncRepositoryImpl @Inject constructor(
     private val syncPreferences: SyncPreferences,
     private val requestRepository: RequestsRepository,
     private val vehicleRepository: VehiclesRepository,
-    private val dispatcher: CoroutineDispatcher
+    @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : SyncRepository {
 
     override suspend fun getLastSyncTime(): Long =
@@ -39,16 +40,14 @@ class SyncRepositoryImpl @Inject constructor(
     override suspend fun sync() {
         coroutineScope {
             try {
-                if (!shouldSync()) return@coroutineScope SyncStatus.Success
-
+                if (!shouldSync()) return@coroutineScope
                 awaitAll(
                     async { requestRepository.fetchRequests().first() },
                     async { vehicleRepository.fetchVehicles().first() }
                 )
                 updateLastSyncTime(System.currentTimeMillis())
-                SyncStatus.Success
             } catch (e: Exception) {
-                SyncStatus.Error(e.message ?: "Unknown error")
+                Result.failure<SyncState.Error>(e)
             }
         }
     }

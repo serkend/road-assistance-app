@@ -1,9 +1,10 @@
-package com.example.data.sync
+package com.example.data.sync.worker
 
 import android.content.Context
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.example.core.common.IoDispatcher
 import com.example.data.notifications.NotificationHelper
 import com.example.domain.sync.repository.SyncRepository
 import dagger.assisted.Assisted
@@ -18,7 +19,7 @@ class SyncWorker @AssistedInject constructor(
     @Assisted params: WorkerParameters,
     private val syncRepository: SyncRepository,
     private val notificationHelper: NotificationHelper,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result = withContext(dispatcher) {
@@ -33,4 +34,5 @@ class SyncWorker @AssistedInject constructor(
             if (runAttemptCount < 3) Result.retry() else Result.failure()
         }
     }
+
 }

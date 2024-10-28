@@ -23,10 +23,10 @@ fun Request.toDto(userId: String) = RequestDto(
 )
 
 fun Request.toEntity() = RequestEntity(
-    id = id,
+    id = id ?: "",
     trouble = trouble,
     cost = cost,
-    vehicle = vehicle.toEntity(null),
+    vehicle = vehicle.toEntity(this.vehicle.id ?: ""),
     latitude = latitude,
     longitude = longitude,
     userId = userId

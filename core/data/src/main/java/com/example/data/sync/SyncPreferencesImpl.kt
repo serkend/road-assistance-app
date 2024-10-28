@@ -2,6 +2,7 @@ package com.example.data.sync
 
 import android.content.Context
 import androidx.core.content.edit
+import com.example.core.common.IoDispatcher
 import com.example.domain.sync.SyncPreferences
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
@@ -11,7 +12,7 @@ import javax.inject.Inject
 
 class SyncPreferencesImpl @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : SyncPreferences {
 
     private val prefs by lazy {

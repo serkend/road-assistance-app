@@ -1,38 +1,34 @@
 package com.example.data.sync.di
 
 import android.content.Context
-import androidx.work.Configuration
+import androidx.work.WorkManager
+import com.example.core.common.IoDispatcher
+import com.example.core.common.MainDispatcher
+import com.example.data.sync.SyncManagerImpl
 import com.example.data.sync.SyncPreferencesImpl
-import com.example.data.sync.SyncWorker
+import com.example.data.sync.repository.SyncRepositoryImpl
+import com.example.domain.sync.SyncManager
 import com.example.domain.sync.SyncPreferences
+import com.example.domain.sync.repository.SyncRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
-@Retention(AnnotationRetention.BINARY)
-@Qualifier
-annotation class IoDispatcher
-
-@Retention(AnnotationRetention.BINARY)
-@Qualifier
-annotation class MainDispatcher
-
 @Module
-
-object SyncModule {
-
+@InstallIn(SingletonComponent::class)
+object SyncDataModule {
     @Provides
-    @Singleton
     @IoDispatcher
     fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
     @Provides
-    @Singleton
     @MainDispatcher
     fun provideMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
 
@@ -42,15 +38,16 @@ object SyncModule {
 
     @Provides
     @Singleton
+    fun provideSyncRepository(impl: SyncRepositoryImpl): SyncRepository = impl
+
+    @Provides
+    @Singleton
     fun provideWorkManager(
         @ApplicationContext context: Context
-    ): SyncWorker {
-        val config = Configuration.Builder()
-            .setMinimumLoggingLevel(android.util.Log.INFO)
-            .build()
-            .initialize(context, config)
-        return SyncWorker().getInstance(context)
-    }
+    ): WorkManager = WorkManager.getInstance(context)
 
+    @Provides
+    @Singleton
+    fun bindSyncManager(impl: SyncManagerImpl): SyncManager = impl
 
 }

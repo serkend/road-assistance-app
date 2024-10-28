@@ -39,7 +39,7 @@ class NotificationHelper @Inject constructor(
         createNotificationChannelIfNeeded()
 
         val notification = NotificationCompat.Builder(context, SYNC_CHANNEL_ID)
-            .setContentTitle("Синхронизация")
+            .setContentTitle("Синхронизация") // TODO extract to res
             .setContentText("Выполняется синхронизация данных...")
             .setSmallIcon(com.example.core.common.R.drawable.ic_sync)
             .setPriority(NotificationCompat.PRIORITY_LOW)
