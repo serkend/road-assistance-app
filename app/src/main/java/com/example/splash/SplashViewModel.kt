@@ -23,8 +23,6 @@ class SplashViewModel @Inject constructor(
 
     init {
         isUserAuthenticated()
-        observeWorkerState()
-
     }
 
     private fun isUserAuthenticated() = viewModelScope.launch {
@@ -35,7 +33,7 @@ class SplashViewModel @Inject constructor(
                     if (isAuthenticated == true) {
                        syncUseCases.requestImmediateSyncUseCase().handleState(
                            onSuccess = {
-                               Log.e("TAG", "success ")
+//                               Log.e("TAG", "success ")
                            },
                            onFailure = { e ->
                                emitToast(e)
@@ -47,12 +45,6 @@ class SplashViewModel @Inject constructor(
                     emitToast(e)
                 }
             )
-        }
-    }
-
-    private fun observeWorkerState() = viewModelScope.launch {
-        syncUseCases.observeSyncStateUseCase().collect {
-            Log.e("TAG", "observeWorkerState: $it", )
         }
     }
 }

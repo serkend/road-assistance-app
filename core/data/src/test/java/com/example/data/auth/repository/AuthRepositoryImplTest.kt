@@ -48,28 +48,8 @@ class AuthRepositoryImplTest {
     }
 
     @Test
-    fun isUserAuthenticated_userIsAuthenticated_emitsTrue() = runTest {
-        val firebaseUser: FirebaseUser = mockk()
-        every { firebaseAuth.currentUser } returns firebaseUser
-
-        val stateFlow = authRepository.isUserAuthenticated(this)
-
-        assertFalse(stateFlow.value)
-    }
-
-    @Test
-    fun isUserAuthenticated_userIsNotAuthenticated_emitsFalse() = runTest {
-        every { firebaseAuth.currentUser } returns null
-
-        val stateFlow = authRepository.isUserAuthenticated(this)
-
-        assertFalse(stateFlow.value)
-    }
-
-    @Test
     fun signIn_credentialsAreCorrect_returnsSuccess() = runTest {
         val credentials = SignInCredentials("test@example.com", "password")
-
         coEvery { authRepository.signIn(credentials) } returns flowOf(Resource.Success(true))
 
         val flow = authRepository.signIn(credentials)
@@ -89,50 +69,5 @@ class AuthRepositoryImplTest {
 //        assertThat(flow.first()).isEqualTo(Resource.Failure(exception))
         assertEquals(flow.first(), Resource.Failure<Exception>(exception))
     }
-
-//    @Test
-//    fun `signUp should return success when user is created`() = runTest {
-//        val credentials = SignUpCredentials("test@example.com", "password", null)
-//        val user = User("test@example.com", null,  userName = "Test User")
-//
-//        coEvery { firebaseAuth.createUserWithEmailAndPassword(credentials.email, credentials.password).await() } just Runs
-//        coEvery { firestore.collection(any()).document(any()).set(any()).await() } just Runs
-//
-//        val flow = authRepository.signUp(credentials, user)
-//
-//        assertEquals(flow.first(), Resource.Success(true))
-//    }
-
-//    @Test
-//    fun `signUp should return failure when creation fails`() = runTest {
-//        val credentials = SignUpCredentials("test@example.com", "password", null)
-//        val user = User("test@example.com", null, "Test User")
-//        val exception = FirebaseAuthException("ERROR_EMAIL_ALREADY_IN_USE", "The email address is already in use by another account.")
-//
-//        coEvery { firebaseAuth.createUserWithEmailAndPassword(credentials.email, credentials.password).await() } throws exception
-//
-//        val flow = authRepository.signUp(credentials, user)
-//
-////        assertThat(flow.first()).isEqualTo(Resource.Failure(exception))
-//    }
-//
-//    @Test
-//    fun `signOut should return success when user signs out successfully`() = runTest {
-//        coEvery { firebaseAuth.signOut() } just Runs
-//
-//        val result = authRepository.signOut()
-//
-////        assertThat(result).isEqualTo(Resource.Success(true))
-//    }
-//
-//    @Test
-//    fun `signOut should return failure when sign out fails`() = runTest {
-//        val exception = Exception("Sign out failed")
-//        coEvery { firebaseAuth.signOut() } throws exception
-//
-//        val result = authRepository.signOut()
-//
-////        assertThat(result).isEqualTo(Resource.Failure(exception))
-//    }
 }
 

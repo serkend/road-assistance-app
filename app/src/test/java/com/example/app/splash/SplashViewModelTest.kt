@@ -12,6 +12,7 @@ import com.example.domain.auth.usecases.auth.SignIn
 import com.example.domain.auth.usecases.auth.SignOut
 import com.example.domain.auth.usecases.auth.SignUp
 import com.example.domain.chat.usecases.ChatUseCases
+import com.example.domain.sync.usecases.SyncUseCases
 import com.example.domain.userManager.usecases.GetUserById
 import com.example.splash.SplashViewModel
 import com.google.common.truth.Truth
@@ -41,16 +42,13 @@ class SplashViewModelTest {
     val coroutineTestRule = CoroutineTestRule()
 
     private lateinit var authUseCases: AuthUseCases
+    private lateinit var syncUseCases: SyncUseCases
     private lateinit var viewModel: SplashViewModel
 
     @Before
     fun setUp() {
-        authUseCases = AuthUseCases(
-            signIn = mockk(),
-            signUp = mockk(),
-            signOut = mockk(),
-            isAuthenticated = mockk()
-        )
+        authUseCases = mockk(relaxed = true)
+        syncUseCases = mockk(relaxed = true)
     }
 
     @Test
@@ -58,12 +56,13 @@ class SplashViewModelTest {
         every { authUseCases.isAuthenticated.invoke() } returns flow {
             emit(ResultState.Success(true))
         }
-        viewModel = SplashViewModel(authUseCases)
+        coEvery { syncUseCases.requestImmediateSyncUseCase() } returns ResultState.Success(Unit)
+
+        viewModel = SplashViewModel(authUseCases, syncUseCases)
 
         viewModel.isUserAuthenticatedStateFlow.test {
             val initial = awaitItem()
             Truth.assertThat(initial).isNull()
-
             cancelAndIgnoreRemainingEvents()
         }
     }
@@ -73,7 +72,7 @@ class SplashViewModelTest {
         every { authUseCases.isAuthenticated.invoke() } returns flow {
             emit(ResultState.Success(true))
         }
-        viewModel = SplashViewModel(authUseCases)
+        viewModel = SplashViewModel(authUseCases, mockk())
 
         viewModel.isUserAuthenticatedStateFlow.test {
             awaitItem()

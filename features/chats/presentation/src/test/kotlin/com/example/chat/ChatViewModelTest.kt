@@ -85,4 +85,22 @@ class ChatViewModelTest {
         }
     }
 
+    @Test
+    fun `should send correct message text`() = runTest {
+        val conversationId = "conv1"
+        val messageText = "New message"
+
+        viewModel.sendMessage(conversationId, messageText)
+
+        viewModel.messages.test {
+            val initialState = awaitItem()
+            Truth.assertThat(initialState).isEmpty()
+
+            viewModel.loadMessages(conversationId)
+
+            val state = awaitItem()
+            Truth.assertThat(state.last().text).isEqualTo(messageText)
+        }
+    }
+
 }
